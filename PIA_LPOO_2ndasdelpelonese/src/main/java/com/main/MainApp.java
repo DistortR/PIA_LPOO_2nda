@@ -118,6 +118,8 @@ public class MainApp extends Application {
         // Configuración de columnas (solo una muestra, se necesita la clase Cliente completa)
         TableColumn<Cliente, String> nombreCol = new TableColumn<>("Nombre Completo");
         nombreCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombreCompleto()));
+        //nombreCol.setMinWidth(250);   // Ajusta a tu gusto
+        //nombreCol.setPrefWidth(300);  // Opcional pero recomendado
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
