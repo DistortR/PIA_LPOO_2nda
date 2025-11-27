@@ -11,15 +11,14 @@ import com.model.Membresia.TipoMembresia;
 import com.model.UsuarioEmpleado;
 import com.util.GymException;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
@@ -48,7 +47,7 @@ public class MainApp extends Application {
             System.exit(1);
         }
 
-        primaryStage.setTitle("GymPOSAI4647");
+        primaryStage.setTitle("GymPOS - Ibarra System (Final Project)");
         primaryStage.setScene(crearVistaLogin(primaryStage));
         primaryStage.show();
     }
@@ -62,7 +61,7 @@ public class MainApp extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25));
 
-        TextField userField = new TextField("jibarra"); // Valores de prueba
+        TextField userField = new TextField("admin"); // Valores de prueba
         PasswordField passField = new PasswordField();
         passField.setText("admin123");
         Button btnLogin = new Button("Iniciar Sesión");
@@ -84,18 +83,14 @@ public class MainApp extends Application {
         return new Scene(grid, 400, 300);
     }
 
-
-    // ----------------------------------------------------------------------
-    // VISTA PRINCIPAL (Contenedor de Módulos)
-    // ----------------------------------------------------------------------
     private Scene crearVistaPrincipal(Stage primaryStage) {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
 
-        Tab tabClientes = new Tab("1. Clientes", CRUDVistaClientes());
+        Tab tabClientes = new Tab("1. Clientes (CRUD)", crearVistaClientes());
         Tab tabMembresias = new Tab("2. Membresías & Pagos", crearVistaMembresias());
         Tab tabAcceso = new Tab("3. Control de Acceso", crearVistaControlAcceso());
-        Tab tabReportes = new Tab("4. Reportes", crearVistaReportes());
+        Tab tabReportes = new Tab("4. Reportes (Multithread)", crearVistaReportes());
 
         tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes);
         tabPane.getTabs().forEach(t -> t.setClosable(false));
@@ -109,23 +104,22 @@ public class MainApp extends Application {
         return new Scene(root, 1100, 800);
     }
 
-
-    // ----------------------------------------------------------------------
-    // MÓDULO DE CLIENTES (USO DE GestionClientesIbarra)
-    // ----------------------------------------------------------------------
-    private BorderPane CRUDVistaClientes() {
+    private BorderPane crearVistaClientes() {
         TableView<Cliente> tableView = new TableView<>();
         tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
 
-        // Configuración de columnas (solo una muestra, se necesita la clase Cliente completa)
         TableColumn<Cliente, String> nombreCol = new TableColumn<>("Nombre Completo");
         nombreCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombreCompleto()));
-        //nombreCol.setMinWidth(250);   // Ajusta a tu gusto
-        //nombreCol.setPrefWidth(300);  // Opcional pero recomendado
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        TableColumn<Cliente, String> emailCol = new TableColumn<>("Email");
+        emailCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEmail()));
+
+        TableColumn<Cliente, String> fechaRegistroCol = new TableColumn<>("Fecha Registro");
+        fechaRegistroCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFechaRegistro().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 
         TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
         membresiaCol.setCellValueFactory(cellData -> {
@@ -133,38 +127,11 @@ public class MainApp extends Application {
             return new javafx.beans.property.SimpleStringProperty(mem != null && mem.esValida() ? mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")" : "INACTIVA");
         });
 
-        tableView.getColumns().addAll(idCol, nombreCol, membresiaCol);
+        tableView.getColumns().addAll(idCol, nombreCol, emailCol,  fechaRegistroCol, membresiaCol);
 
-        Button btnAgregar = new Button("Registrar Cliente");
-        btnAgregar.setOnAction(e -> {
-            CreateClient(tableView);
-        });
-
-        Button btnActualizar = new Button("Actualizar Cliente");
-        btnActualizar.setOnAction(e -> {
-            UpdateClient(tableView);
-        });
-
-        Button btnEliminar = new Button("Eliminar Cliente");
-        btnEliminar.setOnAction(e -> {
-            deleteClient(tableView);
-        });
-
-        BorderPane panel = new BorderPane();
-        panel.setCenter(tableView);
-
-        HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
-        botones.setPadding(new Insets(10));
-        panel.setBottom(botones);
-        return panel;
-    }
-
-    private void CreateClient(TableView<Cliente> tableView) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Agregar Cliente");
         dialog.setHeaderText("Ingrese los datos");
-
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -186,107 +153,23 @@ public class MainApp extends Application {
         grid.add(emailField, 1, 2);
 
         dialog.getDialogPane().setContent(grid);
-        Platform.runLater(() -> nameField.requestFocus());
+        /*dialog.showAndWait();*/
 
-        Optional<ButtonType> result = dialog.showAndWait();
-
-        if(result.isPresent() && result.get() == ButtonType.OK) {
+        Button btnAgregar = new Button("Registrar Cliente");
+        btnAgregar.setOnAction(e -> {
             try {
-                if(!nameField.getText().isEmpty() && !lastNameField.getText().isEmpty() && !emailField.getText().isEmpty()) {
-                    Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
-                    gestorClientes.registrarCliente(c);
-                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
-                }
-                else {
-                    mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
-                }
+                Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
+                gestorClientes.registrarCliente(c);
+                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
             } catch (GymException ex) {
                 mostrarAlerta(Alert.AlertType.ERROR, "Error Registro", ex.getMessage());
             }
-        }
-    }
+        });
 
-    private void UpdateClient(TableView<Cliente> tableView) {
-        Cliente selectedClient = tableView.getSelectionModel().getSelectedItem();
-
-        if (selectedClient == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona un cliente de la lista para editar.");
-            return;
-        }
-
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Actualizar Cliente");
-        dialog.setHeaderText("Modifique los datos del cliente");
-
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField nameField = new TextField(selectedClient.getNombre());
-        TextField lastNameField = new TextField(selectedClient.getApellido());
-        TextField emailField = new TextField(selectedClient.getEmail());
-
-        nameField.setPromptText("Nombre");
-        lastNameField.setPromptText("Apellido");
-        emailField.setPromptText("Email");
-
-        grid.add(new Label("Nombre:"), 0, 0);
-        grid.add(nameField, 1, 0);
-        grid.add(new Label("Apellido:"), 0, 1);
-        grid.add(lastNameField, 1, 1);
-        grid.add(new Label("Email:"), 0, 2);
-        grid.add(emailField, 1, 2);
-
-        dialog.getDialogPane().setContent(grid);
-        Platform.runLater(() -> nameField.requestFocus());
-
-        Optional<ButtonType> result = dialog.showAndWait();
-
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            if (!nameField.getText().isEmpty() || !lastNameField.getText().isEmpty() || !emailField.getText().isEmpty()) {
-                try {
-                    selectedClient.setNombre(nameField.getText());
-                    selectedClient.setApellido(lastNameField.getText());
-                    selectedClient.setEmail(emailField.getText());
-
-                    gestorClientes.actualizarCliente(selectedClient);
-                    tableView.refresh();
-                } catch (Exception ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Error al Actualizar", ex.getMessage());
-                }
-            }
-            else {
-                mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete al menos un campo para actualizar.");
-            }
-        }
-    }
-
-    private void deleteClient(TableView<Cliente> tableView) {
-        Cliente selectedClient = tableView.getSelectionModel().getSelectedItem();
-
-        if (selectedClient == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona un cliente de la lista para eliminar.");
-            return;
-        }
-
-        Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirm.setTitle("Confirmar Eliminación");
-        alertConfirm.setHeaderText("¿Está seguro de eliminar al cliente?");
-        alertConfirm.setContentText("Cliente: " + selectedClient.getNombreCompleto());
-
-        Optional<ButtonType> result = alertConfirm.showAndWait();
-
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                gestorClientes.eliminarCliente(selectedClient.getId());
-                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
-            } catch (GymException ex) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Error al Eliminar", ex.getMessage());
-            }
-        }
+        BorderPane panel = new BorderPane();
+        panel.setCenter(tableView);
+        panel.setBottom(new HBox(10, btnAgregar));
+        return panel;
     }
 
     private VBox crearVistaMembresias() {
