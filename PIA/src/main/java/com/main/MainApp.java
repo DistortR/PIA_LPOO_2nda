@@ -18,7 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import java.time.LocalDate;
+
 import java.util.Optional;
 
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
@@ -92,7 +92,7 @@ public class MainApp extends Application {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
 
-        Tab tabClientes = new Tab("1. Clientes", crearVistaClientes());
+        Tab tabClientes = new Tab("1. Clientes", CRUDVistaClientes());
         Tab tabMembresias = new Tab("2. Membresías & Pagos", crearVistaMembresias());
         Tab tabAcceso = new Tab("3. Control de Acceso", crearVistaControlAcceso());
         Tab tabReportes = new Tab("4. Reportes", crearVistaReportes());
@@ -113,7 +113,7 @@ public class MainApp extends Application {
     // ----------------------------------------------------------------------
     // MÓDULO DE CLIENTES (USO DE GestionClientesIbarra)
     // ----------------------------------------------------------------------
-    private BorderPane crearVistaClientes() {
+    private BorderPane CRUDVistaClientes() {
         TableView<Cliente> tableView = new TableView<>();
         tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
 
@@ -134,59 +134,159 @@ public class MainApp extends Application {
         });
 
         tableView.getColumns().addAll(idCol, nombreCol, membresiaCol);
+
         Button btnAgregar = new Button("Registrar Cliente");
-
         btnAgregar.setOnAction(e -> {
-            Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setTitle("Agregar Cliente");
-            dialog.setHeaderText("Ingrese los datos");
+            CreateClient(tableView);
+        });
 
-            dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        Button btnActualizar = new Button("Actualizar Cliente");
+        btnActualizar.setOnAction(e -> {
+            UpdateClient(tableView);
+        });
 
-            GridPane grid = new GridPane();
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setPadding(new Insets(20, 150, 10, 10));
-
-            TextField nameField = new TextField();
-            TextField lastNameField = new TextField();
-            TextField emailField = new TextField();
-            nameField.setPromptText("Ej. Arturo");
-            lastNameField.setPromptText("Ej. Garcia");
-            emailField.setPromptText("Ej. juan@gmail.com");
-
-            grid.add(new Label("Nombre:"), 0, 0);
-            grid.add(nameField, 1, 0);
-            grid.add(new Label("Apellido:"), 0, 1);
-            grid.add(lastNameField, 1, 1);
-            grid.add(new Label("Email:"), 0, 2);
-            grid.add(emailField, 1, 2);
-
-            dialog.getDialogPane().setContent(grid);
-            Platform.runLater(() -> nameField.requestFocus());
-
-            Optional<ButtonType> result = dialog.showAndWait();
-
-            if(result.isPresent() && result.get() == ButtonType.OK) {
-                try {
-                    if(!nameField.getText().isEmpty() && !lastNameField.getText().isEmpty() && !emailField.getText().isEmpty()) {
-                        Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
-                        gestorClientes.registrarCliente(c);
-                        tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
-                    }
-                    else {
-                        mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
-                    }
-                } catch (GymException ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Error Registro", ex.getMessage());
-                }
-            }
+        Button btnEliminar = new Button("Eliminar Cliente");
+        btnEliminar.setOnAction(e -> {
+            deleteClient(tableView);
         });
 
         BorderPane panel = new BorderPane();
         panel.setCenter(tableView);
-        panel.setBottom(new HBox(10, btnAgregar));
+
+        HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
+        botones.setPadding(new Insets(10));
+        panel.setBottom(botones);
         return panel;
+    }
+
+    private void CreateClient(TableView<Cliente> tableView) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Agregar Cliente");
+        dialog.setHeaderText("Ingrese los datos");
+
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField nameField = new TextField();
+        TextField lastNameField = new TextField();
+        TextField emailField = new TextField();
+        nameField.setPromptText("Ej. Arturo");
+        lastNameField.setPromptText("Ej. Garcia");
+        emailField.setPromptText("Ej. juan@gmail.com");
+
+        grid.add(new Label("Nombre:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Apellido:"), 0, 1);
+        grid.add(lastNameField, 1, 1);
+        grid.add(new Label("Email:"), 0, 2);
+        grid.add(emailField, 1, 2);
+
+        dialog.getDialogPane().setContent(grid);
+        Platform.runLater(() -> nameField.requestFocus());
+
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                if(!nameField.getText().isEmpty() && !lastNameField.getText().isEmpty() && !emailField.getText().isEmpty()) {
+                    Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
+                    gestorClientes.registrarCliente(c);
+                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+                }
+                else {
+                    mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
+                }
+            } catch (GymException ex) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Error Registro", ex.getMessage());
+            }
+        }
+    }
+
+    private void UpdateClient(TableView<Cliente> tableView) {
+        Cliente selectedClient = tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedClient == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona un cliente de la lista para editar.");
+            return;
+        }
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Actualizar Cliente");
+        dialog.setHeaderText("Modifique los datos del cliente");
+
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField nameField = new TextField(selectedClient.getNombre());
+        TextField lastNameField = new TextField(selectedClient.getApellido());
+        TextField emailField = new TextField(selectedClient.getEmail());
+
+        nameField.setPromptText("Nombre");
+        lastNameField.setPromptText("Apellido");
+        emailField.setPromptText("Email");
+
+        grid.add(new Label("Nombre:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Apellido:"), 0, 1);
+        grid.add(lastNameField, 1, 1);
+        grid.add(new Label("Email:"), 0, 2);
+        grid.add(emailField, 1, 2);
+
+        dialog.getDialogPane().setContent(grid);
+        Platform.runLater(() -> nameField.requestFocus());
+
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            if (!nameField.getText().isEmpty() || !lastNameField.getText().isEmpty() || !emailField.getText().isEmpty()) {
+                try {
+                    selectedClient.setNombre(nameField.getText());
+                    selectedClient.setApellido(lastNameField.getText());
+                    selectedClient.setEmail(emailField.getText());
+
+                    gestorClientes.actualizarCliente(selectedClient);
+                    tableView.refresh();
+                } catch (Exception ex) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error al Actualizar", ex.getMessage());
+                }
+            }
+            else {
+                mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete al menos un campo para actualizar.");
+            }
+        }
+    }
+
+    private void deleteClient(TableView<Cliente> tableView) {
+        Cliente selectedClient = tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedClient == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona un cliente de la lista para eliminar.");
+            return;
+        }
+
+        Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirm.setTitle("Confirmar Eliminación");
+        alertConfirm.setHeaderText("¿Está seguro de eliminar al cliente?");
+        alertConfirm.setContentText("Cliente: " + selectedClient.getNombreCompleto());
+
+        Optional<ButtonType> result = alertConfirm.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                gestorClientes.eliminarCliente(selectedClient.getId());
+                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+            } catch (GymException ex) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Error al Eliminar", ex.getMessage());
+            }
+        }
     }
 
     private VBox crearVistaMembresias() {
