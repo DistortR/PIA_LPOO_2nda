@@ -11,6 +11,7 @@ import com.model.Membresia.TipoMembresia;
 import com.model.UsuarioEmpleado;
 import com.util.GymException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.time.LocalDate;
+import java.util.Optional;
 
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
@@ -115,6 +117,9 @@ public class MainApp extends Application {
         TableView<Cliente> tableView = new TableView<>();
         tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
 
+        TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
+
         // Configuración de columnas (solo una muestra, se necesita la clase Cliente completa)
         TableColumn<Cliente, String> nombreCol = new TableColumn<>("Nombre Completo");
         nombreCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombreCompleto()));
@@ -126,17 +131,47 @@ public class MainApp extends Application {
             return new javafx.beans.property.SimpleStringProperty(mem != null && mem.esValida() ? mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")" : "INACTIVA");
         });
 
-        tableView.getColumns().addAll(nombreCol, membresiaCol);
+        tableView.getColumns().addAll(idCol, nombreCol, membresiaCol);
+        Button btnAgregar = new Button("Registrar Cliente");
 
-        // Botón de ejemplo para registrar
-        Button btnAgregar = new Button("Registrar Cliente de Prueba");
         btnAgregar.setOnAction(e -> {
-            try {
-                Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), "Prueba", "Demo", "p@demo.com");
-                gestorClientes.registrarCliente(c);
-                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
-            } catch (GymException ex) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Error Registro", ex.getMessage());
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Agregar Cliente");
+            dialog.setHeaderText("Ingrese los datos");
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            TextField nameField = new TextField();
+            TextField lastNameField = new TextField();
+            TextField emailField = new TextField();
+            nameField.setPromptText("Ej. Arturo");
+            lastNameField.setPromptText("Ej. Garcia");
+            emailField.setPromptText("Ej. juan@gmail.com");
+
+            grid.add(new Label("Nombre:"), 0, 0);
+            grid.add(nameField, 1, 0);
+            grid.add(new Label("Apellido:"), 0, 1);
+            grid.add(lastNameField, 1, 1);
+            grid.add(new Label("Email:"), 0, 2);
+            grid.add(emailField, 1, 2);
+
+            dialog.getDialogPane().setContent(grid);
+            Platform.runLater(() -> nameField.requestFocus());
+            dialog.showAndWait();
+
+            Optional<ButtonType> result = dialog.showAndWait();
+
+            if(result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
+                    gestorClientes.registrarCliente(c);
+                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+                } catch (GymException ex) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error Registro", ex.getMessage());
+                }
             }
         });
 
