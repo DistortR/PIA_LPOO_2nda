@@ -41,6 +41,24 @@ public class GestionClientesIbarra {
         guardarClientes();
     }
 
+    public void actualizarCliente(Cliente clienteModificado) throws GymException {
+        boolean encontrado = false;
+
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getId().equals(clienteModificado.getId())) {
+                clientes.set(i, clienteModificado);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (encontrado) {
+            guardarClientes();
+        } else {
+            throw new GymException("No se puede actualizar: El cliente con ID " + clienteModificado.getId() + " no existe.");
+        }
+    }
+
     public Optional<Cliente> buscarCliente(String id) {
         return clientes.stream().filter(c -> c.getId().equals(id)).findFirst();
     }
