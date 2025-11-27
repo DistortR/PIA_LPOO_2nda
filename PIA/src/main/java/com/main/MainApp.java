@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
@@ -82,10 +83,6 @@ public class MainApp extends Application {
         return new Scene(grid, 400, 300);
     }
 
-
-    // ----------------------------------------------------------------------
-    // VISTA PRINCIPAL (Contenedor de Módulos)
-    // ----------------------------------------------------------------------
     private Scene crearVistaPrincipal(Stage primaryStage) {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
@@ -107,17 +104,22 @@ public class MainApp extends Application {
         return new Scene(root, 1100, 800);
     }
 
-
-    // ----------------------------------------------------------------------
-    // MÓDULO DE CLIENTES (USO DE GestionClientesIbarra)
-    // ----------------------------------------------------------------------
     private BorderPane crearVistaClientes() {
         TableView<Cliente> tableView = new TableView<>();
         tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // Configuración de columnas (solo una muestra, se necesita la clase Cliente completa)
+        TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
+
         TableColumn<Cliente, String> nombreCol = new TableColumn<>("Nombre Completo");
         nombreCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombreCompleto()));
+
+        TableColumn<Cliente, String> emailCol = new TableColumn<>("Email");
+        emailCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEmail()));
+
+        TableColumn<Cliente, String> fechaRegistroCol = new TableColumn<>("Fecha Registro");
+        fechaRegistroCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFechaRegistro().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 
         TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
         membresiaCol.setCellValueFactory(cellData -> {
@@ -125,13 +127,38 @@ public class MainApp extends Application {
             return new javafx.beans.property.SimpleStringProperty(mem != null && mem.esValida() ? mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")" : "INACTIVA");
         });
 
-        tableView.getColumns().addAll(nombreCol, membresiaCol);
+        tableView.getColumns().addAll(idCol, nombreCol, emailCol,  fechaRegistroCol, membresiaCol);
 
-        // Botón de ejemplo para registrar
-        Button btnAgregar = new Button("Registrar Cliente de Prueba");
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Agregar Cliente");
+        dialog.setHeaderText("Ingrese los datos");
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField nameField = new TextField();
+        TextField lastNameField = new TextField();
+        TextField emailField = new TextField();
+        nameField.setPromptText("Ej. Arturo");
+        lastNameField.setPromptText("Ej. Garcia");
+        emailField.setPromptText("Ej. juan@gmail.com");
+
+        grid.add(new Label("Nombre:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Apellido:"), 0, 1);
+        grid.add(lastNameField, 1, 1);
+        grid.add(new Label("Email:"), 0, 2);
+        grid.add(emailField, 1, 2);
+
+        dialog.getDialogPane().setContent(grid);
+        /*dialog.showAndWait();*/
+
+        Button btnAgregar = new Button("Registrar Cliente");
         btnAgregar.setOnAction(e -> {
             try {
-                Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), "Prueba", "Demo", "p@demo.com");
+                Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
                 gestorClientes.registrarCliente(c);
                 tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
             } catch (GymException ex) {
