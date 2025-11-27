@@ -141,6 +141,8 @@ public class MainApp extends Application {
             dialog.setTitle("Agregar Cliente");
             dialog.setHeaderText("Ingrese los datos");
 
+            dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
             GridPane grid = new GridPane();
             grid.setHgap(10);
             grid.setVgap(10);
@@ -162,15 +164,19 @@ public class MainApp extends Application {
 
             dialog.getDialogPane().setContent(grid);
             Platform.runLater(() -> nameField.requestFocus());
-            dialog.showAndWait();
 
             Optional<ButtonType> result = dialog.showAndWait();
 
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 try {
-                    Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
-                    gestorClientes.registrarCliente(c);
-                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+                    if(!nameField.getText().isEmpty() && !lastNameField.getText().isEmpty() && !emailField.getText().isEmpty()) {
+                        Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
+                        gestorClientes.registrarCliente(c);
+                        tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+                    }
+                    else {
+                        mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
+                    }
                 } catch (GymException ex) {
                     mostrarAlerta(Alert.AlertType.ERROR, "Error Registro", ex.getMessage());
                 }
