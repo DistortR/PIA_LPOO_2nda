@@ -1,2 +1,2 @@
 # PIA_LPOO_2nda
-pia del pelon
+Registro de clientes en un sistema de un gimnasio

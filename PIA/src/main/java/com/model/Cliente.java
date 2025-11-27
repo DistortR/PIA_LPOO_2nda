@@ -80,7 +80,6 @@ public class Cliente implements Serializable {
         return fechaRegistro;
     }
 
-    // Generalmente la fecha de registro no se modifica, pero si necesitas migrar datos:
     public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
@@ -103,7 +102,6 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        // Devuelve una cadena formateada útil para logs o listas simples
         String estadoMembresia = (membresiaActual != null && membresiaActual.esValida()) ? "Activa" : "Sin Membresía/Vencida";
 
         return "Cliente{" +
