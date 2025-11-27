@@ -46,7 +46,7 @@ public class MainApp extends Application {
             System.exit(1);
         }
 
-        primaryStage.setTitle("GymPOS - Ibarra System (Final Project)");
+        primaryStage.setTitle("GymPOSAI4647");
         primaryStage.setScene(crearVistaLogin(primaryStage));
         primaryStage.show();
     }
@@ -90,10 +90,10 @@ public class MainApp extends Application {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
 
-        Tab tabClientes = new Tab("1. Clientes (CRUD)", crearVistaClientes());
+        Tab tabClientes = new Tab("1. Clientes", crearVistaClientes());
         Tab tabMembresias = new Tab("2. Membresías & Pagos", crearVistaMembresias());
         Tab tabAcceso = new Tab("3. Control de Acceso", crearVistaControlAcceso());
-        Tab tabReportes = new Tab("4. Reportes (Multithread)", crearVistaReportes());
+        Tab tabReportes = new Tab("4. Reportes", crearVistaReportes());
 
         tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes);
         tabPane.getTabs().forEach(t -> t.setClosable(false));
@@ -118,6 +118,7 @@ public class MainApp extends Application {
         // Configuración de columnas (solo una muestra, se necesita la clase Cliente completa)
         TableColumn<Cliente, String> nombreCol = new TableColumn<>("Nombre Completo");
         nombreCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombreCompleto()));
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
         membresiaCol.setCellValueFactory(cellData -> {
