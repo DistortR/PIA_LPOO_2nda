@@ -60,7 +60,7 @@ public class MainApp extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25));
 
-        TextField userField = new TextField("admin"); // Valores de prueba
+        TextField userField = new TextField("jibarra"); // Valores de prueba
         PasswordField passField = new PasswordField();
         passField.setText("admin123");
         Button btnLogin = new Button("Iniciar Sesión");
