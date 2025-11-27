@@ -20,7 +20,7 @@ public class Serializador<T> {
         if (!file.exists()) return new ArrayList<>();
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-            return (List<T>) ois.readObject();
+            return (ArrayList<T>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             return new ArrayList<>();
         }

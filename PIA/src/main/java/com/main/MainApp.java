@@ -131,7 +131,6 @@ public class MainApp extends Application {
         Button btnAgregar = new Button("Registrar Cliente de Prueba");
         btnAgregar.setOnAction(e -> {
             try {
-                // USO: Crear y registrar un cliente
                 Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), "Prueba", "Demo", "p@demo.com");
                 gestorClientes.registrarCliente(c);
                 tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
@@ -146,10 +145,6 @@ public class MainApp extends Application {
         return panel;
     }
 
-
-    // ----------------------------------------------------------------------
-    // MÓDULO DE MEMBRESÍAS & PAGOS (USO DE SistemaMembresias1412 y ProcesadorPagos_123)
-    // ----------------------------------------------------------------------
     private VBox crearVistaMembresias() {
         // Componentes para la simulación
         TextField txtClienteId = new TextField();
@@ -207,10 +202,6 @@ public class MainApp extends Application {
         return new VBox(10, new Label("Configuración de Suscripción:"), grid, new Label("Log de Transacciones:"), logArea);
     }
 
-
-    // ----------------------------------------------------------------------
-    // MÓDULO DE CONTROL DE ACCESO (USO DE ControlAccesoIbarra)
-    // ----------------------------------------------------------------------
     private VBox crearVistaControlAcceso() {
         TextField txtIdCliente = new TextField();
         txtIdCliente.setPromptText("ID del Cliente");
@@ -234,7 +225,7 @@ public class MainApp extends Application {
                 }
             } catch (GymException ex) {
                 // Manejo de excepciones (Membresía vencida, etc.)
-                lblResultado.setText("❌ ACCESO DENEGADO: " + ex.getMessage());
+                lblResultado.setText("ACCESO DENEGADO: " + ex.getMessage());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: red; -fx-font-size: 16px;");
             } finally {
                 // Actualiza la bitácora visible
@@ -261,10 +252,6 @@ public class MainApp extends Application {
         return new VBox(15, lblResultado, inputArea, new Label("--- Historial de Accesos ---"), logListView);
     }
 
-
-    // ----------------------------------------------------------------------
-    // MÓDULO DE REPORTES (USO DE GeneradorReportesA - Multithreading)
-    // ----------------------------------------------------------------------
     private BorderPane crearVistaReportes() {
         BorderPane panel = new BorderPane();
         Button btnGenerar = new Button("Generar Reporte Estadístico (Background Thread)");
@@ -296,10 +283,6 @@ public class MainApp extends Application {
         return panel;
     }
 
-
-    // ----------------------------------------------------------------------
-    // UTILIDADES
-    // ----------------------------------------------------------------------
     private void mostrarAlerta(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);

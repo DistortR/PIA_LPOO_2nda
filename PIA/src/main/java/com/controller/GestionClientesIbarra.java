@@ -15,9 +15,9 @@ public class GestionClientesIbarra {
     private Serializador<Cliente> dbCliente;
     private Serializador<UsuarioEmpleado> dbEmpleado; // Serializador para empleados
 
-    // Rutas de archivos (Ajustadas para consistencia si usas la estructura anterior)
-    private final String DB_FILE_CLIENTES = "data/clientes.ser";
-    private final String DB_FILE_EMPLEADOS = "data/empleados.ser";
+    String proyectoDir = System.getProperty("user.dir");
+    private final String DB_FILE_CLIENTES = proyectoDir + "\\data\\clientes.ser";
+    private final String DB_FILE_EMPLEADOS = proyectoDir + "\\data\\empleados.ser";
 
     public GestionClientesIbarra() {
         this.dbCliente = new Serializador<>();
@@ -28,13 +28,10 @@ public class GestionClientesIbarra {
 
         // Carga de administrador inicial (Requisito: Si no hay empleados, crea el admin)
         if (this.empleados.isEmpty()) {
-            // Usamos datos de estudiante/prueba (ej: Apellido Ibarra, Matrícula 4647)
             this.empleados.add(new UsuarioEmpleado("jibarra", "admin123", "Juan Ibarra (ADMIN)", "ADMIN"));
             try { guardarEmpleados(); } catch (GymException e) { /* Ignorar en inicialización */ }
         }
     }
-
-    // --- Métodos de Clientes (CRUD) ---
 
     public void registrarCliente(Cliente c) throws GymException {
         if (buscarCliente(c.getId()).isPresent()) {
@@ -84,7 +81,6 @@ public class GestionClientesIbarra {
         if (userOpt.isPresent()) {
             return userOpt.get();
         } else {
-            // Si nadie coincide, lanza la excepción para denegar el acceso.
             throw new GymException("Credenciales inválidas. Acceso denegado.");
         }
     }

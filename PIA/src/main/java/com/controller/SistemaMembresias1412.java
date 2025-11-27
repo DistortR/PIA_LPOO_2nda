@@ -49,10 +49,6 @@ public class SistemaMembresias1412 {
         return new Membresia(tipo, meses, costoFinalConCentavos);
     }
 
-    // -------------------------------------------------------------------------
-    // FUNCIÓN PRINCIPAL 1: Inscribir Cliente y Procesar Pago
-    // -------------------------------------------------------------------------
-
     /**
      * Procesa la compra de la membresía, realiza el pago y la asigna al cliente.
      * @param cliente El cliente al que se asignará la nueva membresía.
