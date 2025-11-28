@@ -50,6 +50,7 @@ public class MainApp extends Application {
         }
 
         primaryStage.setTitle("GymPOSAI4647");
+        primaryStage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/gym.jpg")));
         primaryStage.setScene(crearVistaLogin(primaryStage));
         primaryStage.show();
     }
@@ -82,9 +83,10 @@ public class MainApp extends Application {
                 mostrarAlerta(Alert.AlertType.ERROR, "Fallo en Login", ex.getMessage());
             }
         });
-        return new Scene(grid, 400, 300);
+        Scene scene = new Scene(grid, 400, 300);
+        scene.getStylesheets().add(getClass().getResource("/Estilos.css").toExternalForm());
+        return scene;
     }
-
 
     // ----------------------------------------------------------------------
     // VISTA PRINCIPAL (Contenedor de Módulos)
