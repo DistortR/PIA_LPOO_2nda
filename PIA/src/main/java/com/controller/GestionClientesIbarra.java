@@ -81,17 +81,7 @@ public class GestionClientesIbarra {
 
     public List<Cliente> getListaClientes() { return clientes; }
 
-    // --- Método de Autenticación (COMPLETO) ---
-
-    /**
-     * Busca y autentica un UsuarioEmpleado con las credenciales proporcionadas.
-     * @param user Nombre de usuario (ej. "jibarra").
-     * @param pass Contraseña (ej. "admin123").
-     * @return El objeto UsuarioEmpleado autenticado.
-     * @throws GymException Si las credenciales son incorrectas.
-     */
     public UsuarioEmpleado autenticar(String user, String pass) throws GymException {
-        // Busca al primer empleado cuyo método .autenticar(user, pass) devuelva true
         Optional<UsuarioEmpleado> userOpt = empleados.stream()
                 .filter(e -> e.autenticar(user, pass))
                 .findFirst();
