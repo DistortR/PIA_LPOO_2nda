@@ -4,12 +4,14 @@ import com.model.Cliente;
 import com.model.UsuarioEmpleado;
 import com.util.Serializador;
 import com.util.GymException;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class GestionClientesIbarra {
-
+    private ObservableList<Cliente> listaClientes;
     private List<Cliente> clientes;
     private List<UsuarioEmpleado> empleados; // Lista de empleados
     private Serializador<Cliente> dbCliente;

@@ -53,11 +53,9 @@ public class SistemaMembresias1412 {
             throw new GymException("El cliente ya tiene una membresía activa. Use el método renovarMembresia.");
         }
 
-        // 1. Calcular Costo y Crear Objeto Membresia
         Membresia nuevaMembresia = calcularCostoMembresia(tipo, meses);
         double costoFinal = nuevaMembresia.getCosto();
 
-        // 2. PROCESAR PAGO (Uso de la función del Procesador de Pagos)
         if (procesadorPagos.procesarPagoTarjeta(tarjetaSimulada, costoFinal)) {
             // 3. Asignación y Actualización de Cliente
             cliente.setMembresiaActual(nuevaMembresia);

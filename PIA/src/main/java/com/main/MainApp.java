@@ -26,7 +26,7 @@ import java.util.Optional;
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
 
-    // --- Instancias de Controladores (USO DE TODOS LOS MÓDULOS) ---
+    private TableView<Cliente> tableView = new TableView<>();
     private GestionClientesIbarra gestorClientes;
     private ControlAccesoIbarra controlAcceso;
     private SistemaMembresias1412 gestorMembresias;
@@ -38,7 +38,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        // Inicialización de Controladores y persistencia
         try {
             gestorClientes = new GestionClientesIbarra();
             controlAcceso = new ControlAccesoIbarra();
@@ -55,9 +54,6 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
-    // ----------------------------------------------------------------------
-    // VISTA DE LOGIN (USO DE GestionClientesIbarra y UsuarioEmpleado)
-    // ----------------------------------------------------------------------
     private Scene crearVistaLogin(Stage primaryStage) {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -108,7 +104,6 @@ public class MainApp extends Application {
     }
 
     private BorderPane CRUDVistaClientes() {
-        TableView<Cliente> tableView = new TableView<>();
         tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
 
         TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
@@ -309,6 +304,7 @@ public class MainApp extends Application {
                 gestorMembresias.inscribirCliente(cliente, tipo, meses, "1234567890123456"); // Tarjeta simulada
                 logArea.appendText("Inscripción exitosa para " + cliente.getNombreCompleto() + ". Verifique en Clientes.\n");
                 gestorClientes.actualizarCliente(cliente);
+                actualizarVistaClientes(tableView);
 
                 txtClienteId.clear();
                 spnMeses.getValueFactory().setValue(1);
@@ -441,6 +437,14 @@ public class MainApp extends Application {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private void actualizarVistaClientes(TableView<Cliente> tableView) {
+        if (tableView != null)
+        {
+            tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+            tableView.refresh();
+        }
     }
 
     public static void main(String[] args) {
