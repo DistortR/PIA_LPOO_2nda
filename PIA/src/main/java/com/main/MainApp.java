@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -25,7 +26,7 @@ import java.util.Optional;
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
 
-    // --- Instancias de Controladores (USO DE TODOS LOS MÓDULOS) ---
+    private TableView<Cliente> tableView = new TableView<>();
     private GestionClientesIbarra gestorClientes;
     private ControlAccesoIbarra controlAcceso;
     private SistemaMembresias1412 gestorMembresias;
@@ -37,7 +38,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        // Inicialización de Controladores y persistencia
         try {
             gestorClientes = new GestionClientesIbarra();
             controlAcceso = new ControlAccesoIbarra();
@@ -55,9 +55,6 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
-    // ----------------------------------------------------------------------
-    // VISTA DE LOGIN (USO DE GestionClientesIbarra y UsuarioEmpleado)
-    // ----------------------------------------------------------------------
     private Scene crearVistaLogin(Stage primaryStage) {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -88,9 +85,12 @@ public class MainApp extends Application {
         return scene;
     }
 
+<<<<<<< HEAD
     // ----------------------------------------------------------------------
     // VISTA PRINCIPAL (Contenedor de Módulos)
     // ----------------------------------------------------------------------
+=======
+>>>>>>> rama_yael/manuel
     private Scene crearVistaPrincipal(Stage primaryStage) {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
@@ -112,12 +112,7 @@ public class MainApp extends Application {
         return new Scene(root, 1100, 800);
     }
 
-
-    // ----------------------------------------------------------------------
-    // MÓDULO DE CLIENTES (USO DE GestionClientesIbarra)
-    // ----------------------------------------------------------------------
     private BorderPane CRUDVistaClientes() {
-        TableView<Cliente> tableView = new TableView<>();
         tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
 
         TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
@@ -303,8 +298,9 @@ public class MainApp extends Application {
         cmbTipo.getSelectionModel().selectFirst();
         Spinner<Integer> spnMeses = new Spinner<>(1, 12, 1);
 
-        Button btnInscribir = new Button("1. Inscribir Cliente (Pagar)");
-        Button btnRenovar = new Button("2. Renovar Membresía");
+
+        Button btnInscribir = new Button("Inscribir Cliente (Pagar)");
+        Button btnRenovar = new Button("Renovar Membresía");
         TextArea logArea = new TextArea();
         logArea.setEditable(false);
 
@@ -314,9 +310,14 @@ public class MainApp extends Application {
                 TipoMembresia tipo = cmbTipo.getValue();
                 int meses = spnMeses.getValue();
 
-                // USO: Inscribir cliente (pago y asignación)
                 gestorMembresias.inscribirCliente(cliente, tipo, meses, "1234567890123456"); // Tarjeta simulada
                 logArea.appendText("Inscripción exitosa para " + cliente.getNombreCompleto() + ". Verifique en Clientes.\n");
+                gestorClientes.actualizarCliente(cliente);
+                actualizarVistaClientes(tableView);
+
+                txtClienteId.clear();
+                spnMeses.getValueFactory().setValue(1);
+                txtClienteId.requestFocus();
 
             } catch (GymException ex) {
                 logArea.appendText("ERROR: " + ex.getMessage() + "\n");
@@ -329,9 +330,12 @@ public class MainApp extends Application {
                 Cliente cliente = gestorClientes.buscarCliente(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
                 int meses = spnMeses.getValue();
 
-                // USO: Renovar Membresía (pago y extensión de fecha)
                 gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456"); // Tarjeta simulada
                 logArea.appendText("Renovación exitosa para " + cliente.getNombreCompleto() + ".\n");
+
+                txtClienteId.clear();
+                spnMeses.getValueFactory().setValue(1);
+                txtClienteId.requestFocus();
 
             } catch (GymException ex) {
                 logArea.appendText("ERROR: " + ex.getMessage() + "\n");
@@ -346,11 +350,14 @@ public class MainApp extends Application {
         grid.addRow(0, new Label("ID Cliente:"), txtClienteId);
         grid.addRow(1, new Label("Tipo:"), cmbTipo);
         grid.addRow(2, new Label("Meses:"), spnMeses);
-        grid.addRow(3, btnInscribir, btnRenovar);
+
+        HBox cajaBotones = new HBox(10, btnInscribir, btnRenovar);
+        grid.add(cajaBotones, 1, 3);
 
         VBox.setVgrow(logArea, Priority.ALWAYS);
-        return new VBox(10, new Label("Configuración de Suscripción:"), grid, new Label("Log de Transacciones:"), logArea);
-    }
+        VBox layout = new VBox(15, grid, logArea);
+        layout.setPadding(new javafx.geometry.Insets(20));
+        return layout;    }
 
     private VBox crearVistaControlAcceso() {
         TextField txtIdCliente = new TextField();
@@ -439,6 +446,14 @@ public class MainApp extends Application {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private void actualizarVistaClientes(TableView<Cliente> tableView) {
+        if (tableView != null)
+        {
+            tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+            tableView.refresh();
+        }
     }
 
     public static void main(String[] args) {

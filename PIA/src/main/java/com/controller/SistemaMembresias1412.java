@@ -35,7 +35,6 @@ public class SistemaMembresias1412 {
             case ESTUDIANTE:
                 costoBase = (PRECIO_BASICO * 0.70) * meses; // 30% descuento fijo
                 break;
-            // Manejo de ANUAL si aplica
             case ANUAL:
                 costoBase = (PRECIO_PREMIUM * 12) * 0.85; // Ejemplo: 15% descuento anual
                 meses = 12; // Asegurar la duración
@@ -49,24 +48,14 @@ public class SistemaMembresias1412 {
         return new Membresia(tipo, meses, costoFinalConCentavos);
     }
 
-    /**
-     * Procesa la compra de la membresía, realiza el pago y la asigna al cliente.
-     * @param cliente El cliente al que se asignará la nueva membresía.
-     * @param tipo El tipo de membresía a crear.
-     * @param meses La duración de la membresía en meses.
-     * @param tarjetaSimulada Un placeholder para simular el número de tarjeta.
-     * @throws GymException Si hay un error en el pago o en la lógica.
-     */
     public void inscribirCliente(Cliente cliente, TipoMembresia tipo, int meses, String tarjetaSimulada) throws GymException {
         if (cliente.getMembresiaActual() != null && cliente.getMembresiaActual().esValida()) {
             throw new GymException("El cliente ya tiene una membresía activa. Use el método renovarMembresia.");
         }
 
-        // 1. Calcular Costo y Crear Objeto Membresia
         Membresia nuevaMembresia = calcularCostoMembresia(tipo, meses);
         double costoFinal = nuevaMembresia.getCosto();
 
-        // 2. PROCESAR PAGO (Uso de la función del Procesador de Pagos)
         if (procesadorPagos.procesarPagoTarjeta(tarjetaSimulada, costoFinal)) {
             // 3. Asignación y Actualización de Cliente
             cliente.setMembresiaActual(nuevaMembresia);
@@ -78,21 +67,13 @@ public class SistemaMembresias1412 {
             String recibo = procesadorPagos.generarRecibo(cliente.getNombreCompleto(), nuevaMembresia, costoFinal);
             System.out.println(recibo);
 
-            System.out.println("✅ Cliente " + cliente.getId() + " inscrito con éxito. Total pagado: $" + String.format("%.2f", costoFinal));
+            System.out.println("Cliente " + cliente.getId() + " inscrito con éxito. Total pagado: $" + String.format("%.2f", costoFinal));
         } else {
             // Esto solo se ejecuta si procesarPagoTarjeta devuelve false, aunque en nuestra simulación lanza una excepción.
             throw new GymException("Error desconocido al procesar el pago para la nueva suscripción.");
         }
     }
 
-
-    // -------------------------------------------------------------------------
-    // FUNCIÓN PRINCIPAL 2: Renovación de Membresía Existente
-    // -------------------------------------------------------------------------
-
-    /**
-     * Renueva la membresía actual del cliente, extiende la fecha de finalización y procesa el pago.
-     */
     public void renovarMembresia(Cliente cliente, int mesesExtras, String tarjetaSimulada) throws GymException {
         if (mesesExtras <= 0) {
             throw new GymException("La renovación debe ser por al menos un mes.");
@@ -104,37 +85,38 @@ public class SistemaMembresias1412 {
             throw new GymException("El cliente " + cliente.getNombreCompleto() + " no tiene una membresía registrada. Use inscribirCliente().");
         }
 
-        // 1. Calcular el costo de renovación basado en el tipo de membresía actual
+
         double precioBasePorMes = membresiaActual.getTipo() == TipoMembresia.BASICA || membresiaActual.getTipo() == TipoMembresia.ESTUDIANTE
                 ? PRECIO_BASICO : PRECIO_PREMIUM;
 
         double costoBaseRenovacion = precioBasePorMes * mesesExtras;
 
-        // Aplicar centavos de matrícula
+
         double costoFinalRenovacion = procesadorPagos.calcularTotalConCentavos(costoBaseRenovacion);
 
-        // 2. PROCESO DE PAGO
+
         if (!procesadorPagos.procesarPagoTarjeta(tarjetaSimulada, costoFinalRenovacion)) {
             throw new GymException("Pago rechazado. No se pudo completar la renovación.");
         }
 
-        // 3. Determinar la nueva fecha de inicio para la extensión
+
         LocalDate fechaInicioRenovacion = membresiaActual.esValida()
                 ? membresiaActual.getFechaFin().plusDays(1) // Si es válida, empieza el día después de vencer
-                : LocalDate.now(); // Si está vencida, empieza hoy.
+                : LocalDate.now(); // Si está vencida, empieza hoy
 
-        // 4. Actualizar el objeto Membresia
+
         LocalDate nuevaFechaFin = fechaInicioRenovacion.plusMonths(mesesExtras);
         membresiaActual.setFechaFin(nuevaFechaFin);
-        membresiaActual.setActiva(true); // Asegurar que quede activa
+        membresiaActual.setActiva(true);
 
-        // 5. Agregar puntos por la renovación (Requisito del sistema de puntos)
+
         cliente.agregarPuntos(mesesExtras * 10);
 
-        // Opcional: Generar recibo
+
         String recibo = procesadorPagos.generarRecibo(cliente.getNombreCompleto(), membresiaActual, costoFinalRenovacion);
         System.out.println(recibo);
 
-        System.out.println("✅ Membresía renovada para " + cliente.getNombreCompleto() + " hasta el " + nuevaFechaFin + ". Puntos añadidos.");
+        System.out.println("Membresía renovada para " + cliente.getNombreCompleto() + " hasta el " + nuevaFechaFin + ". Puntos añadidos.");
     }
+
 }
