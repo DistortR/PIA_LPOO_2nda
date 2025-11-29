@@ -4,26 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" afterDir="false" />
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/view/Estilos.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ControlAccesoIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/ControlAccesoIbarra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GeneradorReportesA.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GeneradorReportesA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ProcesadorPagos4647.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/ProcesadorPagos4647.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/Cliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia$TipoMembresia.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia$TipoMembresia.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/UsuarioEmpleado.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/UsuarioEmpleado.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/GymException.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/util/GymException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/Serializador.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/util/Serializador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/view/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/view/LoginView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/view/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/view/MainView.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,21 +21,21 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Airos1214"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Airos1214&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/DistortR/PIA_LPOO_2nda.git",
-    "accountId": "7fc64427-9438-42fb-a4a2-b6793e4d3841"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/DistortR/PIA_LPOO_2nda.git&quot;,
+    &quot;accountId&quot;: &quot;7fc64427-9438-42fb-a4a2-b6793e4d3841&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="365DuOJHvhPNLZeQMEjOYqf9JSL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -65,8 +48,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "ALEXIS",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -93,7 +78,31 @@
       <option name="presentableId" value="Default" />
       <updated>1764287766155</updated>
     </task>
+    <task id="LOCAL-00001" summary="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
+      <option name="closed" value="true" />
+      <created>1764290390035</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1764290390035</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen" />
+    <option name="LAST_COMMIT_MESSAGE" value="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

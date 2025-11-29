@@ -1,0 +1,100 @@
+/* ======= GENERAL ======= */
+
+.root {
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-weight: bold;  /* 🔥 Texto en negritas */
+    -fx-background-color: #f0e9bf;
+}
+
+/* ======= BOTONES ======= */
+
+.button {
+    -fx-background-color: #3EB489;    /* 🔥 Verde esmeralda suave */
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0, 0, 2);
+}
+
+/* Hover: un poco más oscuro para un efecto elegante */
+.button:hover {
+    -fx-background-color: #36a07c;
+}
+
+/* Click: más oscuro */
+.button:pressed {
+    -fx-background-color: #2e8b6c;
+}
+
+/* ======= LABELS ======= */
+
+.label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+/* ======= TEXTFIELDS ======= */
+
+.text-field, .password-field {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 8;
+    -fx-background-radius: 6;
+    -fx-border-color: #C6C6C6;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #4A90E2;
+    -fx-background-color: #FFFFFF;
+}
+
+/* ======= TABLEVIEW ======= */
+
+.table-view {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 10;
+    -fx-background-radius: 6;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #4A90E2;
+}
+
+.table-view .column-header, 
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-cell-size: 40px;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #DDEBFA;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #F0F6FF;
+}
+
+/* ======= LOGIN PANEL ======= */
+
+.login-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 30;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 4);
+}
+
+.login-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 0 0 10 0;
+}
