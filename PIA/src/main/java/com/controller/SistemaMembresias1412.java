@@ -57,10 +57,7 @@ public class SistemaMembresias1412 {
         double costoFinal = nuevaMembresia.getCosto();
 
         if (procesadorPagos.procesarPagoTarjeta(tarjetaSimulada, costoFinal)) {
-            // 3. Asignación y Actualización de Cliente
             cliente.setMembresiaActual(nuevaMembresia);
-
-            // Requisito: Sistema de puntos/recompensas
             cliente.agregarPuntos(50);
 
             // Opcional: Generar recibo
@@ -69,7 +66,6 @@ public class SistemaMembresias1412 {
 
             System.out.println("Cliente " + cliente.getId() + " inscrito con éxito. Total pagado: $" + String.format("%.2f", costoFinal));
         } else {
-            // Esto solo se ejecuta si procesarPagoTarjeta devuelve false, aunque en nuestra simulación lanza una excepción.
             throw new GymException("Error desconocido al procesar el pago para la nueva suscripción.");
         }
     }
@@ -84,7 +80,6 @@ public class SistemaMembresias1412 {
         if (membresiaActual == null) {
             throw new GymException("El cliente " + cliente.getNombreCompleto() + " no tiene una membresía registrada. Use inscribirCliente().");
         }
-
 
         double precioBasePorMes = membresiaActual.getTipo() == TipoMembresia.BASICA || membresiaActual.getTipo() == TipoMembresia.ESTUDIANTE
                 ? PRECIO_BASICO : PRECIO_PREMIUM;
@@ -109,10 +104,7 @@ public class SistemaMembresias1412 {
         membresiaActual.setFechaFin(nuevaFechaFin);
         membresiaActual.setActiva(true);
 
-
         cliente.agregarPuntos(mesesExtras * 10);
-
-
         String recibo = procesadorPagos.generarRecibo(cliente.getNombreCompleto(), membresiaActual, costoFinalRenovacion);
         System.out.println(recibo);
 

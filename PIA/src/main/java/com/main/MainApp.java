@@ -20,7 +20,10 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 import java.util.Optional;
 
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
@@ -86,10 +89,10 @@ public class MainApp extends Application {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
 
-        Tab tabClientes = new Tab("1. Clientes", CRUDVistaClientes());
-        Tab tabMembresias = new Tab("2. Membresías & Pagos", crearVistaMembresias());
-        Tab tabAcceso = new Tab("3. Control de Acceso", crearVistaControlAcceso());
-        Tab tabReportes = new Tab("4. Reportes", crearVistaReportes());
+        Tab tabClientes = new Tab("Clientes", CRUDVistaClientes());
+        Tab tabMembresias = new Tab("Membresías & Pagos", crearVistaMembresias());
+        Tab tabAcceso = new Tab("Control de Acceso", crearVistaControlAcceso());
+        Tab tabReportes = new Tab("Reportes", crearVistaReportes());
 
         tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes);
         tabPane.getTabs().forEach(t -> t.setClosable(false));
@@ -122,9 +125,28 @@ public class MainApp extends Application {
         TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
         membresiaCol.setCellValueFactory(cellData -> {
             Membresia mem = cellData.getValue().getMembresiaActual();
-            return new javafx.beans.property.SimpleStringProperty(mem != null && mem.esValida() ? mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")" : "INACTIVA");
+            if (mem != null && (mem.esValida() || Objects.requireNonNull(mem).esActualizable()))
+            {
+                if (Objects.requireNonNull(mem).esActualizable() && mem.diasRestantes() == 0) // actualizar membresia automaticamente
+                {
+                    Membresia membresiaCliente = cellData.getValue().getMembresiaActual();
+                    try {
+                        gestorMembresias.inscribirCliente(cellData.getValue(),
+                                membresiaCliente.getTipo(),
+                                membresiaCliente.getMeses(),
+                                "1234567890123456"); // Tarjeta simulada
+                    } catch (GymException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("Inscripción exitosa para " + cellData.getValue().getNombreCompleto() + ". Verifique en Clientes.\n");
+                }
+                return new javafx.beans.property.SimpleStringProperty(mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")");
+            }
+            else {
+                return new javafx.beans.property.SimpleStringProperty("INACTIVO");
+            }
         });
-
+            
         tableView.getColumns().addAll(idCol, nombreCol, emailCol,  fechaRegistroCol, membresiaCol);
 
         Button btnAgregar = new Button("Registrar Cliente");
@@ -366,13 +388,13 @@ public class MainApp extends Application {
             try {
                 Cliente cliente = gestorClientes.buscarCliente(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
 
-                // USO: Validación de Entrada
                 if (controlAcceso.validarEntrada(cliente)) {
-                    lblResultado.setText("✅ ACCESO PERMITIDO: Bienvenido(a) " + cliente.getNombreCompleto());
+                    lblResultado.setText("ACCESO PERMITIDO: Bienvenido(a) " + cliente.getNombreCompleto());
                     lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: green; -fx-font-size: 16px;");
+                    cliente.agregarPuntos(20);
+                    gestorClientes.actualizarCliente(cliente);
                 }
             } catch (GymException ex) {
-                // Manejo de excepciones (Membresía vencida, etc.)
                 lblResultado.setText("ACCESO DENEGADO: " + ex.getMessage());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: red; -fx-font-size: 16px;");
             } finally {
@@ -408,10 +430,8 @@ public class MainApp extends Application {
         barra.setVisible(false);
 
         btnGenerar.setOnAction(e -> {
-            // USO: GeneradorReportesA (Task, requiere GestionClientesIbarra en el constructor)
             GeneradorReportesA tarea = new GeneradorReportesA();
 
-            // Vincular UI con el Hilo
             lblEstado.textProperty().bind(tarea.messageProperty());
             barra.visibleProperty().bind(tarea.runningProperty());
             barra.progressProperty().bind(tarea.progressProperty());
