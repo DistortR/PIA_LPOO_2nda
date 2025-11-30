@@ -16,6 +16,7 @@ public class Membresia implements Serializable {
     private LocalDate fechaFin;
     private double costo;
     private boolean activa;
+    private boolean actualizable;
 
     public Membresia(TipoMembresia tipo, int duracionMeses, double costoBase) {
         this.tipo = tipo;
@@ -25,7 +26,6 @@ public class Membresia implements Serializable {
         this.activa = true;
     }
 
-    // Método para verificar si sigue vigente hoy
     public boolean esValida() {
         return activa && LocalDate.now().isBefore(fechaFin);
     }
@@ -35,14 +35,21 @@ public class Membresia implements Serializable {
     }
 
     public long diasRestantes() {
+        if (LocalDate.now().isAfter(fechaInicio)) {
+            return 0L;
+        }
         return ChronoUnit.DAYS.between(LocalDate.now(), fechaFin);
     }
 
     // Getters
     public TipoMembresia getTipo() { return tipo; }
     public double getCosto() { return costo; }
+    public LocalDate getFechaInicio() { return fechaInicio; }
     public LocalDate getFechaFin() { return fechaFin; }
+    public boolean esActualizable() { return actualizable; }
+    public int getMeses() {return (int) ChronoUnit.MONTHS.between(fechaInicio, fechaFin);}
 
+    public void setActualizable(boolean actualizable) { this.actualizable = actualizable; }
     public void setActiva(boolean activa) { this.activa = activa; }
     public void setFechaFin(LocalDate fechaFin) { this.fechaFin = fechaFin; }
     public void setFechaInicio(LocalDate fechaInicio) {this.fechaInicio = fechaInicio; }

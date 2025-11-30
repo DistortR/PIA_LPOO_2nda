@@ -6,6 +6,7 @@ import com.controller.GestionClientesIbarra;
 import com.controller.SistemaMembresias1412;
 import com.controller.ProcesadorPagos4647;
 import com.model.Cliente;
+import com.model.Inventario;
 import com.model.Membresia;
 import com.model.Membresia.TipoMembresia;
 import com.model.UsuarioEmpleado;
@@ -18,14 +19,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Optional;
 
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
 
-    // --- Instancias de Controladores (USO DE TODOS LOS MÓDULOS) ---
+    private TableView<Cliente> tableView = new TableView<>();
     private GestionClientesIbarra gestorClientes;
     private ControlAccesoIbarra controlAcceso;
     private SistemaMembresias1412 gestorMembresias;
@@ -37,7 +40,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        // Inicialización de Controladores y persistencia
         try {
             gestorClientes = new GestionClientesIbarra();
             controlAcceso = new ControlAccesoIbarra();
@@ -54,9 +56,6 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
-    // ----------------------------------------------------------------------
-    // VISTA DE LOGIN (USO DE GestionClientesIbarra y UsuarioEmpleado)
-    // ----------------------------------------------------------------------
     private Scene crearVistaLogin(Stage primaryStage) {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -85,18 +84,14 @@ public class MainApp extends Application {
         return new Scene(grid, 400, 300);
     }
 
-
-    // ----------------------------------------------------------------------
-    // VISTA PRINCIPAL (Contenedor de Módulos)
-    // ----------------------------------------------------------------------
     private Scene crearVistaPrincipal(Stage primaryStage) {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
 
-        Tab tabClientes = new Tab("1. Clientes", CRUDVistaClientes());
-        Tab tabMembresias = new Tab("2. Membresías & Pagos", crearVistaMembresias());
-        Tab tabAcceso = new Tab("3. Control de Acceso", crearVistaControlAcceso());
-        Tab tabReportes = new Tab("4. Reportes", crearVistaReportes());
+        Tab tabClientes = new Tab("Clientes", CRUDVistaClientes());
+        Tab tabMembresias = new Tab("Membresías & Pagos", crearVistaMembresias());
+        Tab tabAcceso = new Tab("Control de Acceso", crearVistaControlAcceso());
+        Tab tabReportes = new Tab("Reportes", crearVistaReportes());
 
         tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes);
         tabPane.getTabs().forEach(t -> t.setClosable(false));
@@ -110,13 +105,8 @@ public class MainApp extends Application {
         return new Scene(root, 1100, 800);
     }
 
-
-    // ----------------------------------------------------------------------
-    // MÓDULO DE CLIENTES (USO DE GestionClientesIbarra)
-    // ----------------------------------------------------------------------
     private BorderPane CRUDVistaClientes() {
-        TableView<Cliente> tableView = new TableView<>();
-        tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+        tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
 
         TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
@@ -134,10 +124,28 @@ public class MainApp extends Application {
         TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
         membresiaCol.setCellValueFactory(cellData -> {
             Membresia mem = cellData.getValue().getMembresiaActual();
-            return new javafx.beans.property.SimpleStringProperty(mem != null && mem.esValida() ? mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")" : "INACTIVA");
+            if (mem != null && (mem.esValida() || Objects.requireNonNull(mem).esActualizable()))
+            {
+                if (Objects.requireNonNull(mem).esActualizable() && mem.diasRestantes() == 0) // actualizar membresia automaticamente
+                {
+                    try {
+                        gestorMembresias.inscribirCliente(cellData.getValue(),
+                                mem.getTipo(),
+                                mem.getMeses(),
+                                "1234567890123456");
+                    } catch (GymException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("Inscripción exitosa para " + cellData.getValue().getNombreCompleto() + ". Verifique en Clientes.\n");
+                }
+                return new javafx.beans.property.SimpleStringProperty(mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")");
+            }
+            else {
+                return new javafx.beans.property.SimpleStringProperty("INACTIVO");
+            }
         });
 
-        tableView.getColumns().addAll(idCol, nombreCol, emailCol,  fechaRegistroCol, membresiaCol);
+        tableView.getColumns().addAll(idCol, nombreCol, emailCol, fechaRegistroCol, membresiaCol);
 
         Button btnAgregar = new Button("Registrar Cliente");
         btnAgregar.setOnAction(e -> {
@@ -197,9 +205,9 @@ public class MainApp extends Application {
         if(result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 if(!nameField.getText().isEmpty() && !lastNameField.getText().isEmpty() && !emailField.getText().isEmpty()) {
-                    Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
-                    gestorClientes.registrarCliente(c);
-                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+                    Cliente c = new Cliente("C" + (gestorClientes.getLista().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
+                    gestorClientes.registrar(c);
+                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
                 }
                 else {
                     mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
@@ -256,7 +264,7 @@ public class MainApp extends Application {
                     selectedClient.setApellido(lastNameField.getText());
                     selectedClient.setEmail(emailField.getText());
 
-                    gestorClientes.actualizarCliente(selectedClient);
+                    gestorClientes.actualizar(selectedClient);
                     tableView.refresh();
                 } catch (Exception ex) {
                     mostrarAlerta(Alert.AlertType.ERROR, "Error al Actualizar", ex.getMessage());
@@ -285,8 +293,8 @@ public class MainApp extends Application {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                gestorClientes.eliminarCliente(selectedClient.getId());
-                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+                gestorClientes.eliminar(selectedClient.getId());
+                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
             } catch (GymException ex) {
                 mostrarAlerta(Alert.AlertType.ERROR, "Error al Eliminar", ex.getMessage());
             }
@@ -294,27 +302,32 @@ public class MainApp extends Application {
     }
 
     private VBox crearVistaMembresias() {
-        // Componentes para la simulación
         TextField txtClienteId = new TextField();
         txtClienteId.setPromptText("ID Cliente a Cobrar");
         ComboBox<TipoMembresia> cmbTipo = new ComboBox<>(javafx.collections.FXCollections.observableArrayList(TipoMembresia.values()));
         cmbTipo.getSelectionModel().selectFirst();
         Spinner<Integer> spnMeses = new Spinner<>(1, 12, 1);
 
-        Button btnInscribir = new Button("1. Inscribir Cliente (Pagar)");
-        Button btnRenovar = new Button("2. Renovar Membresía");
+
+        Button btnInscribir = new Button("Inscribir Cliente (Pagar)");
+        Button btnRenovar = new Button("Renovar Membresía");
         TextArea logArea = new TextArea();
         logArea.setEditable(false);
 
         btnInscribir.setOnAction(e -> {
             try {
-                Cliente cliente = gestorClientes.buscarCliente(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
+                Cliente cliente = gestorClientes.buscar(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
                 TipoMembresia tipo = cmbTipo.getValue();
                 int meses = spnMeses.getValue();
 
-                // USO: Inscribir cliente (pago y asignación)
                 gestorMembresias.inscribirCliente(cliente, tipo, meses, "1234567890123456"); // Tarjeta simulada
                 logArea.appendText("Inscripción exitosa para " + cliente.getNombreCompleto() + ". Verifique en Clientes.\n");
+                gestorClientes.actualizar(cliente);
+                actualizarVistaClientes(tableView);
+
+                txtClienteId.clear();
+                spnMeses.getValueFactory().setValue(1);
+                txtClienteId.requestFocus();
 
             } catch (GymException ex) {
                 logArea.appendText("ERROR: " + ex.getMessage() + "\n");
@@ -324,12 +337,15 @@ public class MainApp extends Application {
 
         btnRenovar.setOnAction(e -> {
             try {
-                Cliente cliente = gestorClientes.buscarCliente(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
+                Cliente cliente = gestorClientes.buscar(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
                 int meses = spnMeses.getValue();
 
-                // USO: Renovar Membresía (pago y extensión de fecha)
                 gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456"); // Tarjeta simulada
                 logArea.appendText("Renovación exitosa para " + cliente.getNombreCompleto() + ".\n");
+
+                txtClienteId.clear();
+                spnMeses.getValueFactory().setValue(1);
+                txtClienteId.requestFocus();
 
             } catch (GymException ex) {
                 logArea.appendText("ERROR: " + ex.getMessage() + "\n");
@@ -344,11 +360,14 @@ public class MainApp extends Application {
         grid.addRow(0, new Label("ID Cliente:"), txtClienteId);
         grid.addRow(1, new Label("Tipo:"), cmbTipo);
         grid.addRow(2, new Label("Meses:"), spnMeses);
-        grid.addRow(3, btnInscribir, btnRenovar);
+
+        HBox cajaBotones = new HBox(10, btnInscribir, btnRenovar);
+        grid.add(cajaBotones, 1, 3);
 
         VBox.setVgrow(logArea, Priority.ALWAYS);
-        return new VBox(10, new Label("Configuración de Suscripción:"), grid, new Label("Log de Transacciones:"), logArea);
-    }
+        VBox layout = new VBox(15, grid, logArea);
+        layout.setPadding(new javafx.geometry.Insets(20));
+        return layout;    }
 
     private VBox crearVistaControlAcceso() {
         TextField txtIdCliente = new TextField();
@@ -364,15 +383,14 @@ public class MainApp extends Application {
 
         btnAcceso.setOnAction(e -> {
             try {
-                Cliente cliente = gestorClientes.buscarCliente(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
+                Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
 
-                // USO: Validación de Entrada
                 if (controlAcceso.validarEntrada(cliente)) {
-                    lblResultado.setText("✅ ACCESO PERMITIDO: Bienvenido(a) " + cliente.getNombreCompleto());
+                    lblResultado.setText("ACCESO PERMITIDO: Bienvenido(a) " + cliente.getNombreCompleto());
                     lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: green; -fx-font-size: 16px;");
+                    gestorClientes.actualizar(cliente);
                 }
             } catch (GymException ex) {
-                // Manejo de excepciones (Membresía vencida, etc.)
                 lblResultado.setText("ACCESO DENEGADO: " + ex.getMessage());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: red; -fx-font-size: 16px;");
             } finally {
@@ -383,7 +401,7 @@ public class MainApp extends Application {
 
         btnSalida.setOnAction(e -> {
             try {
-                Cliente cliente = gestorClientes.buscarCliente(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
+                Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
                 controlAcceso.registrarSalida(cliente); // USO: Registro de Salida
                 lblResultado.setText("✅ Salida registrada para: " + cliente.getNombreCompleto());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: blue; -fx-font-size: 16px;");
@@ -408,10 +426,8 @@ public class MainApp extends Application {
         barra.setVisible(false);
 
         btnGenerar.setOnAction(e -> {
-            // USO: GeneradorReportesA (Task, requiere GestionClientesIbarra en el constructor)
             GeneradorReportesA tarea = new GeneradorReportesA();
 
-            // Vincular UI con el Hilo
             lblEstado.textProperty().bind(tarea.messageProperty());
             barra.visibleProperty().bind(tarea.runningProperty());
             barra.progressProperty().bind(tarea.progressProperty());
@@ -437,6 +453,14 @@ public class MainApp extends Application {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private void actualizarVistaClientes(TableView<Cliente> tableView) {
+        if (tableView != null)
+        {
+            tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
+            tableView.refresh();
+        }
     }
 
     public static void main(String[] args) {
