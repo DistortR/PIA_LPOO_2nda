@@ -25,6 +25,7 @@ public class ControlAccesoIbarra {
         }
 
         registrarEvento(cliente, "ENTRADA");
+        cliente.agregarPuntos(10);
         return true;
     }
 
@@ -33,8 +34,8 @@ public class ControlAccesoIbarra {
     }
 
     private void registrarEvento(Cliente c, String tipo) {
-        String log = String.format("[%s] %s - Cliente: %s (%s)",
-                LocalDateTime.now(), tipo, c.getNombreCompleto(), c.getId());
+        String log = String.format("[%s] %s - Cliente: %s (%s). 10 puntos añadidos, %d puntos totales.",
+                LocalDateTime.now(), tipo, c.getNombreCompleto(), c.getId(), c.getPuntosFidelidad());
         registroAccesos.add(log);
         System.out.println(log);
     }

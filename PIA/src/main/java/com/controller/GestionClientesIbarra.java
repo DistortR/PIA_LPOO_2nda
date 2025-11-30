@@ -2,15 +2,15 @@ package com.controller;
 
 import com.model.Cliente;
 import com.model.UsuarioEmpleado;
+import com.util.Gestionador;
 import com.util.Serializador;
 import com.util.GymException;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class GestionClientesIbarra {
+public class GestionClientesIbarra implements Gestionador<Cliente>{
     private ObservableList<Cliente> listaClientes;
     private List<Cliente> clientes;
     private List<UsuarioEmpleado> empleados; // Lista de empleados
@@ -28,22 +28,21 @@ public class GestionClientesIbarra {
         this.clientes = dbCliente.cargar(DB_FILE_CLIENTES);
         this.empleados = dbEmpleado.cargar(DB_FILE_EMPLEADOS);
 
-        // Carga de administrador inicial (Requisito: Si no hay empleados, crea el admin)
         if (this.empleados.isEmpty()) {
             this.empleados.add(new UsuarioEmpleado("jibarra", "admin123", "Juan Ibarra (ADMIN)", "ADMIN"));
             try { guardarEmpleados(); } catch (GymException e) { /* Ignorar en inicialización */ }
         }
     }
 
-    public void registrarCliente(Cliente c) throws GymException {
-        if (buscarCliente(c.getId()).isPresent()) {
+    public void registrar(Cliente c) throws GymException {
+        if (buscar(c.getId()).isPresent()) {
             throw new GymException("El cliente con ID " + c.getId() + " ya existe.");
         }
         clientes.add(c);
         guardarClientes();
     }
 
-    public void actualizarCliente(Cliente clienteModificado) throws GymException {
+    public void actualizar(Cliente clienteModificado) throws GymException {
         boolean encontrado = false;
 
         for (int i = 0; i < clientes.size(); i++) {
@@ -61,11 +60,11 @@ public class GestionClientesIbarra {
         }
     }
 
-    public Optional<Cliente> buscarCliente(String id) {
+    public Optional<Cliente> buscar(String id) {
         return clientes.stream().filter(c -> c.getId().equals(id)).findFirst();
     }
 
-    public void eliminarCliente(String id) throws GymException {
+    public void eliminar(String id) throws GymException {
         if (clientes.removeIf(c -> c.getId().equals(id))) {
             guardarClientes();
         } else {
@@ -81,7 +80,7 @@ public class GestionClientesIbarra {
         dbEmpleado.guardar(DB_FILE_EMPLEADOS, empleados);
     }
 
-    public List<Cliente> getListaClientes() { return clientes; }
+    public List<Cliente> getLista() { return clientes; }
 
     public UsuarioEmpleado autenticar(String user, String pass) throws GymException {
         Optional<UsuarioEmpleado> userOpt = empleados.stream()

@@ -6,6 +6,7 @@ import com.controller.GestionClientesIbarra;
 import com.controller.SistemaMembresias1412;
 import com.controller.ProcesadorPagos4647;
 import com.model.Cliente;
+import com.model.Inventario;
 import com.model.Membresia;
 import com.model.Membresia.TipoMembresia;
 import com.model.UsuarioEmpleado;
@@ -20,9 +21,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -107,7 +106,7 @@ public class MainApp extends Application {
     }
 
     private BorderPane CRUDVistaClientes() {
-        tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+        tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
 
         TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
@@ -129,12 +128,11 @@ public class MainApp extends Application {
             {
                 if (Objects.requireNonNull(mem).esActualizable() && mem.diasRestantes() == 0) // actualizar membresia automaticamente
                 {
-                    Membresia membresiaCliente = cellData.getValue().getMembresiaActual();
                     try {
                         gestorMembresias.inscribirCliente(cellData.getValue(),
-                                membresiaCliente.getTipo(),
-                                membresiaCliente.getMeses(),
-                                "1234567890123456"); // Tarjeta simulada
+                                mem.getTipo(),
+                                mem.getMeses(),
+                                "1234567890123456");
                     } catch (GymException e) {
                         throw new RuntimeException(e);
                     }
@@ -146,8 +144,8 @@ public class MainApp extends Application {
                 return new javafx.beans.property.SimpleStringProperty("INACTIVO");
             }
         });
-            
-        tableView.getColumns().addAll(idCol, nombreCol, emailCol,  fechaRegistroCol, membresiaCol);
+
+        tableView.getColumns().addAll(idCol, nombreCol, emailCol, fechaRegistroCol, membresiaCol);
 
         Button btnAgregar = new Button("Registrar Cliente");
         btnAgregar.setOnAction(e -> {
@@ -207,9 +205,9 @@ public class MainApp extends Application {
         if(result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 if(!nameField.getText().isEmpty() && !lastNameField.getText().isEmpty() && !emailField.getText().isEmpty()) {
-                    Cliente c = new Cliente("C" + (gestorClientes.getListaClientes().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
-                    gestorClientes.registrarCliente(c);
-                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+                    Cliente c = new Cliente("C" + (gestorClientes.getLista().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
+                    gestorClientes.registrar(c);
+                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
                 }
                 else {
                     mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
@@ -266,7 +264,7 @@ public class MainApp extends Application {
                     selectedClient.setApellido(lastNameField.getText());
                     selectedClient.setEmail(emailField.getText());
 
-                    gestorClientes.actualizarCliente(selectedClient);
+                    gestorClientes.actualizar(selectedClient);
                     tableView.refresh();
                 } catch (Exception ex) {
                     mostrarAlerta(Alert.AlertType.ERROR, "Error al Actualizar", ex.getMessage());
@@ -295,8 +293,8 @@ public class MainApp extends Application {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                gestorClientes.eliminarCliente(selectedClient.getId());
-                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+                gestorClientes.eliminar(selectedClient.getId());
+                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
             } catch (GymException ex) {
                 mostrarAlerta(Alert.AlertType.ERROR, "Error al Eliminar", ex.getMessage());
             }
@@ -304,7 +302,6 @@ public class MainApp extends Application {
     }
 
     private VBox crearVistaMembresias() {
-        // Componentes para la simulación
         TextField txtClienteId = new TextField();
         txtClienteId.setPromptText("ID Cliente a Cobrar");
         ComboBox<TipoMembresia> cmbTipo = new ComboBox<>(javafx.collections.FXCollections.observableArrayList(TipoMembresia.values()));
@@ -319,13 +316,13 @@ public class MainApp extends Application {
 
         btnInscribir.setOnAction(e -> {
             try {
-                Cliente cliente = gestorClientes.buscarCliente(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
+                Cliente cliente = gestorClientes.buscar(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
                 TipoMembresia tipo = cmbTipo.getValue();
                 int meses = spnMeses.getValue();
 
                 gestorMembresias.inscribirCliente(cliente, tipo, meses, "1234567890123456"); // Tarjeta simulada
                 logArea.appendText("Inscripción exitosa para " + cliente.getNombreCompleto() + ". Verifique en Clientes.\n");
-                gestorClientes.actualizarCliente(cliente);
+                gestorClientes.actualizar(cliente);
                 actualizarVistaClientes(tableView);
 
                 txtClienteId.clear();
@@ -340,7 +337,7 @@ public class MainApp extends Application {
 
         btnRenovar.setOnAction(e -> {
             try {
-                Cliente cliente = gestorClientes.buscarCliente(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
+                Cliente cliente = gestorClientes.buscar(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
                 int meses = spnMeses.getValue();
 
                 gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456"); // Tarjeta simulada
@@ -386,13 +383,12 @@ public class MainApp extends Application {
 
         btnAcceso.setOnAction(e -> {
             try {
-                Cliente cliente = gestorClientes.buscarCliente(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
+                Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
 
                 if (controlAcceso.validarEntrada(cliente)) {
                     lblResultado.setText("ACCESO PERMITIDO: Bienvenido(a) " + cliente.getNombreCompleto());
                     lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: green; -fx-font-size: 16px;");
-                    cliente.agregarPuntos(20);
-                    gestorClientes.actualizarCliente(cliente);
+                    gestorClientes.actualizar(cliente);
                 }
             } catch (GymException ex) {
                 lblResultado.setText("ACCESO DENEGADO: " + ex.getMessage());
@@ -405,7 +401,7 @@ public class MainApp extends Application {
 
         btnSalida.setOnAction(e -> {
             try {
-                Cliente cliente = gestorClientes.buscarCliente(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
+                Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
                 controlAcceso.registrarSalida(cliente); // USO: Registro de Salida
                 lblResultado.setText("✅ Salida registrada para: " + cliente.getNombreCompleto());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: blue; -fx-font-size: 16px;");
@@ -462,7 +458,7 @@ public class MainApp extends Application {
     private void actualizarVistaClientes(TableView<Cliente> tableView) {
         if (tableView != null)
         {
-            tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getListaClientes()));
+            tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
             tableView.refresh();
         }
     }

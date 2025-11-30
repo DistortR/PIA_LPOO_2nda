@@ -78,7 +78,7 @@ public class SistemaMembresias1412 {
         Membresia membresiaActual = cliente.getMembresiaActual();
 
         if (membresiaActual == null) {
-            throw new GymException("El cliente " + cliente.getNombreCompleto() + " no tiene una membresía registrada. Use inscribirCliente().");
+            throw new GymException("El cliente " + cliente.getNombreCompleto() + " no tiene una membresía registrada.");
         }
 
         double precioBasePorMes = membresiaActual.getTipo() == TipoMembresia.BASICA || membresiaActual.getTipo() == TipoMembresia.ESTUDIANTE
