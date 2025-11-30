@@ -1,4 +1,4 @@
-package com.view;
+package com.controller;
 
 public class MainView {
 }

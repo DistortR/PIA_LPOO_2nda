@@ -46,6 +46,33 @@
     -fx-border-width: 1;
 }
 
+/* Inputs used in the FXML form */
+.text-input-field {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 8 8 8 40; /* espacio a la izquierda para el icono */
+    -fx-background-radius: 6;
+    -fx-border-color: #C6C6C6;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+/* Use selectors specific to control type so JavaFX applies correctly */
+TextField.text-input-field{
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left 10 center;
+    -fx-background-size: 18px 18px;
+    -fx-padding: 8 8 8 40; /* deja espacio para el icono */
+}
+
+.text-input-field.user-field {
+    -fx-background-image: url("user.png");
+}
+
+.text-input-field.pass-field {
+    -fx-background-image: url("password.png");
+}
+
+
 .text-field:focused, .password-field:focused {
     -fx-border-color: #4A90E2;
     -fx-background-color: #FFFFFF;
@@ -97,4 +124,55 @@
     -fx-font-weight: bold;
     -fx-text-fill: #333;
     -fx-padding: 0 0 10 0;
+}
+
+/* ======= MAIN LAYOUT ======= */
+.main-root {
+    -fx-background-color: linear-gradient(to bottom right, #f6f7fb, #f0e9bf);
+}
+
+.main-tabs .tab-header-area {
+    -fx-background-color: transparent;
+}
+
+.session-label {
+    /* Usar una versión semitransparente del mismo degradado de .main-root
+       para integrarse naturalmente con el fondo principal. */
+    -fx-background-color: linear-gradient(to bottom right, rgba(246,247,251,0.75), rgba(240,233,191,0.75));
+    -fx-background-radius: 6 6 0 0;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-padding: 6 10;
+}
+
+.content-pane {
+    -fx-padding: 14;
+}
+
+.button-row .button {
+    -fx-background-color: #2E8B6C;
+}
+
+.dialog-pane {
+    -fx-background-color: white;
+    -fx-padding: 12;
+}
+
+.custom-table .column-header-background {
+    -fx-background-color: #4A90E2;
+}
+
+.text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 6;
+}
+
+.list-view {
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 6;
+}
+
+.combo-box, .spinner {
+    -fx-background-radius: 6;
 }
