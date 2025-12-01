@@ -58,7 +58,7 @@ public class GestionInventario implements Gestionador<Inventario> {
         return inventario.stream().filter(inv -> inv.getId().equals(id)).findFirst();
     }
 
-    public List<Inventario> getLista() throws GymException {
+    public List<Inventario> getLista() {
         return inventario;
     }
 

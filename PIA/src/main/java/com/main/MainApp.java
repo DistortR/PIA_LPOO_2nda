@@ -1,18 +1,11 @@
 package com.main;
 
-import com.controller.ControlAccesoIbarra;
-import com.controller.GeneradorReportesA;
-import com.controller.GestionClientesIbarra;
-import com.controller.SistemaMembresias1412;
-import com.controller.ProcesadorPagos4647;
+import com.controller.*;
 import com.model.Cliente;
-import com.model.Inventario;
-import com.model.Membresia;
 import com.model.Membresia.TipoMembresia;
 import com.model.UsuarioEmpleado;
 import com.util.GymException;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,17 +14,15 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
-import java.util.Optional;
+import static com.main.VistaClientes.tableView;
 
 // Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
 
-    private TableView<Cliente> tableView = new TableView<>();
-    private GestionClientesIbarra gestorClientes;
+    protected static GestionClientesIbarra gestorClientes;
     private ControlAccesoIbarra controlAcceso;
-    private SistemaMembresias1412 gestorMembresias;
+    protected static SistemaMembresias1412 gestorMembresias;
+    protected static GestionInventario gestorInventario;
     private ProcesadorPagos4647 procesadorPagos;
 
     // --- Datos de Sesión ---
@@ -41,9 +32,11 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
 
         try {
+            gestorInventario = new GestionInventario();
             gestorClientes = new GestionClientesIbarra();
             controlAcceso = new ControlAccesoIbarra();
             gestorMembresias = new SistemaMembresias1412();
+
             procesadorPagos = new ProcesadorPagos4647(); // Inicialización del Procesador
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error Fatal", "Fallo al cargar la base de datos o inicializar controladores: " + e.getMessage());
@@ -88,12 +81,13 @@ public class MainApp extends Application {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
 
-        Tab tabClientes = new Tab("Clientes", CRUDVistaClientes());
+        Tab tabClientes = new Tab("Clientes", VistaClientes.CRUDVistaClientes());
         Tab tabMembresias = new Tab("Membresías & Pagos", crearVistaMembresias());
         Tab tabAcceso = new Tab("Control de Acceso", crearVistaControlAcceso());
         Tab tabReportes = new Tab("Reportes", crearVistaReportes());
+        Tab tabInventarios = new Tab("Inventarios", VistaInventario.crearVistaInventario());
 
-        tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes);
+        tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabInventarios, tabReportes);
         tabPane.getTabs().forEach(t -> t.setClosable(false));
 
         Label lblUser = new Label("SESIÓN: " + usuarioLogeado.getNombreCompleto() + " | ROL: " + usuarioLogeado.getRol());
@@ -105,201 +99,6 @@ public class MainApp extends Application {
         return new Scene(root, 1100, 800);
     }
 
-    private BorderPane CRUDVistaClientes() {
-        tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
-
-        TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
-        idCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
-
-        TableColumn<Cliente, String> nombreCol = new TableColumn<>("Nombre Completo");
-        nombreCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombreCompleto()));
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        TableColumn<Cliente, String> emailCol = new TableColumn<>("Email");
-        emailCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEmail()));
-
-        TableColumn<Cliente, String> fechaRegistroCol = new TableColumn<>("Fecha Registro");
-        fechaRegistroCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFechaRegistro().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
-
-        TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
-        membresiaCol.setCellValueFactory(cellData -> {
-            Membresia mem = cellData.getValue().getMembresiaActual();
-            if (mem != null && (mem.esValida() || Objects.requireNonNull(mem).esActualizable()))
-            {
-                if (Objects.requireNonNull(mem).esActualizable() && mem.diasRestantes() == 0) // actualizar membresia automaticamente
-                {
-                    try {
-                        gestorMembresias.inscribirCliente(cellData.getValue(),
-                                mem.getTipo(),
-                                mem.getMeses(),
-                                "1234567890123456");
-                    } catch (GymException e) {
-                        throw new RuntimeException(e);
-                    }
-                    System.out.println("Inscripción exitosa para " + cellData.getValue().getNombreCompleto() + ". Verifique en Clientes.\n");
-                }
-                return new javafx.beans.property.SimpleStringProperty(mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")");
-            }
-            else {
-                return new javafx.beans.property.SimpleStringProperty("INACTIVO");
-            }
-        });
-
-        tableView.getColumns().addAll(idCol, nombreCol, emailCol, fechaRegistroCol, membresiaCol);
-
-        Button btnAgregar = new Button("Registrar Cliente");
-        btnAgregar.setOnAction(e -> {
-            CreateClient(tableView);
-        });
-
-        Button btnActualizar = new Button("Actualizar Cliente");
-        btnActualizar.setOnAction(e -> {
-            UpdateClient(tableView);
-        });
-
-        Button btnEliminar = new Button("Eliminar Cliente");
-        btnEliminar.setOnAction(e -> {
-            deleteClient(tableView);
-        });
-
-        BorderPane panel = new BorderPane();
-        panel.setCenter(tableView);
-
-        HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
-        botones.setPadding(new Insets(10));
-        panel.setBottom(botones);
-        return panel;
-    }
-
-    private void CreateClient(TableView<Cliente> tableView) {
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Agregar Cliente");
-        dialog.setHeaderText("Ingrese los datos");
-
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField nameField = new TextField();
-        TextField lastNameField = new TextField();
-        TextField emailField = new TextField();
-        nameField.setPromptText("Ej. Arturo");
-        lastNameField.setPromptText("Ej. Garcia");
-        emailField.setPromptText("Ej. juan@gmail.com");
-
-        grid.add(new Label("Nombre:"), 0, 0);
-        grid.add(nameField, 1, 0);
-        grid.add(new Label("Apellido:"), 0, 1);
-        grid.add(lastNameField, 1, 1);
-        grid.add(new Label("Email:"), 0, 2);
-        grid.add(emailField, 1, 2);
-
-        dialog.getDialogPane().setContent(grid);
-        Platform.runLater(() -> nameField.requestFocus());
-
-        Optional<ButtonType> result = dialog.showAndWait();
-
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                if(!nameField.getText().isEmpty() && !lastNameField.getText().isEmpty() && !emailField.getText().isEmpty()) {
-                    Cliente c = new Cliente("C" + (gestorClientes.getLista().size() + 1), nameField.getText(), lastNameField.getText(), emailField.getText());
-                    gestorClientes.registrar(c);
-                    tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
-                }
-                else {
-                    mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
-                }
-            } catch (GymException ex) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Error Registro", ex.getMessage());
-            }
-        }
-    }
-
-    private void UpdateClient(TableView<Cliente> tableView) {
-        Cliente selectedClient = tableView.getSelectionModel().getSelectedItem();
-
-        if (selectedClient == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona un cliente de la lista para editar.");
-            return;
-        }
-
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Actualizar Cliente");
-        dialog.setHeaderText("Modifique los datos del cliente");
-
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField nameField = new TextField(selectedClient.getNombre());
-        TextField lastNameField = new TextField(selectedClient.getApellido());
-        TextField emailField = new TextField(selectedClient.getEmail());
-
-        nameField.setPromptText("Nombre");
-        lastNameField.setPromptText("Apellido");
-        emailField.setPromptText("Email");
-
-        grid.add(new Label("Nombre:"), 0, 0);
-        grid.add(nameField, 1, 0);
-        grid.add(new Label("Apellido:"), 0, 1);
-        grid.add(lastNameField, 1, 1);
-        grid.add(new Label("Email:"), 0, 2);
-        grid.add(emailField, 1, 2);
-
-        dialog.getDialogPane().setContent(grid);
-        Platform.runLater(() -> nameField.requestFocus());
-
-        Optional<ButtonType> result = dialog.showAndWait();
-
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            if (!nameField.getText().isEmpty() || !lastNameField.getText().isEmpty() || !emailField.getText().isEmpty()) {
-                try {
-                    selectedClient.setNombre(nameField.getText());
-                    selectedClient.setApellido(lastNameField.getText());
-                    selectedClient.setEmail(emailField.getText());
-
-                    gestorClientes.actualizar(selectedClient);
-                    tableView.refresh();
-                } catch (Exception ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Error al Actualizar", ex.getMessage());
-                }
-            }
-            else {
-                mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete al menos un campo para actualizar.");
-            }
-        }
-    }
-
-    private void deleteClient(TableView<Cliente> tableView) {
-        Cliente selectedClient = tableView.getSelectionModel().getSelectedItem();
-
-        if (selectedClient == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona un cliente de la lista para eliminar.");
-            return;
-        }
-
-        Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirm.setTitle("Confirmar Eliminación");
-        alertConfirm.setHeaderText("¿Está seguro de eliminar al cliente?");
-        alertConfirm.setContentText("Cliente: " + selectedClient.getNombreCompleto());
-
-        Optional<ButtonType> result = alertConfirm.showAndWait();
-
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                gestorClientes.eliminar(selectedClient.getId());
-                tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
-            } catch (GymException ex) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Error al Eliminar", ex.getMessage());
-            }
-        }
-    }
 
     private VBox crearVistaMembresias() {
         TextField txtClienteId = new TextField();
@@ -403,7 +202,7 @@ public class MainApp extends Application {
             try {
                 Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
                 controlAcceso.registrarSalida(cliente); // USO: Registro de Salida
-                lblResultado.setText("✅ Salida registrada para: " + cliente.getNombreCompleto());
+                lblResultado.setText("Salida registrada para: " + cliente.getNombreCompleto());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: blue; -fx-font-size: 16px;");
             } catch (GymException ex) {
                 mostrarAlerta(Alert.AlertType.ERROR, "Error", ex.getMessage());
@@ -447,7 +246,7 @@ public class MainApp extends Application {
         return panel;
     }
 
-    private void mostrarAlerta(Alert.AlertType type, String title, String content) {
+    protected static void mostrarAlerta(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
