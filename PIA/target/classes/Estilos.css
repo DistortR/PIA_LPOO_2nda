@@ -1,0 +1,186 @@
+/* ======= GENERAL ======= */
+
+.root {
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-weight: bold;  /* 🔥 Texto en negritas */
+    -fx-background-color: #f0e9bf;
+}
+
+/* ======= BOTONES ======= */
+
+.button {
+    -fx-background-color: #3EB489;    /* 🔥 Verde esmeralda suave */
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0, 0, 2);
+}
+
+/* Hover: un poco más oscuro para un efecto elegante */
+.button:hover {
+    -fx-background-color: #36a07c;
+}
+
+/* Click: más oscuro */
+.button:pressed {
+    -fx-background-color: #2e8b6c;
+}
+
+/* ======= LABELS ======= */
+
+.label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+/* ======= TEXTFIELDS ======= */
+
+.text-field, .password-field {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 8;
+    -fx-background-radius: 6;
+    -fx-border-color: #C6C6C6;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+/* Inputs used in the FXML form */
+.text-input-field {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 8 8 8 40; /* espacio a la izquierda para el icono */
+    -fx-background-radius: 6;
+    -fx-border-color: #C6C6C6;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+/* Use selectors specific to control type so JavaFX applies correctly */
+TextField.text-input-field{
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left 10 center;
+    -fx-background-size: 18px 18px;
+    -fx-padding: 8 8 8 40; /* deja espacio para el icono */
+}
+
+.text-input-field.user-field {
+    -fx-background-image: url("user.png");
+}
+
+.text-input-field.pass-field {
+    -fx-background-image: url("password.png");
+}
+
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #4A90E2;
+    -fx-background-color: #FFFFFF;
+}
+
+/* ======= TABLEVIEW ======= */
+
+.table-view {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-radius: 10;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #36a07c;
+    -fx-background-radius: 10 10 0 0;  /* Esquinas superiores redondeadas */
+    -fx-padding: 5;  /*para que se vea más limpio */
+}
+
+.table-view .column-header, 
+.table-view .column-header .label {
+    -fx-background-color: #36a07c;
+    -fx-background-radius: 10 10 0 0;
+    -fx-text-fill: rgb(255, 252, 252);
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-cell-size: 40px;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #8FD8C2;  
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #C4EDE0; 
+}
+
+.table-row-cell:filled:selected .text {
+    -fx-fill: #000000;   /* Texto negro al seleccionar */
+}
+
+
+/* ======= LOGIN PANEL ======= */
+
+.login-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 30;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 4);
+}
+
+.login-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 0 0 10 0;
+}
+
+/* ======= MAIN LAYOUT ======= */
+.main-root {
+    -fx-background-color: linear-gradient(to bottom right, #f5f5f0, #eff0bf);
+}
+
+.main-tabs .tab-header-area .tab-header-background {
+    -fx-background-color: #e2ddab;
+    -fx-background-radius: 10 10 0 0;
+}
+
+
+
+.session-label {
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-padding: 6 10;
+}
+
+.content-pane {
+    -fx-padding: 14;
+}
+
+.button-row .button {
+    -fx-background-color: #2E8B6C;
+}
+
+.dialog-pane {
+    -fx-background-color: white;
+    -fx-padding: 12;
+}
+
+.custom-table .column-header-background {
+    -fx-background-color: #36a07c;
+}
+
+.text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 6;
+}
+
+.list-view {
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 6;
+}
+
+.combo-box, .spinner {
+    -fx-background-radius: 6;
+}

@@ -4,56 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d4a19c5-67a9-4bd9-ae2c-7e9350102372" name="Changes" comment="merge del main con rama manuel">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="workspace">
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.base/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.base/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.base/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.base/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.base/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.base/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.controls/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.controls/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.controls/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.controls/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.controls/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.controls/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.fxml/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.fxml/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.fxml/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.fxml/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/jpeg_fx.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/jpeg_fx.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/mesa3d.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/mesa3d.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/pipewire.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.graphics/pipewire.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/directshow.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/directshow.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/glib.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/glib.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/gstreamer.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/gstreamer.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/libffi.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.media/libffi.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.swing/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.swing/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.swing/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.swing/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.swing/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.swing/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/icu_web.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/icu_web.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/libxml2.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/libxml2.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/libxslt.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/libxslt.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/webkit.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/javafx.web/webkit.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jdk.jsobject/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jdk.jsobject/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jdk.jsobject/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jdk.jsobject/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jdk.jsobject/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jdk.jsobject/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.input/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.input/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.input/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.input/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.input/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.input/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.richtext/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.richtext/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.richtext/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.richtext/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.richtext/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.richtext/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.richtext/unicode-fx.md" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/legal/jfx.incubator.richtext/unicode-fx.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/lib/javafx.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/lib/javafx.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/javafx-sdk-25.0.1/src.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/view/LoginView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/view/MainView.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,120 +26,127 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Airos1214&quot;
+  }
 }</component>
-  <component name="ProjectId" id="36DD4lVmfyrZIGabXsGyWTGbOFN" />
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/DistortR/PIA_LPOO_2nda.git&quot;,
+    &quot;accountId&quot;: &quot;7fc64427-9438-42fb-a4a2-b6793e4d3841&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="365DuOJHvhPNLZeQMEjOYqf9JSL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Launcher.executor": "Run",
-    "Application.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.570115",
-    "settings.editor.selected.configurable": "swagger",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ALEXIS&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\java\com\controller" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\resources" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\java\com" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\resources" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.main.Launcher" />
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.main.MainApp" />
       <module name="gympos" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\aibar\Desktop\PIA\javafx-sdk-25.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics --enable-native-access=javafx.graphics" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="PIA_LPOO_2nda" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="PIA_LPOO_2nda" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Launcher" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
-      </set>
-    </attachedChunks>
-  </component>
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\USER\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6d4a19c5-67a9-4bd9-ae2c-7e9350102372" name="Changes" comment="" />
-      <created>1764532060402</created>
+      <changelist id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="" />
+      <created>1764287766155</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1764532060402</updated>
-      <workItem from="1764532061910" duration="2879000" />
-      <workItem from="1764534959269" duration="354000" />
-      <workItem from="1764535321523" duration="60000" />
-      <workItem from="1764535438305" duration="351000" />
-      <workItem from="1764535797610" duration="156000" />
-      <workItem from="1764542283049" duration="916000" />
+      <updated>1764287766155</updated>
     </task>
-    <task id="LOCAL-00001" summary="merge del main con rama manuel">
+    <task id="LOCAL-00001" summary="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
       <option name="closed" value="true" />
-      <created>1764533647726</created>
+      <created>1764290390035</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1764533647726</updated>
+      <updated>1764290390035</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
+      <option name="closed" value="true" />
+      <created>1764445766469</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764445766469</updated>
+    </task>
+    <task id="LOCAL-00003" summary="workspace">
+      <option name="closed" value="true" />
+      <created>1764445790834</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1764445790834</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="merge del main con rama manuel" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge del main con rama manuel" />
+    <MESSAGE value="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen" />
+    <MESSAGE value="workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace" />
   </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>

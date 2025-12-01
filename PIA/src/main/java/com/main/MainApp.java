@@ -16,16 +16,16 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
-
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
 
-// Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
 
     private TableView<Cliente> tableView = new TableView<>();
@@ -34,26 +34,71 @@ public class MainApp extends Application {
     private SistemaMembresias1412 gestorMembresias;
     private ProcesadorPagos4647 procesadorPagos;
 
-    // --- Datos de Sesión ---
     private UsuarioEmpleado usuarioLogeado = null;
+    private String stylesheet;
+    private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
 
         try {
             gestorClientes = new GestionClientesIbarra();
             controlAcceso = new ControlAccesoIbarra();
             gestorMembresias = new SistemaMembresias1412();
-            procesadorPagos = new ProcesadorPagos4647(); // Inicialización del Procesador
+            procesadorPagos = new ProcesadorPagos4647();
         } catch (Exception e) {
-            mostrarAlerta(Alert.AlertType.ERROR, "Error Fatal", "Fallo al cargar la base de datos o inicializar controladores: " + e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
+            mostrarAlerta(Alert.AlertType.ERROR, "Error Fatal", e.getMessage());
+            return;
         }
 
-        primaryStage.setTitle("GymPOSAI4647");
-        primaryStage.setScene(crearVistaLogin(primaryStage));
-        primaryStage.show();
+        cargarVistaLogin();
+    }
+
+    // Carga la vista FXML del login y configura el controlador
+    private void cargarVistaLogin() {
+        try {
+            if (getClass().getResource("/Estilos.css") != null && stylesheet == null) {
+                stylesheet = getClass().getResource("/Estilos.css").toExternalForm();
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
+            Parent root = loader.load();
+
+            // Inicializar controlador
+            Object ctrl = loader.getController();
+            if (ctrl instanceof com.controller.LoginController) {
+                ((com.controller.LoginController) ctrl).init(this, gestorClientes);
+            }
+
+            Scene scene = new Scene(root);
+            if (stylesheet != null) scene.getStylesheets().add(stylesheet);
+
+            primaryStage.setTitle("GymPOSAI4647");
+            if (getClass().getResourceAsStream("/gym.jpg") != null) {
+                primaryStage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/gym.jpg")));
+            }
+            primaryStage.setScene(scene);
+            primaryStage.centerOnScreen();
+            primaryStage.show();
+
+        } catch (Exception e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error al cargar Login", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Permitido para que el LoginController guarde el usuario en MainApp
+    public void setUsuarioLogeado(UsuarioEmpleado usuario) {
+        this.usuarioLogeado = usuario;
+    }
+
+    // Permitido para que el LoginController solicite cambiar a la vista principal
+    public void mostrarVistaPrincipal() {
+        if (primaryStage != null) {
+            primaryStage.setScene(crearVistaPrincipal(primaryStage));
+            primaryStage.centerOnScreen();
+        }
     }
 
     private Scene crearVistaLogin(Stage primaryStage) {
@@ -61,8 +106,9 @@ public class MainApp extends Application {
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(10);
         grid.setPadding(new Insets(25));
+        grid.getStyleClass().add("login-pane");
 
-        TextField userField = new TextField("jibarra"); // Valores de prueba
+        TextField userField = new TextField("jibarra");
         PasswordField passField = new PasswordField();
         passField.setText("admin123");
         Button btnLogin = new Button("Iniciar Sesión");
@@ -73,7 +119,7 @@ public class MainApp extends Application {
 
         btnLogin.setOnAction(e -> {
             try {
-                // USO: Autenticación de UsuarioEmpleado
+
                 usuarioLogeado = gestorClientes.autenticar(userField.getText(), passField.getText());
                 primaryStage.setScene(crearVistaPrincipal(primaryStage));
                 primaryStage.centerOnScreen();
@@ -81,12 +127,16 @@ public class MainApp extends Application {
                 mostrarAlerta(Alert.AlertType.ERROR, "Fallo en Login", ex.getMessage());
             }
         });
-        return new Scene(grid, 400, 300);
+        Scene scene = new Scene(grid, 400, 300);
+        if (stylesheet != null) scene.getStylesheets().add(stylesheet);
+        return scene;
     }
 
     private Scene crearVistaPrincipal(Stage primaryStage) {
         BorderPane root = new BorderPane();
+        root.getStyleClass().add("main-root");
         TabPane tabPane = new TabPane();
+        tabPane.getStyleClass().add("main-tabs");
 
         Tab tabClientes = new Tab("Clientes", CRUDVistaClientes());
         Tab tabMembresias = new Tab("Membresías & Pagos", crearVistaMembresias());
@@ -97,12 +147,23 @@ public class MainApp extends Application {
         tabPane.getTabs().forEach(t -> t.setClosable(false));
 
         Label lblUser = new Label("SESIÓN: " + usuarioLogeado.getNombreCompleto() + " | ROL: " + usuarioLogeado.getRol());
-        lblUser.setPadding(new Insets(5, 10, 5, 10));
+        lblUser.getStyleClass().add("session-label");
+        lblUser.setPadding(new Insets(8, 12, 8, 12));
+
+        javafx.scene.image.Image icon = new javafx.scene.image.Image(getClass().getResourceAsStream("/person.png"));
+        javafx.scene.image.ImageView iconView = new javafx.scene.image.ImageView(icon);
+        iconView.setFitHeight(20);
+        iconView.setPreserveRatio(true);
+        lblUser.setGraphic(iconView);
+        lblUser.setGraphicTextGap(10);
+
 
         root.setTop(lblUser);
         root.setCenter(tabPane);
 
-        return new Scene(root, 1100, 800);
+        Scene scene = new Scene(root, 1100, 800);
+        if (stylesheet != null) scene.getStylesheets().add(stylesheet);
+        return scene;
     }
 
     private BorderPane CRUDVistaClientes() {
@@ -163,10 +224,13 @@ public class MainApp extends Application {
         });
 
         BorderPane panel = new BorderPane();
+        panel.getStyleClass().add("content-pane");
+        tableView.getStyleClass().add("custom-table");
         panel.setCenter(tableView);
 
         HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
-        botones.setPadding(new Insets(10));
+        botones.getStyleClass().add("button-row");
+        botones.setPadding(new Insets(12));
         panel.setBottom(botones);
         return panel;
     }
@@ -175,6 +239,22 @@ public class MainApp extends Application {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Agregar Cliente");
         dialog.setHeaderText("Ingrese los datos");
+
+        if (stylesheet != null) {
+            dialog.getDialogPane().getStylesheets().add(stylesheet);
+            dialog.getDialogPane().getStyleClass().add("dialog-pane");
+        }
+
+        try {//ya vere si quito este try
+            if (getClass().getResourceAsStream("/create.png") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                dialog.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
 
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
@@ -229,6 +309,22 @@ public class MainApp extends Application {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Actualizar Cliente");
         dialog.setHeaderText("Modifique los datos del cliente");
+
+        if (stylesheet != null) {
+            dialog.getDialogPane().getStylesheets().add(stylesheet);
+            dialog.getDialogPane().getStyleClass().add("dialog-pane");
+        }
+
+        try {
+            if (getClass().getResourceAsStream("/edit.jpg") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/edit.jpg"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                dialog.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
 
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
@@ -288,6 +384,10 @@ public class MainApp extends Application {
         alertConfirm.setTitle("Confirmar Eliminación");
         alertConfirm.setHeaderText("¿Está seguro de eliminar al cliente?");
         alertConfirm.setContentText("Cliente: " + selectedClient.getNombreCompleto());
+        if (stylesheet != null) {
+            alertConfirm.getDialogPane().getStylesheets().add(stylesheet);
+            alertConfirm.getDialogPane().getStyleClass().add("dialog-pane");
+        }
 
         Optional<ButtonType> result = alertConfirm.showAndWait();
 
@@ -320,7 +420,7 @@ public class MainApp extends Application {
                 TipoMembresia tipo = cmbTipo.getValue();
                 int meses = spnMeses.getValue();
 
-                gestorMembresias.inscribirCliente(cliente, tipo, meses, "1234567890123456"); // Tarjeta simulada
+                gestorMembresias.inscribirCliente(cliente, tipo, meses, "1234567890123456");
                 logArea.appendText("Inscripción exitosa para " + cliente.getNombreCompleto() + ". Verifique en Clientes.\n");
                 gestorClientes.actualizar(cliente);
                 actualizarVistaClientes(tableView);
@@ -340,7 +440,7 @@ public class MainApp extends Application {
                 Cliente cliente = gestorClientes.buscar(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
                 int meses = spnMeses.getValue();
 
-                gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456"); // Tarjeta simulada
+                gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456");
                 logArea.appendText("Renovación exitosa para " + cliente.getNombreCompleto() + ".\n");
 
                 txtClienteId.clear();
@@ -394,7 +494,6 @@ public class MainApp extends Application {
                 lblResultado.setText("ACCESO DENEGADO: " + ex.getMessage());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: red; -fx-font-size: 16px;");
             } finally {
-                // Actualiza la bitácora visible
                 logListView.setItems(javafx.collections.FXCollections.observableList(controlAcceso.getHistorialAccesos()));
             }
         });
@@ -452,6 +551,7 @@ public class MainApp extends Application {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
+        if (stylesheet != null) alert.getDialogPane().getStylesheets().add(stylesheet);
         alert.showAndWait();
     }
 
