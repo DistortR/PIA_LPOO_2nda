@@ -17,6 +17,7 @@ public class GeneradorReportesA extends Task<Boolean> {
             writer.write("REPORTE MENSUAL GIMNASIO\n");
             writer.write("Generado: " + java.time.LocalDateTime.now() + "\n");
             writer.write("----------------------------\n");
+
         }
 
         updateMessage("Reporte generado exitosamente.");

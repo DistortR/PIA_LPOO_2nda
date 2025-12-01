@@ -1,6 +1,5 @@
-package com.main;
+package com.view;
 
-import com.model.Cliente;
 import com.model.Inventario;
 import com.util.GymException;
 import javafx.application.Platform;
@@ -25,7 +24,7 @@ public class VistaInventario {
         return null;
     };
 
-    protected static BorderPane crearVistaInventario() {
+    public static BorderPane crearVistaInventario() {
         TableView<Inventario> tablaInventario = new TableView<>();
         tablaInventario.setItems(javafx.collections.FXCollections.observableList(gestorInventario.getLista()));
 

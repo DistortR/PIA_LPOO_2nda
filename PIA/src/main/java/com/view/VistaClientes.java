@@ -1,4 +1,4 @@
-package com.main;
+package com.view;
 
 import com.model.Cliente;
 import com.model.Membresia;
@@ -17,8 +17,8 @@ import java.util.Optional;
 import static com.main.MainApp.*;
 
 public class VistaClientes {
-    protected static TableView<Cliente> tableView = new TableView<>();
-    protected static BorderPane CRUDVistaClientes() {
+    public static TableView<Cliente> tableView = new TableView<>();
+    public static BorderPane CRUDVistaClientes() {
         tableView.setItems(javafx.collections.FXCollections.observableList(gestorClientes.getLista()));
 
         TableColumn<Cliente, String> idCol = new TableColumn<>("ID");
