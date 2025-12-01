@@ -51,7 +51,11 @@ public class VistaClientes {
                     }
                     System.out.println("Inscripción exitosa para " + cellData.getValue().getNombreCompleto() + ". Verifique en Clientes.\n");
                 }
+
                 return new javafx.beans.property.SimpleStringProperty(mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")");
+            }
+            else if (mem != null && !mem.esValida()) { // membresia no renovada
+                return new javafx.beans.property.SimpleStringProperty(mem.getTipo().name() + " Vencida.");
             }
             else {
                 return new javafx.beans.property.SimpleStringProperty("INACTIVO");
