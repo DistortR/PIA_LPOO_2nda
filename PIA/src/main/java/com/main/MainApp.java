@@ -53,7 +53,6 @@ public class MainApp extends Application {
         cargarVistaLogin();
     }
 
-    // Carga la vista FXML del login y configura el controlador
     private void cargarVistaLogin() {
         try {
             if (getClass().getResource("/Estilos.css") != null && stylesheet == null) {
@@ -62,8 +61,6 @@ public class MainApp extends Application {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
             Parent root = loader.load();
-
-            // Inicializar controlador
             Object ctrl = loader.getController();
             if (ctrl instanceof com.controller.LoginController) {
                 ((com.controller.LoginController) ctrl).init(this, gestorClientes);
@@ -86,12 +83,10 @@ public class MainApp extends Application {
         }
     }
 
-    // Permitido para que el LoginController guarde el usuario en MainApp
     public void setUsuarioLogeado(UsuarioEmpleado usuario) {
         this.usuarioLogeado = usuario;
     }
 
-    // Permitido para que el LoginController solicite cambiar a la vista principal
     public void mostrarVistaPrincipal() {
         if (primaryStage != null) {
             primaryStage.setScene(crearVistaPrincipal(primaryStage));
@@ -225,7 +220,7 @@ public class MainApp extends Application {
             dialog.getDialogPane().getStyleClass().add("dialog-pane");
         }
 
-        try {//ya vere si quito este try
+        try {
             if (getClass().getResourceAsStream("/create.png") != null) {
                 javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png"));
                 javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
@@ -432,7 +427,6 @@ public class MainApp extends Application {
                 mostrarAlerta(Alert.AlertType.ERROR, "Error de Renovación", ex.getMessage());
             }
         });
-
 
         GridPane grid = new GridPane();
         grid.setVgap(10);

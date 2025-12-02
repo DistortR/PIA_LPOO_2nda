@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="workspace">
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/view/LoginView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/view/MainView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/view/LoginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/resources/view/LoginView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/view/LoginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/view/LoginView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764445790834</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora.">
+      <option name="closed" value="true" />
+      <created>1764538059238</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1764538059238</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,7 +139,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen" />
     <MESSAGE value="workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace" />
+    <MESSAGE value="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

@@ -137,15 +137,12 @@ TextField.text-input-field{
 
 /* ======= MAIN LAYOUT ======= */
 .main-root {
-    -fx-background-color: linear-gradient(to bottom right, #f5f5f0, #eff0bf);
+    -fx-background-color: linear-gradient(to bottom right, #f5f0f0, #f0e9bf);
 }
 
 .main-tabs .tab-header-area .tab-header-background {
-    -fx-background-color: #e2ddab;
-    -fx-background-radius: 10 10 0 0;
+    -fx-background-color: #eee2a3;
 }
-
-
 
 .session-label {
     -fx-text-fill: #333333;

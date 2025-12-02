@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -16,7 +14,6 @@
         <center>
             <HBox alignment="CENTER" spacing="80">
 
-                <!-- ILUSTRACIÓN IZQUIERDA -->
                 <VBox alignment="CENTER">
                     <ImageView fitWidth="260" fitHeight="260" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -25,14 +22,12 @@
                     </ImageView>
                 </VBox>
 
-                <!-- FORMULARIO -->
                 <VBox alignment="CENTER" spacing="20">
 
                     <Label text="Iniciar Sesión" styleClass="login-title"/>
 
                     <VBox spacing="15">
 
-                        <!-- USER FIELD CON ICONO -->
                         <HBox spacing="10" alignment="CENTER_LEFT">
                             <ImageView fitWidth="20" fitHeight="20">
                                 <image>
@@ -43,7 +38,6 @@
                             <TextField fx:id="userField" promptText="Usuario" styleClass="text-input-field"/>
                         </HBox>
 
-                        <!-- PASSWORD FIELD CON ICONO -->
                         <HBox spacing="10" alignment="CENTER_LEFT">
                             <ImageView fitWidth="20" fitHeight="20">
                                 <image>
@@ -61,17 +55,5 @@
                 </VBox>
             </HBox>
         </center>
-
-        <bottom>
-            <VBox alignment="CENTER">
-                <padding>
-                    <Insets top="20" right="20" bottom="20" left="20"/>
-                </padding>
-                <Label text="Crear cuenta →" styleClass="small-link"/>
-            </VBox>
-        </bottom>
-
-
     </BorderPane>
-
 </AnchorPane>
