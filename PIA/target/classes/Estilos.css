@@ -85,13 +85,25 @@ TextField.text-input-field{
     -fx-table-cell-border-color: transparent;
     -fx-padding: 10;
     -fx-background-radius: 6;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #4A90E2;
+    -fx-background-color: #2E8B6C;
+    -fx-background-radius: 10 10 0 0;
+    -fx-background-insets: 0;
 }
 
-.table-view .column-header, 
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.3);
+}
+
+.table-view .filler {
+    -fx-background-color: transparent;
+}
+
 .table-view .column-header .label {
     -fx-text-fill: white;
     -fx-font-size: 14px;
@@ -100,10 +112,20 @@ TextField.text-input-field{
 
 .table-row-cell {
     -fx-cell-size: 40px;
+    -fx-border-color: transparent;
 }
 
 .table-row-cell:filled:selected {
-    -fx-background-color: #DDEBFA;
+    -fx-background-color: #64b692;
+}
+
+.table-row-cell:filled:selected .table-cell {
+    -fx-border-color: transparent;
+    -fx-text-fill: #333333;
+}
+
+.table-row-cell:filled:selected:hover {
+    -fx-background-color: #7ccea8;
 }
 
 .table-row-cell:filled:hover {
@@ -158,9 +180,9 @@ TextField.text-input-field{
     -fx-padding: 12;
 }
 
-.custom-table .column-header-background {
-    -fx-background-color: #4A90E2;
-}
+/*.custom-table .column-header-background {
+    -fx-background-color: red;
+}*/
 
 .text-area {
     -fx-background-color: #ffffff;
@@ -175,9 +197,4 @@ TextField.text-input-field{
 
 .combo-box, .spinner {
     -fx-background-radius: 6;
-}
-
-.events-on-calendar {
-    -fx-font-size: 10px;
-    -fx-text-fill: white;
 }

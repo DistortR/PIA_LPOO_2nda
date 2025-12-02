@@ -40,7 +40,7 @@ public class MainApp extends Application {
     private ProcesadorPagos4647 procesadorPagos;
     private CalendarioDeClase controlCalendario = new CalendarioDeClase();
 
-    YearMonth mesActualCalendario = YearMonth.now();
+    private YearMonth mesActualCalendario = YearMonth.now();
     private GridPane gridVisualCalendario;
     private Label lblTituloMes;
     private UsuarioEmpleado usuarioLogeado = null;
@@ -91,7 +91,6 @@ public class MainApp extends Application {
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error al cargar Login", e.getMessage());
             e.printStackTrace();
-
         }
     }
 
@@ -231,7 +230,7 @@ public class MainApp extends Application {
 
         BorderPane panel = new BorderPane();
         panel.getStyleClass().add("content-pane");
-        tableView.getStyleClass().add("custom-table");
+        tableView.getStyleClass().add("table-view");
         panel.setCenter(tableView);
 
         HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
@@ -819,7 +818,7 @@ public class MainApp extends Application {
         String[] diasSemana = {"Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"};
         for (int i = 0; i < diasSemana.length; i++) {
             Label lbl = new Label(diasSemana[i]);
-            lbl.getStyleClass().add("label");
+            lbl.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;");
             lbl.setMaxWidth(Double.MAX_VALUE);
             gridVisualCalendario.add(lbl, i, 0);
         }
@@ -844,12 +843,12 @@ public class MainApp extends Application {
 
                 VBox contenidoCelda = new VBox(2);
                 Label lblNumero = new Label(String.valueOf(i));
-                lblNumero.getStyleClass().add("label");
+                lblNumero.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;");
                 contenidoCelda.getChildren().add(lblNumero);
 
                 for (ClaseGrupal c : clasesDelDia) {
                     Label lblClase = new Label("• " + c.getHour() + " " + c.getDescription());
-                    lblClase.getStyleClass().add("events-on-calendar");
+                    lblClase.setStyle("-fx-font-size: 10px; -fx-text-fill: white;");
                     lblClase.setMaxWidth(180);
                     lblClase.setWrapText(false);
                     contenidoCelda.getChildren().add(lblClase);
@@ -857,7 +856,7 @@ public class MainApp extends Application {
 
                 if (clasesDelDia.size() > 3) {
                     Label lblExtra = new Label("... (+" + (clasesDelDia.size()-3) + ")");
-                    lblExtra.getStyleClass().add("events-on-calendar");
+                    lblExtra.setStyle("-fx-font-size: 10px; -fx-text-fill: white;");
                     contenidoCelda.getChildren().add(lblExtra);
                 }
 
