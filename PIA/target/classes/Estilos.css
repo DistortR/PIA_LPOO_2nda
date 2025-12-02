@@ -83,21 +83,17 @@ TextField.text-input-field{
 .table-view {
     -fx-background-color: white;
     -fx-table-cell-border-color: transparent;
-    -fx-padding: 0;
-    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-background-radius: 6;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #36a07c;
-    -fx-background-radius: 10 10 0 0;  /* Esquinas superiores redondeadas */
-    -fx-padding: 5;  /*para que se vea más limpio */
+    -fx-background-color: #4A90E2;
 }
 
 .table-view .column-header, 
 .table-view .column-header .label {
-    -fx-background-color: #36a07c;
-    -fx-background-radius: 10 10 0 0;
-    -fx-text-fill: rgb(255, 252, 252);
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
@@ -107,17 +103,12 @@ TextField.text-input-field{
 }
 
 .table-row-cell:filled:selected {
-    -fx-background-color: #8FD8C2;  
+    -fx-background-color: #DDEBFA;
 }
 
 .table-row-cell:filled:hover {
-    -fx-background-color: #C4EDE0; 
+    -fx-background-color: #F0F6FF;
 }
-
-.table-row-cell:filled:selected .text {
-    -fx-fill: #000000;   /* Texto negro al seleccionar */
-}
-
 
 /* ======= LOGIN PANEL ======= */
 
@@ -137,14 +128,18 @@ TextField.text-input-field{
 
 /* ======= MAIN LAYOUT ======= */
 .main-root {
-    -fx-background-color: linear-gradient(to bottom right, #f4f3ee, #f0e9bf);
+    -fx-background-color: linear-gradient(to bottom right, #f6f7fb, #f0e9bf);
 }
 
-.main-tabs .tab-header-area .tab-header-background {
-    -fx-background-color: #eee2a3;
+.main-tabs .tab-header-area {
+    -fx-background-color: transparent;
 }
 
 .session-label {
+    /* Usar una versión semitransparente del mismo degradado de .main-root
+       para integrarse naturalmente con el fondo principal. */
+    -fx-background-color: linear-gradient(to bottom right, rgba(246,247,251,0.75), rgba(240,233,191,0.75));
+    -fx-background-radius: 6 6 0 0;
     -fx-text-fill: #333333;
     -fx-font-weight: bold;
     -fx-padding: 6 10;
@@ -164,7 +159,7 @@ TextField.text-input-field{
 }
 
 .custom-table .column-header-background {
-    -fx-background-color: #36a07c;
+    -fx-background-color: #4A90E2;
 }
 
 .text-area {
