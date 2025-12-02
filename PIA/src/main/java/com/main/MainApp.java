@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
@@ -90,6 +91,7 @@ public class MainApp extends Application {
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error al cargar Login", e.getMessage());
             e.printStackTrace();
+
         }
     }
 
@@ -104,7 +106,7 @@ public class MainApp extends Application {
         }
     }
 
-    private Scene crearVistaLogin(Stage primaryStage) {
+    private Scene crearVistaLogin(Stage primaryStage) { //weon esto no se usa
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(10);
@@ -244,6 +246,9 @@ public class MainApp extends Application {
         dialog.setTitle("Agregar Cliente");
         dialog.setHeaderText("Ingrese los datos");
 
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png")));
+
         if (stylesheet != null) {
             dialog.getDialogPane().getStylesheets().add(stylesheet);
             dialog.getDialogPane().getStyleClass().add("dialog-pane");
@@ -313,6 +318,9 @@ public class MainApp extends Application {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Actualizar Cliente");
         dialog.setHeaderText("Modifique los datos del cliente");
+
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/edit.jpg")));
 
         if (stylesheet != null) {
             dialog.getDialogPane().getStylesheets().add(stylesheet);
@@ -388,6 +396,21 @@ public class MainApp extends Application {
         alertConfirm.setTitle("Confirmar Eliminación");
         alertConfirm.setHeaderText("¿Está seguro de eliminar al cliente?");
         alertConfirm.setContentText("Cliente: " + selectedClient.getNombreCompleto());
+
+        Stage stage = (Stage) alertConfirm.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/delete.png")));
+
+        try {
+            if (getClass().getResourceAsStream("/delete.png") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/delete.png"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                alertConfirm.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
+
         if (stylesheet != null) {
             alertConfirm.getDialogPane().getStylesheets().add(stylesheet);
             alertConfirm.getDialogPane().getStyleClass().add("dialog-pane");
