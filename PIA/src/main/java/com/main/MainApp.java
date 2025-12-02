@@ -1,12 +1,8 @@
 package com.main;
 
-import com.controller.ControlAccesoIbarra;
-import com.controller.GeneradorReportesA;
-import com.controller.GestionClientesIbarra;
-import com.controller.SistemaMembresias1412;
-import com.controller.ProcesadorPagos4647;
+import com.controller.*;
+import com.model.ClaseGrupal;
 import com.model.Cliente;
-import com.model.Inventario;
 import com.model.Membresia;
 import com.model.Membresia.TipoMembresia;
 import com.model.UsuarioEmpleado;
@@ -33,6 +29,7 @@ public class MainApp extends Application {
     private ControlAccesoIbarra controlAcceso;
     private SistemaMembresias1412 gestorMembresias;
     private ProcesadorPagos4647 procesadorPagos;
+    private CalendarioDeClase controlCalendario = new CalendarioDeClase();
 
     private UsuarioEmpleado usuarioLogeado = null;
     private String stylesheet;
@@ -142,8 +139,9 @@ public class MainApp extends Application {
         Tab tabMembresias = new Tab("Membresías & Pagos", crearVistaMembresias());
         Tab tabAcceso = new Tab("Control de Acceso", crearVistaControlAcceso());
         Tab tabReportes = new Tab("Reportes", crearVistaReportes());
+        Tab tabCalendario = new Tab("Calendario de Clases", crearVistaCalendarioDeClases());
 
-        tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes);
+        tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes, tabCalendario);
         tabPane.getTabs().forEach(t -> t.setClosable(false));
 
         Label lblUser = new Label("SESIÓN: " + usuarioLogeado.getNombreCompleto() + " | ROL: " + usuarioLogeado.getRol());
@@ -543,6 +541,13 @@ public class MainApp extends Application {
 
         panel.setCenter(btnGenerar);
         panel.setBottom(new VBox(10, lblEstado, barra));
+        return panel;
+    }
+
+    public BorderPane crearVistaCalendarioDeClases() {
+        BorderPane panel = new BorderPane();
+        panel.setPadding( new Insets(10, 10, 10, 10));
+
         return panel;
     }
 
