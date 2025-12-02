@@ -4,47 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="ahora si ya quedo">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="agregue iconos pero no pude agregar los del error y alerta">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/CalendarioDeClase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ControlAccesoIbarra.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GeneradorReportesA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionInventario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/MainView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ProcesadorPagos4647.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/MainView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/Launcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/ClaseGrupal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Cliente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Inventario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia$TipoMembresia.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/UsuarioEmpleado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/Gestionador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/GymException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/Serializador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/create.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/delete.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/edit.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/error.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/gym.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/login.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/password.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/person.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/user.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/view/LoginView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/warning.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/clases.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/clases.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,24 +55,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MainApp.executor": "Run",
-    "Application.main.executor": "Run",
-    "Maven.gympos [clean].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Yael",
-    "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.570115",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ALEXIS&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\java\com\controller" />
@@ -113,6 +76,16 @@
       <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main" />
       <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\resources" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.main.MainApp" />
+      <module name="gympos" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\aibar\Desktop\PIA\javafx-sdk-25.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics --enable-native-access=javafx.graphics" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -170,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764637889086</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="agregue iconos pero no pude agregar los del error y alerta">
+      <option name="closed" value="true" />
+      <created>1764642095249</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1764642095249</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,7 +171,8 @@
     <MESSAGE value="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora." />
     <MESSAGE value="hasta donde yo tengo, ya esta finalizado el diseño" />
     <MESSAGE value="ahora si ya quedo" />
-    <option name="LAST_COMMIT_MESSAGE" value="ahora si ya quedo" />
+    <MESSAGE value="agregue iconos pero no pude agregar los del error y alerta" />
+    <option name="LAST_COMMIT_MESSAGE" value="agregue iconos pero no pude agregar los del error y alerta" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
