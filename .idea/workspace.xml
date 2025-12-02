@@ -4,38 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d4a19c5-67a9-4bd9-ae2c-7e9350102372" name="Changes" comment="merge del main con rama manuel">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/CalendarioDeClase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PIA/src/main/java/com/model/ClaseGrupal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PIA/src/main/resources/view/CalendarioView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_11_2025_01_45_p__m___Changes_.xml" beforeDir="false" />
+    <list default="true" id="6d4a19c5-67a9-4bd9-ae2c-7e9350102372" name="Changes" comment="Avance de Calendario de Clases">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/util/Gestionador.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/util/Gestionador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ControlAccesoIbarra.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GeneradorReportesA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ProcesadorPagos4647.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Cliente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia$TipoMembresia.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/UsuarioEmpleado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/GymException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/Serializador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/gympos-1.0-SNAPSHOT-shaded.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/gympos-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/data/clases.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/original-gympos-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reporte_Gym.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Reporte_Gym.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/view/CalendarioView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/clases.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/clases.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/clientes.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/clientes.ser" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +119,7 @@
       <workItem from="1764535438305" duration="351000" />
       <workItem from="1764535797610" duration="156000" />
       <workItem from="1764542283049" duration="916000" />
-      <workItem from="1764633646042" duration="7634000" />
+      <workItem from="1764633646042" duration="13892000" />
     </task>
     <task id="LOCAL-00001" summary="merge del main con rama manuel">
       <option name="closed" value="true" />
@@ -155,7 +129,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764533647726</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Avance de Calendario de Clases">
+      <option name="closed" value="true" />
+      <created>1764644859115</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764644859115</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +145,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merge del main con rama manuel" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge del main con rama manuel" />
+    <MESSAGE value="Avance de Calendario de Clases" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avance de Calendario de Clases" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

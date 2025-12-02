@@ -18,12 +18,20 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
+
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.YearMonth;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.Objects;
 import java.util.Optional;
 
 public class MainApp extends Application {
 
+    private TableView<ClaseGrupal> claseGrupalTableView = new TableView<>();
     private TableView<Cliente> tableView = new TableView<>();
     private GestionClientesIbarra gestorClientes;
     private ControlAccesoIbarra controlAcceso;
@@ -31,6 +39,9 @@ public class MainApp extends Application {
     private ProcesadorPagos4647 procesadorPagos;
     private CalendarioDeClase controlCalendario = new CalendarioDeClase();
 
+    YearMonth mesActualCalendario = YearMonth.now();
+    private GridPane gridVisualCalendario;
+    private Label lblTituloMes;
     private UsuarioEmpleado usuarioLogeado = null;
     private String stylesheet;
     private Stage primaryStage;
@@ -546,9 +557,326 @@ public class MainApp extends Application {
 
     public BorderPane crearVistaCalendarioDeClases() {
         BorderPane panel = new BorderPane();
-        panel.setPadding( new Insets(10, 10, 10, 10));
+        panel.setPadding(new Insets(10));
 
+        VBox contenedorCalendario = new VBox(10);
+        contenedorCalendario.setAlignment(Pos.TOP_CENTER);
+
+        HBox navegacion = new HBox(15);
+        navegacion.setAlignment(Pos.CENTER);
+        navegacion.setPadding(new Insets(10));
+
+        Button btnAnterior = new Button("<");
+        Button btnSiguiente = new Button(">");
+        lblTituloMes = new Label();
+        lblTituloMes.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        btnAnterior.setOnAction(e -> {
+            mesActualCalendario = mesActualCalendario.minusMonths(1);
+            showCalendario();
+        });
+
+        btnSiguiente.setOnAction(e -> {
+            mesActualCalendario = mesActualCalendario.plusMonths(1);
+            showCalendario();
+        });
+
+        navegacion.getChildren().addAll(btnAnterior, lblTituloMes, btnSiguiente);
+
+        gridVisualCalendario = new GridPane();
+        gridVisualCalendario.setHgap(10);
+        gridVisualCalendario.setVgap(10);
+        gridVisualCalendario.setAlignment(Pos.CENTER);
+
+        contenedorCalendario.getChildren().addAll(navegacion, gridVisualCalendario);
+
+        TableColumn<ClaseGrupal, String> colFecha = new TableColumn<>("Fecha");
+        colFecha.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDay().toString()));
+
+        TableColumn<ClaseGrupal, String> colHora = new TableColumn<>("Hora");
+        colHora.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getHour().toString()));
+
+        TableColumn<ClaseGrupal, String> colDesc = new TableColumn<>("Actividad");
+        colDesc.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDescription()));
+
+        claseGrupalTableView.getColumns().addAll(colFecha, colHora, colDesc);
+        claseGrupalTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        Button btnAgregar = new Button("Agregar Clase");
+        btnAgregar.setOnAction(e -> {
+            createClaseGrupal(claseGrupalTableView);
+        });
+
+        Button btnActualizar = new Button("Actualizar Clase");
+        btnActualizar.setOnAction(e -> {
+            updateClase(claseGrupalTableView);
+        });
+
+        Button btnEliminar = new Button("Eliminar Clase");
+        btnEliminar.setOnAction(e -> {
+            deleteClase(claseGrupalTableView);
+        });
+
+        HBox barraHerramientas = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
+        barraHerramientas.setAlignment(Pos.CENTER_RIGHT);
+        barraHerramientas.setPadding(new Insets(10, 0, 0, 0));
+
+        VBox contenedorDerecho = new VBox(10, new Label("Detalle de Clases"), claseGrupalTableView, barraHerramientas);
+        VBox.setVgrow(claseGrupalTableView, Priority.ALWAYS);
+
+        SplitPane divisor = new SplitPane(contenedorCalendario, contenedorDerecho);
+        divisor.setDividerPositions(0.65);
+        panel.setCenter(divisor);
+        
+        showCalendario();
         return panel;
+    }
+
+    private void createClaseGrupal(TableView<ClaseGrupal> claseGrupalTableView) {
+        Dialog<ClaseGrupal> dialog = new Dialog<>();
+        dialog.setTitle("Crear Clase");
+        dialog.setHeaderText("Ingrese los datos de la clase grupal");
+
+        if (stylesheet != null) {
+            dialog.getDialogPane().getStylesheets().add(stylesheet);
+            dialog.getDialogPane().getStyleClass().add("dialog-pane");
+        }
+
+        ButtonType btnGuardarType = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField txtDesc = new TextField();
+        txtDesc.setPromptText("Ej. Yoga, CrossFit");
+        DatePicker datePicker = new DatePicker();
+        TextField txtHora = new TextField();
+        txtHora.setPromptText("HH:mm (Ej. 17:30)");
+
+        grid.add(new Label("Actividad:"), 0, 0);
+        grid.add(txtDesc, 1, 0);
+        grid.add(new Label("Fecha:"), 0, 1);
+        grid.add(datePicker, 1, 1);
+        grid.add(new Label("Hora (24h):"), 0, 2);
+        grid.add(txtHora, 1, 2);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == btnGuardarType) {
+                try {
+                    String desc = txtDesc.getText();
+                    LocalDate fecha = datePicker.getValue();
+                    LocalTime hora = LocalTime.parse(txtHora.getText());
+                    String nuevoId = "CL-" + controlCalendario.getLista().size() + 1;
+
+                    return new ClaseGrupal(nuevoId, desc, fecha, fecha, hora);
+                } catch (DateTimeParseException ex) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Formato Incorrecto", "La hora debe ser HH:mm (Ej. 17:30)");
+                    return null;
+                }
+                catch (GymException ex) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error al Crear Clase", ex.getMessage());
+                    return null;
+                }
+            }
+            return null;
+        });
+
+        Optional<ClaseGrupal> result = dialog.showAndWait();
+
+        result.ifPresent(clase -> {
+            try {
+                controlCalendario.registrar(clase);
+                showCalendario();
+            } catch (GymException e) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Error al Agregar Clase", e.getMessage());
+            }
+        });
+    }
+
+    private void updateClase(TableView<ClaseGrupal> claseGrupalTableView) {
+        ClaseGrupal selectedClaseGrupal = claseGrupalTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedClaseGrupal == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona una clase de la lista para editar.");
+            return;
+        }
+
+        Dialog<ClaseGrupal> dialog = new Dialog<>();
+        dialog.setTitle("Editar Clase");
+        dialog.setHeaderText("Ingrese los datos para editar la clase grupal");
+
+        if (stylesheet != null) {
+            dialog.getDialogPane().getStylesheets().add(stylesheet);
+            dialog.getDialogPane().getStyleClass().add("dialog-pane");
+        }
+
+        ButtonType btnGuardarType = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField txtDesc = new TextField(selectedClaseGrupal.getDescription());
+        DatePicker datePicker = new DatePicker(selectedClaseGrupal.getDay());
+        TextField txtHora = new TextField(selectedClaseGrupal.getHour().toString());
+
+        grid.add(new Label("Actividad:"), 0, 0);
+        grid.add(txtDesc, 1, 0);
+        grid.add(new Label("Fecha:"), 0, 1);
+        grid.add(datePicker, 1, 1);
+        grid.add(new Label("Hora (24h):"), 0, 2);
+        grid.add(txtHora, 1, 2);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == btnGuardarType) {
+                try {
+                    String desc = txtDesc.getText();
+                    LocalDate fecha = datePicker.getValue();
+                    LocalTime hora = LocalTime.parse(txtHora.getText());
+                    String idOriginal = selectedClaseGrupal.getId();
+
+                    return new ClaseGrupal(idOriginal, desc, fecha, fecha, hora);
+                } catch (DateTimeParseException ex) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Formato Incorrecto", "La hora debe ser HH:mm (Ej. 09:30)");
+                    return null;
+                }
+            }
+            return null;
+        });
+
+        Optional<ClaseGrupal> result = dialog.showAndWait();
+        result.ifPresent(claseModificada -> {
+            try {
+                controlCalendario.actualizar(claseModificada);
+                showCalendario();
+                mostrarClasesEnTabla(claseModificada.getDay());
+            } catch (GymException e) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Error", e.getMessage());
+            }
+        });
+    }
+
+    private void deleteClase(TableView<ClaseGrupal> claseGrupalTableView) {
+        ClaseGrupal selectedClaseGrupal = claseGrupalTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedClaseGrupal == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona una clase de la lista para eliminar.");
+            return;
+        }
+
+        Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirm.setTitle("Confirmar Eliminación");
+        alertConfirm.setHeaderText("¿Está seguro de eliminar la clase?");
+        alertConfirm.setContentText("Clase: " + selectedClaseGrupal.getDescription());
+        if (stylesheet != null) {
+            alertConfirm.getDialogPane().getStylesheets().add(stylesheet);
+            alertConfirm.getDialogPane().getStyleClass().add("dialog-pane");
+        }
+
+        Optional<ButtonType> result = alertConfirm.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                controlCalendario.eliminar(selectedClaseGrupal.getId());
+                showCalendario();
+                mostrarClasesEnTabla(selectedClaseGrupal.getDay());
+            } catch (GymException ex) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Error al Eliminar", ex.getMessage());
+            }
+        }
+    }
+
+    private void showCalendario() {
+        lblTituloMes.setText(mesActualCalendario.getMonth().name() + " " + mesActualCalendario.getYear());
+        gridVisualCalendario.getChildren().clear();
+
+        String[] diasSemana = {"Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"};
+        for (int i = 0; i < diasSemana.length; i++) {
+            Label lbl = new Label(diasSemana[i]);
+            lbl.setStyle("-fx-font-weight: bold; -fx-alignment: center;");
+            lbl.setMaxWidth(Double.MAX_VALUE);
+            gridVisualCalendario.add(lbl, i, 0);
+        }
+
+        LocalDate primerDiaDelMes = mesActualCalendario.atDay(1);
+        int diaSemanaInicio = primerDiaDelMes.getDayOfWeek().getValue();
+        if (diaSemanaInicio == 7) diaSemanaInicio = 0;
+
+        int diasEnMes = mesActualCalendario.lengthOfMonth();
+
+        try {
+            List<ClaseGrupal> todasLasClases = controlCalendario.getLista();
+
+            for (int i = 1; i <= diasEnMes; i++) {
+                LocalDate fechaDia = mesActualCalendario.atDay(i);
+
+                List<ClaseGrupal> clasesDelDia = todasLasClases.stream()
+                        .filter(c -> c.getDay().isEqual(fechaDia))
+                        .collect(Collectors.toList());
+
+                Button btnDia = new Button();
+                btnDia.setPrefSize(200, 200);
+                btnDia.setAlignment(Pos.TOP_LEFT);
+
+                VBox contenidoCelda = new VBox(2);
+                Label lblNumero = new Label(String.valueOf(i));
+                lblNumero.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+                contenidoCelda.getChildren().add(lblNumero);
+
+                for (ClaseGrupal c : clasesDelDia) {
+                    Label lblClase = new Label("• " + c.getHour() + " " + c.getDescription());
+                    lblClase.setStyle("-fx-font-size: 10px; -fx-text-fill: white;");
+                    lblClase.setMaxWidth(180);
+                    lblClase.setWrapText(false);
+                    contenidoCelda.getChildren().add(lblClase);
+                }
+
+                if (clasesDelDia.size() > 3) {
+                    Label lblExtra = new Label("... (+" + (clasesDelDia.size()-3) + ")");
+                    lblExtra.setStyle("-fx-font-size: 9px; -fx-text-fill: white;");
+                    contenidoCelda.getChildren().add(lblExtra);
+                }
+
+                btnDia.setGraphic(contenidoCelda);
+
+                if (fechaDia.equals(LocalDate.now())) {
+                    btnDia.setStyle("-fx-border-color: red; -fx-border-width: 2;");
+                }
+
+                btnDia.setOnAction(e -> mostrarClasesEnTabla(fechaDia));
+
+                int col = (diaSemanaInicio + i - 1) % 7;
+                int row = (diaSemanaInicio + i - 1) / 7 + 1;
+                gridVisualCalendario.add(btnDia, col, row);
+            }
+
+        } catch (GymException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No cargaron las clases.");
+        }
+    }
+
+    private void mostrarClasesEnTabla(LocalDate fecha) {
+        try {
+            List<ClaseGrupal> todas = controlCalendario.getLista();
+
+            List<ClaseGrupal> delDia = todas.stream()
+                    .filter(c -> c.getDay().isEqual(fecha))
+                    .collect(Collectors.toList());
+
+            claseGrupalTableView.setItems(javafx.collections.FXCollections.observableList(delDia));
+
+        } catch (GymException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de Datos", "No se pudieron cargar las clases para la fecha: " + fecha);
+        }
     }
 
     private void mostrarAlerta(Alert.AlertType type, String title, String content) {
