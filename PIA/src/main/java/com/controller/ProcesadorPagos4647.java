@@ -8,14 +8,9 @@ public class ProcesadorPagos4647 {
 
     private final int DIGITOS_MATRICULA = 123;
 
-    public double calcularTotalConCentavos(double precioBase) {
-        double centavos = DIGITOS_MATRICULA / 100.0;
-
-        if (DIGITOS_MATRICULA > 99) {
-            centavos = (DIGITOS_MATRICULA % 100) / 100.0;
-        }
-
-        return precioBase + centavos;
+    public double calcularTotalConCentavos(double precioBase, double descuento) {
+        double centavos = precioBase * descuento;
+        return precioBase - centavos;
     }
 
     public boolean procesarPagoTarjeta(String numeroTarjeta, double monto) throws GymException {

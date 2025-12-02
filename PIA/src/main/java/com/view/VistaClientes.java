@@ -62,7 +62,9 @@ public class VistaClientes {
             }
         });
 
-        tableView.getColumns().addAll(idCol, nombreCol, emailCol, fechaRegistroCol, membresiaCol);
+        TableColumn<Cliente, String> puntosCol = new TableColumn<>("Puntos de fidelidad");
+        puntosCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getPuntosFidelidad().toString()));
+        tableView.getColumns().addAll(idCol, nombreCol, emailCol, fechaRegistroCol, membresiaCol, puntosCol);
 
         Button btnAgregar = new Button("Registrar Cliente");
         btnAgregar.setOnAction(e -> {

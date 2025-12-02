@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.main.MainApp;
 import com.model.Cliente;
 import com.model.Membresia;
 import com.model.Membresia.TipoMembresia;
@@ -9,6 +10,10 @@ import java.time.LocalDate;
 // IMPORTA TU CLASE REAL DE PROCESADOR DE PAGOS
 // Asumiendo que usaste los dígitos 123
 import com.controller.ProcesadorPagos4647;
+import com.view.VistaClientes;
+import javafx.scene.control.TableView;
+
+import static com.main.MainApp.gestorClientes;
 
 public class SistemaMembresias1412 {
 
@@ -36,16 +41,13 @@ public class SistemaMembresias1412 {
                 costoBase = (PRECIO_BASICO * 0.70) * meses; // 30% descuento fijo
                 break;
             case ANUAL:
-                costoBase = (PRECIO_PREMIUM * 12) * 0.85; // Ejemplo: 15% descuento anual
+                costoBase = (PRECIO_PREMIUM * 12) * 0.85; // 15% descuento anual
                 meses = 12; // Asegurar la duración
                 break;
         }
 
-        // Llama al procesador para aplicar el requisito de los centavos de matrícula
-        double costoFinalConCentavos = procesadorPagos.calcularTotalConCentavos(costoBase);
-
         // Crea el objeto Membresia con el costo final
-        return new Membresia(tipo, meses, costoFinalConCentavos);
+        return new Membresia(tipo, meses, costoBase);
     }
 
     public void inscribirCliente(Cliente cliente, TipoMembresia tipo, int meses, String tarjetaSimulada) throws GymException {
@@ -60,7 +62,6 @@ public class SistemaMembresias1412 {
             cliente.setMembresiaActual(nuevaMembresia);
             cliente.agregarPuntos(50);
 
-            // Opcional: Generar recibo
             String recibo = procesadorPagos.generarRecibo(cliente.getNombreCompleto(), nuevaMembresia, costoFinal);
             System.out.println(recibo);
 
@@ -70,7 +71,7 @@ public class SistemaMembresias1412 {
         }
     }
 
-    public void renovarMembresia(Cliente cliente, int mesesExtras, String tarjetaSimulada) throws GymException {
+    public void renovarMembresia(Cliente cliente, int mesesExtras, String tarjetaSimulada, double descuento) throws GymException {
         if (mesesExtras <= 0) {
             throw new GymException("La renovación debe ser por al menos un mes.");
         }
@@ -85,15 +86,18 @@ public class SistemaMembresias1412 {
                 ? PRECIO_BASICO : PRECIO_PREMIUM;
 
         double costoBaseRenovacion = precioBasePorMes * mesesExtras;
+        double costoFinalRenovacion = 0.0;
 
-
-        double costoFinalRenovacion = procesadorPagos.calcularTotalConCentavos(costoBaseRenovacion);
-
+        if (descuento > 0.0) {
+            costoFinalRenovacion = procesadorPagos.calcularTotalConCentavos(costoBaseRenovacion, descuento);
+        }
+        else {
+            costoFinalRenovacion = costoBaseRenovacion;
+        }
 
         if (!procesadorPagos.procesarPagoTarjeta(tarjetaSimulada, costoFinalRenovacion)) {
             throw new GymException("Pago rechazado. No se pudo completar la renovación.");
         }
-
 
         LocalDate fechaInicioRenovacion = membresiaActual.esValida()
                 ? membresiaActual.getFechaFin().plusDays(1) // Si es válida, empieza el día después de vencer
@@ -106,9 +110,10 @@ public class SistemaMembresias1412 {
 
         cliente.agregarPuntos(mesesExtras * 10);
         String recibo = procesadorPagos.generarRecibo(cliente.getNombreCompleto(), membresiaActual, costoFinalRenovacion);
+        gestorClientes.actualizar(cliente);
+        MainApp.actualizarVistaClientes(VistaClientes.tableView);
         System.out.println(recibo);
-
-        System.out.println("Membresía renovada para " + cliente.getNombreCompleto() + " hasta el " + nuevaFechaFin + ". Puntos añadidos.");
+        System.out.println("Membresía renovada para " + cliente.getNombreCompleto() + " hasta el " + nuevaFechaFin + ". " + mesesExtras*10 +" Puntos añadidos.");
     }
 
 }

@@ -24,6 +24,7 @@ public class VistaMembresias {
 
         Button btnInscribir = new Button("Inscribir Cliente (Pagar)");
         Button btnRenovar = new Button("Renovar Membresía");
+        Button btnDescuento = new Button("Aplicar descuento (con puntos)");
         TextArea logArea = new TextArea();
         logArea.setEditable(false);
 
@@ -53,7 +54,14 @@ public class VistaMembresias {
                 Cliente cliente = gestorClientes.buscar(txtClienteId.getText()).orElseThrow(() -> new GymException("Cliente no encontrado."));
                 int meses = spnMeses.getValue();
 
-                gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456"); // Tarjeta simulada
+                if (cliente.getPuntosFidelidad() >= 100)
+                {
+                    applyDiscount(cliente, logArea);
+                    gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456", 0.2); // Tarjeta simulada
+                }
+                else
+                    gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456", 0.0);
+
                 logArea.appendText("Renovación exitosa para " + cliente.getNombreCompleto() + ".\n");
 
                 txtClienteId.clear();
@@ -80,5 +88,24 @@ public class VistaMembresias {
         VBox.setVgrow(logArea, Priority.ALWAYS);
         VBox layout = new VBox(15, grid, logArea);
         layout.setPadding(new javafx.geometry.Insets(20));
-        return layout;    }
+        return layout;
+    }
+
+    private static void applyDiscount(Cliente cliente, TextArea logArea) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Descuento");
+        alert.setHeaderText("Aplicar descuento");
+        alert.setContentText(String.format("Puntos a usar: 100\nPuntos disponibles: %d", cliente.getPuntosFidelidad()));
+        ButtonType btnSi = new ButtonType("Sí", ButtonBar.ButtonData.YES);
+        ButtonType btnNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+        alert.getButtonTypes().setAll(btnSi, btnNo);
+
+        alert.showAndWait().ifPresent(respuesta -> {
+            if (respuesta == btnSi) {
+                cliente.setPuntosFidelidad(cliente.getPuntosFidelidad() - 100);
+                // Guardar estado de descuento pendiente
+                logArea.appendText("Descuento del 20% activado para " + cliente.getNombreCompleto() + "\n");
+            }
+        });
+    }
 }

@@ -2,7 +2,6 @@ package com.main;
 
 import com.controller.*;
 import com.model.Cliente;
-import com.model.Membresia.TipoMembresia;
 import com.model.UsuarioEmpleado;
 import com.util.GymException;
 import com.view.VistaClientes;
@@ -14,13 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.HBox;
 
 import static com.view.VistaAcceso.crearVistaControlAcceso;
-import static com.view.VistaClientes.tableView;
 import static com.view.VistaMembresias.crearVistaMembresias;
 
-// Nombre del Ejecutable Completo: GymPOS[InicialesApellido][Matricula]
 public class MainApp extends Application {
 
     public static GestionClientesIbarra gestorClientes;
@@ -111,7 +107,7 @@ public class MainApp extends Application {
         barra.setVisible(false);
 
         btnGenerar.setOnAction(e -> {
-            GeneradorReportesA tarea = new GeneradorReportesA();
+            GeneradorReportesA tarea = new GeneradorReportesA(gestorClientes.getLista(), gestorInventario.getLista());
 
             lblEstado.textProperty().bind(tarea.messageProperty());
             barra.visibleProperty().bind(tarea.runningProperty());
