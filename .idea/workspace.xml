@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="hasta donde yo tengo, ya esta finalizado el diseño" />
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="ahora si ya quedo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -125,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764637573309</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="ahora si ya quedo">
+      <option name="closed" value="true" />
+      <created>1764637889086</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764637889086</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,7 +157,8 @@
     <MESSAGE value="workspace" />
     <MESSAGE value="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora." />
     <MESSAGE value="hasta donde yo tengo, ya esta finalizado el diseño" />
-    <option name="LAST_COMMIT_MESSAGE" value="hasta donde yo tengo, ya esta finalizado el diseño" />
+    <MESSAGE value="ahora si ya quedo" />
+    <option name="LAST_COMMIT_MESSAGE" value="ahora si ya quedo" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
