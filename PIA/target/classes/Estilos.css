@@ -137,7 +137,7 @@ TextField.text-input-field{
 
 /* ======= MAIN LAYOUT ======= */
 .main-root {
-    -fx-background-color: linear-gradient(to bottom right, #f5f0f0, #f0e9bf);
+    -fx-background-color: linear-gradient(to bottom right, #f4f3ee, #f0e9bf);
 }
 
 .main-tabs .tab-header-area .tab-header-background {
