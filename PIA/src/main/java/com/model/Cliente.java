@@ -12,7 +12,7 @@ public class Cliente implements Serializable {
     private String apellido;
     private String email;
     private LocalDate fechaRegistro;
-    private int puntosFidelidad;
+    private Integer puntosFidelidad;
 
     private Membresia membresiaActual;
 
@@ -84,7 +84,7 @@ public class Cliente implements Serializable {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public int getPuntosFidelidad() {
+    public Integer getPuntosFidelidad() {
         return puntosFidelidad;
     }
 
