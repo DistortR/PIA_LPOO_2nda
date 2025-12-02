@@ -107,7 +107,7 @@ public class MainApp extends Application {
         barra.setVisible(false);
 
         btnGenerar.setOnAction(e -> {
-            GeneradorReportesA tarea = new GeneradorReportesA();
+            GeneradorReportesA tarea = new GeneradorReportesA(gestorClientes.getLista(), gestorInventario.getLista());
 
             lblEstado.textProperty().bind(tarea.messageProperty());
             barra.visibleProperty().bind(tarea.runningProperty());
