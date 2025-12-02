@@ -176,3 +176,8 @@ TextField.text-input-field{
 .combo-box, .spinner {
     -fx-background-radius: 6;
 }
+
+.events-on-calendar {
+    -fx-font-size: 10px;
+    -fx-text-fill: white;
+}

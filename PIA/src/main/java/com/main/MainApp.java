@@ -819,7 +819,7 @@ public class MainApp extends Application {
         String[] diasSemana = {"Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"};
         for (int i = 0; i < diasSemana.length; i++) {
             Label lbl = new Label(diasSemana[i]);
-            lbl.setStyle("-fx-font-weight: bold; -fx-alignment: center;");
+            lbl.getStyleClass().add("label");
             lbl.setMaxWidth(Double.MAX_VALUE);
             gridVisualCalendario.add(lbl, i, 0);
         }
@@ -836,9 +836,7 @@ public class MainApp extends Application {
             for (int i = 1; i <= diasEnMes; i++) {
                 LocalDate fechaDia = mesActualCalendario.atDay(i);
 
-                List<ClaseGrupal> clasesDelDia = todasLasClases.stream()
-                        .filter(c -> c.getDay().isEqual(fechaDia))
-                        .collect(Collectors.toList());
+                List<ClaseGrupal> clasesDelDia = todasLasClases.stream().filter(c -> c.getDay().isEqual(fechaDia)).collect(Collectors.toList());
 
                 Button btnDia = new Button();
                 btnDia.setPrefSize(200, 200);
@@ -846,12 +844,12 @@ public class MainApp extends Application {
 
                 VBox contenidoCelda = new VBox(2);
                 Label lblNumero = new Label(String.valueOf(i));
-                lblNumero.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+                lblNumero.getStyleClass().add("label");
                 contenidoCelda.getChildren().add(lblNumero);
 
                 for (ClaseGrupal c : clasesDelDia) {
                     Label lblClase = new Label("• " + c.getHour() + " " + c.getDescription());
-                    lblClase.setStyle("-fx-font-size: 10px; -fx-text-fill: white;");
+                    lblClase.getStyleClass().add("events-on-calendar");
                     lblClase.setMaxWidth(180);
                     lblClase.setWrapText(false);
                     contenidoCelda.getChildren().add(lblClase);
@@ -859,7 +857,7 @@ public class MainApp extends Application {
 
                 if (clasesDelDia.size() > 3) {
                     Label lblExtra = new Label("... (+" + (clasesDelDia.size()-3) + ")");
-                    lblExtra.setStyle("-fx-font-size: 9px; -fx-text-fill: white;");
+                    lblExtra.getStyleClass().add("events-on-calendar");
                     contenidoCelda.getChildren().add(lblExtra);
                 }
 
@@ -884,13 +882,9 @@ public class MainApp extends Application {
     private void mostrarClasesEnTabla(LocalDate fecha) {
         try {
             List<ClaseGrupal> todas = controlCalendario.getLista();
-
-            List<ClaseGrupal> delDia = todas.stream()
-                    .filter(c -> c.getDay().isEqual(fecha))
-                    .collect(Collectors.toList());
+            List<ClaseGrupal> delDia = todas.stream().filter(c -> c.getDay().isEqual(fecha)).collect(Collectors.toList());
 
             claseGrupalTableView.setItems(javafx.collections.FXCollections.observableList(delDia));
-
         } catch (GymException e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error de Datos", "No se pudieron cargar las clases para la fecha: " + fecha);
         }

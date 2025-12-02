@@ -4,13 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d4a19c5-67a9-4bd9-ae2c-7e9350102372" name="Changes" comment="Avance de Calendario de Clases">
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="ahora si ya quedo">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/view/CalendarioView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/CalendarioDeClase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ControlAccesoIbarra.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GeneradorReportesA.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionInventario.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/MainView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ProcesadorPagos4647.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/Launcher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/ClaseGrupal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Cliente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Inventario.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia$TipoMembresia.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/UsuarioEmpleado.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/Gestionador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/GymException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/Serializador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/create.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/delete.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/edit.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/gym.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/login.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/password.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/person.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/view/LoginView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/warning.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/clases.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/clases.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/clientes.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/clientes.ser" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,131 +60,137 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;DistortR&quot;
+    &quot;assignee&quot;: &quot;Airos1214&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/DistortR/PIA_LPOO_2nda.git&quot;,
-    &quot;accountId&quot;: &quot;84b75ea7-e5d4-4b14-968c-07e247bacd86&quot;
+    &quot;accountId&quot;: &quot;7fc64427-9438-42fb-a4a2-b6793e4d3841&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="36DD4lVmfyrZIGabXsGyWTGbOFN" />
+  <component name="ProjectId" id="365DuOJHvhPNLZeQMEjOYqf9JSL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Launcher.executor": "Run",
     "Application.MainApp.executor": "Run",
     "Application.main.executor": "Run",
     "Maven.gympos [clean].executor": "Run",
-    "Maven.gympos [install].executor": "Run",
-    "Maven.gympos [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "Yael",
-    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.570115",
-    "settings.editor.selected.configurable": "swagger",
-    "vue.rearranger.settings.migration": "true"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.main.Launcher" />
-      <module name="gympos" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Launcher" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28238.7" />
-      </set>
-    </attachedChunks>
-  </component>
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\USER\AppData\Roaming\Subversion</configuration>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\java\com\controller" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\resources" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\java\com" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\resources" />
+    </key>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6d4a19c5-67a9-4bd9-ae2c-7e9350102372" name="Changes" comment="" />
-      <created>1764532060402</created>
+      <changelist id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="" />
+      <created>1764287766155</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1764532060402</updated>
-      <workItem from="1764532061910" duration="2879000" />
-      <workItem from="1764534959269" duration="354000" />
-      <workItem from="1764535321523" duration="60000" />
-      <workItem from="1764535438305" duration="351000" />
-      <workItem from="1764535797610" duration="156000" />
-      <workItem from="1764542283049" duration="916000" />
-      <workItem from="1764633646042" duration="13892000" />
+      <updated>1764287766155</updated>
     </task>
-    <task id="LOCAL-00001" summary="merge del main con rama manuel">
+    <task id="LOCAL-00001" summary="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
       <option name="closed" value="true" />
-      <created>1764533647726</created>
+      <created>1764290390035</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1764533647726</updated>
+      <updated>1764290390035</updated>
     </task>
-    <task id="LOCAL-00002" summary="Avance de Calendario de Clases">
+    <task id="LOCAL-00002" summary="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
       <option name="closed" value="true" />
-      <created>1764644859115</created>
+      <created>1764445766469</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1764644859115</updated>
+      <updated>1764445766469</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="workspace">
+      <option name="closed" value="true" />
+      <created>1764445790834</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1764445790834</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora.">
+      <option name="closed" value="true" />
+      <created>1764538059238</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1764538059238</updated>
+    </task>
+    <task id="LOCAL-00005" summary="hasta donde yo tengo, ya esta finalizado el diseño">
+      <option name="closed" value="true" />
+      <created>1764637573309</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1764637573309</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ahora si ya quedo">
+      <option name="closed" value="true" />
+      <created>1764637889086</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764637889086</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="merge del main con rama manuel" />
-    <MESSAGE value="Avance de Calendario de Clases" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avance de Calendario de Clases" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+    <MESSAGE value="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen" />
+    <MESSAGE value="workspace" />
+    <MESSAGE value="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora." />
+    <MESSAGE value="hasta donde yo tengo, ya esta finalizado el diseño" />
+    <MESSAGE value="ahora si ya quedo" />
+    <option name="LAST_COMMIT_MESSAGE" value="ahora si ya quedo" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
