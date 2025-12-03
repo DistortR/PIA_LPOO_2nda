@@ -9,15 +9,13 @@ public class ClaseGrupal implements Serializable {
 
     private String id;
     private String description;
-    private LocalDate year;
-    private LocalDate day;
+    private LocalDate date;
     private LocalTime hour;
 
-    public ClaseGrupal(String id, String description, LocalDate year, LocalDate day, LocalTime hour) {
+    public ClaseGrupal(String id, String description, LocalDate date, LocalTime hour) {
         this.id = id;
         this.description = description;
-        this.year = year;
-        this.day = day;
+        this.date = date;
         this.hour = hour;
     }
 
@@ -27,17 +25,14 @@ public class ClaseGrupal implements Serializable {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public LocalDate getYear() { return year; }
-    public void setYear(LocalDate year) { this.year = year; }
-
-    public LocalDate getDay() { return day; }
-    public void setDay(LocalDate day) { this.day = day; }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
 
     public LocalTime getHour() { return hour; }
     public void setHour(LocalTime hour) { this.hour = hour; }
 
     @Override
     public String toString() {
-        return description + " | " + day + " | " + hour + " | " + year;
+        return description + " | " + date + " | " + hour;
     }
 }

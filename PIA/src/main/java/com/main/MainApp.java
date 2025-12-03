@@ -40,6 +40,7 @@ public class MainApp extends Application {
     private ProcesadorPagos4647 procesadorPagos;
     private CalendarioDeClase controlCalendario = new CalendarioDeClase();
 
+    private LocalDate selectedDate = LocalDate.now();
     private YearMonth mesActualCalendario = YearMonth.now();
     private GridPane gridVisualCalendario;
     private Label lblTituloMes;
@@ -607,7 +608,7 @@ public class MainApp extends Application {
         contenedorCalendario.getChildren().addAll(navegacion, gridVisualCalendario);
 
         TableColumn<ClaseGrupal, String> colFecha = new TableColumn<>("Fecha");
-        colFecha.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDay().toString()));
+        colFecha.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDate().toString()));
 
         TableColumn<ClaseGrupal, String> colHora = new TableColumn<>("Hora");
         colHora.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getHour().toString()));
@@ -649,7 +650,7 @@ public class MainApp extends Application {
     }
 
     private void createClaseGrupal(TableView<ClaseGrupal> claseGrupalTableView) {
-        Dialog<ClaseGrupal> dialog = new Dialog<>();
+        Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Crear Clase");
         dialog.setHeaderText("Ingrese los datos de la clase grupal");
 
@@ -668,7 +669,7 @@ public class MainApp extends Application {
 
         TextField txtDesc = new TextField();
         txtDesc.setPromptText("Ej. Yoga, CrossFit");
-        DatePicker datePicker = new DatePicker();
+        DatePicker datePicker = new DatePicker(selectedDate);
         TextField txtHora = new TextField();
         txtHora.setPromptText("HH:mm (Ej. 17:30)");
 
@@ -681,37 +682,25 @@ public class MainApp extends Application {
 
         dialog.getDialogPane().setContent(grid);
 
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == btnGuardarType) {
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        if (result.isPresent() && result.get() == btnGuardarType) {
+            if(!txtDesc.getText().isEmpty() && !txtHora.getText().isEmpty() && datePicker.getValue() != null) {
                 try {
-                    String desc = txtDesc.getText();
-                    LocalDate fecha = datePicker.getValue();
-                    LocalTime hora = LocalTime.parse(txtHora.getText());
-                    String nuevoId = "CL-" + controlCalendario.getLista().size() + 1;
-
-                    return new ClaseGrupal(nuevoId, desc, fecha, fecha, hora);
+                    ClaseGrupal clase = new ClaseGrupal("CL" + (controlCalendario.getLista().size() + 1), txtDesc.getText(), datePicker.getValue(), LocalTime.parse(txtHora.getText()));
+                    controlCalendario.registrar(clase);
+                    showCalendario();
+                    mostrarClasesEnTabla(clase.getDate());
+                } catch (GymException ex) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error", ex.getMessage());
                 } catch (DateTimeParseException ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Formato Incorrecto", "La hora debe ser HH:mm (Ej. 17:30)");
-                    return null;
-                }
-                catch (GymException ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Error al Crear Clase", ex.getMessage());
-                    return null;
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error de Formato", "Formato de hora inválido. Use HH:mm (Ej. 14:30).");
                 }
             }
-            return null;
-        });
-
-        Optional<ClaseGrupal> result = dialog.showAndWait();
-
-        result.ifPresent(clase -> {
-            try {
-                controlCalendario.registrar(clase);
-                showCalendario();
-            } catch (GymException e) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Error al Agregar Clase", e.getMessage());
+            else {
+                mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
             }
-        });
+        }
     }
 
     private void updateClase(TableView<ClaseGrupal> claseGrupalTableView) {
@@ -722,7 +711,7 @@ public class MainApp extends Application {
             return;
         }
 
-        Dialog<ClaseGrupal> dialog = new Dialog<>();
+        Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Editar Clase");
         dialog.setHeaderText("Ingrese los datos para editar la clase grupal");
 
@@ -740,7 +729,7 @@ public class MainApp extends Application {
         grid.setPadding(new Insets(20, 150, 10, 10));
 
         TextField txtDesc = new TextField(selectedClaseGrupal.getDescription());
-        DatePicker datePicker = new DatePicker(selectedClaseGrupal.getDay());
+        DatePicker datePicker = new DatePicker(selectedClaseGrupal.getDate());
         TextField txtHora = new TextField(selectedClaseGrupal.getHour().toString());
 
         grid.add(new Label("Actividad:"), 0, 0);
@@ -752,33 +741,25 @@ public class MainApp extends Application {
 
         dialog.getDialogPane().setContent(grid);
 
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == btnGuardarType) {
-                try {
-                    String desc = txtDesc.getText();
-                    LocalDate fecha = datePicker.getValue();
-                    LocalTime hora = LocalTime.parse(txtHora.getText());
-                    String idOriginal = selectedClaseGrupal.getId();
+        Optional<ButtonType> result = dialog.showAndWait();
 
-                    return new ClaseGrupal(idOriginal, desc, fecha, fecha, hora);
+        if(result.isPresent() && result.get() == btnGuardarType) {
+            if(!txtDesc.getText().isEmpty() && !txtHora.getText().isEmpty() && datePicker.getValue() != null) {
+                try {
+                    ClaseGrupal claseModificada = new ClaseGrupal(selectedClaseGrupal.getId(), txtDesc.getText(), datePicker.getValue(), LocalTime.parse(txtHora.getText()));
+                    controlCalendario.actualizar(claseModificada);
+                    showCalendario();
+                    mostrarClasesEnTabla(claseModificada.getDate());
+                } catch (GymException ex) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error al Actualizar", ex.getMessage());
                 } catch (DateTimeParseException ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Formato Incorrecto", "La hora debe ser HH:mm (Ej. 09:30)");
-                    return null;
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error de Formato", "Formato de hora inválido. Use HH:mm (Ej. 14:30).");
                 }
             }
-            return null;
-        });
-
-        Optional<ClaseGrupal> result = dialog.showAndWait();
-        result.ifPresent(claseModificada -> {
-            try {
-                controlCalendario.actualizar(claseModificada);
-                showCalendario();
-                mostrarClasesEnTabla(claseModificada.getDay());
-            } catch (GymException e) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Error", e.getMessage());
+            else {
+                mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
             }
-        });
+        }
     }
 
     private void deleteClase(TableView<ClaseGrupal> claseGrupalTableView) {
@@ -804,7 +785,7 @@ public class MainApp extends Application {
             try {
                 controlCalendario.eliminar(selectedClaseGrupal.getId());
                 showCalendario();
-                mostrarClasesEnTabla(selectedClaseGrupal.getDay());
+                mostrarClasesEnTabla(selectedClaseGrupal.getDate());
             } catch (GymException ex) {
                 mostrarAlerta(Alert.AlertType.ERROR, "Error al Eliminar", ex.getMessage());
             }
@@ -835,7 +816,7 @@ public class MainApp extends Application {
             for (int i = 1; i <= diasEnMes; i++) {
                 LocalDate fechaDia = mesActualCalendario.atDay(i);
 
-                List<ClaseGrupal> clasesDelDia = todasLasClases.stream().filter(c -> c.getDay().isEqual(fechaDia)).collect(Collectors.toList());
+                List<ClaseGrupal> clasesDelDia = todasLasClases.stream().filter(c -> c.getDate() != null).filter(c -> c.getDate().isEqual(fechaDia)).collect(Collectors.toList());
 
                 Button btnDia = new Button();
                 btnDia.setPrefSize(200, 200);
@@ -879,9 +860,11 @@ public class MainApp extends Application {
     }
 
     private void mostrarClasesEnTabla(LocalDate fecha) {
+        this.selectedDate = fecha;
+
         try {
             List<ClaseGrupal> todas = controlCalendario.getLista();
-            List<ClaseGrupal> delDia = todas.stream().filter(c -> c.getDay().isEqual(fecha)).collect(Collectors.toList());
+            List<ClaseGrupal> delDia = todas.stream().filter(c -> c.getDate() != null).filter(c -> c.getDate().isEqual(fecha)).collect(Collectors.toList());
 
             claseGrupalTableView.setItems(javafx.collections.FXCollections.observableList(delDia));
         } catch (GymException e) {
