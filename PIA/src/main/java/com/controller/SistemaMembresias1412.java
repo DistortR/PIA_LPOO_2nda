@@ -10,7 +10,6 @@ import java.time.LocalDate;
 // IMPORTA TU CLASE REAL DE PROCESADOR DE PAGOS
 // Asumiendo que usaste los dígitos 123
 import com.controller.ProcesadorPagos4647;
-import com.view.VistaClientes;
 import javafx.scene.control.TableView;
 
 import static com.main.MainApp.gestorClientes;
@@ -111,7 +110,7 @@ public class SistemaMembresias1412 {
         cliente.agregarPuntos(mesesExtras * 10);
         String recibo = procesadorPagos.generarRecibo(cliente.getNombreCompleto(), membresiaActual, costoFinalRenovacion);
         gestorClientes.actualizar(cliente);
-        MainApp.actualizarVistaClientes(VistaClientes.tableView);
+        MainApp.actualizarVistaClientes(MainApp.tableView);
         System.out.println(recibo);
         System.out.println("Membresía renovada para " + cliente.getNombreCompleto() + " hasta el " + nuevaFechaFin + ". " + mesesExtras*10 +" Puntos añadidos.");
     }

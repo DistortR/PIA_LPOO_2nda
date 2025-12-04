@@ -6,13 +6,31 @@
   <component name="ChangeListManager">
     <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="agregue iconos pero no pude agregar los del error y alerta">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/VistaInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/VistaInventario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ControlAccesoIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/ControlAccesoIbarra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GeneradorReportesA.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GeneradorReportesA.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/MainView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/ProcesadorPagos4647.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/ProcesadorPagos4647.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia$TipoMembresia.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia$TipoMembresia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/UsuarioEmpleado.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/UsuarioEmpleado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/GymException.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/util/GymException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/util/Serializador.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/util/Serializador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/gympos-1.0-SNAPSHOT-shaded.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/gympos-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/original-gympos-1.0-SNAPSHOT.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,19 +73,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ALEXIS&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainApp.executor": "Run",
+    "Application.main.executor": "Run",
+    "Maven.gympos [clean].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "rama__yael/manuel",
+    "kotlin-language-version-configured": "true",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\java\com\controller" />
@@ -77,15 +98,13 @@
       <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\resources" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="main" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.main.MainApp" />
-      <module name="gympos" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\aibar\Desktop\PIA\javafx-sdk-25.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics --enable-native-access=javafx.graphics" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -94,6 +113,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1764287766155</updated>
+      <workItem from="1764811355905" duration="43000" />
     </task>
     <task id="LOCAL-00001" summary="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
       <option name="closed" value="true" />
@@ -153,6 +173,9 @@
     </task>
     <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
