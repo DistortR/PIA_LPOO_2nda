@@ -24,7 +24,47 @@ public class VistaInventario {
         return null;
     };
 
-    protected static void crearInventario(TableView<Inventario> tablaInventario) {
+    public static BorderPane crearVistaInventario() {
+        TableView<Inventario> tablaInventario = new TableView<>();
+        tablaInventario.setItems(javafx.collections.FXCollections.observableList(gestorInventario.getLista()));
+
+        TableColumn<Inventario, String> idObjCol = new TableColumn<>("ID");
+        idObjCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
+
+        TableColumn<Inventario, String> nombreObjCol = new TableColumn<>("Nombre");
+        nombreObjCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombre()));
+
+        TableColumn<Inventario, String> cantidadCol = new TableColumn<>("Cantidad");
+        cantidadCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getCantidad().toString()));
+        tablaInventario.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        tablaInventario.getColumns().addAll(idObjCol, nombreObjCol, cantidadCol);
+
+        Button btnAgregar = new Button("Registrar Cliente");
+        btnAgregar.setOnAction(e -> {
+            crearInventario(tablaInventario);
+        });
+
+        Button btnActualizar = new Button("Actualizar Inventario");
+        btnActualizar.setOnAction(e -> {
+            actualizarInventario(tablaInventario);
+        });
+
+        Button btnEliminar = new Button("Eliminar Inventario");
+        btnEliminar.setOnAction(e -> {
+            eliminarInventario(tablaInventario);
+        });
+
+        BorderPane panel = new BorderPane();
+        panel.setCenter(tablaInventario);
+
+        HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
+        botones.setPadding(new Insets(10));
+        panel.setBottom(botones);
+        return panel;
+    }
+
+    public static void crearInventario(TableView<Inventario> tablaInventario) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Agregar Inventario");
         dialog.setHeaderText("Ingrese los datos del inventario");
