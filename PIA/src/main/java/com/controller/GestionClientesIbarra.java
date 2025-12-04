@@ -30,7 +30,7 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
 
         if (this.empleados.isEmpty()) {
             this.empleados.add(new UsuarioEmpleado("jibarra", "admin123", "Juan Ibarra (ADMIN)", "ADMIN"));
-            try { guardarEmpleados(); } catch (GymException e) { /* Ignorar en inicialización */ }
+            try { guardarEmpleados(); } catch (GymException e) {}
         }
     }
 
