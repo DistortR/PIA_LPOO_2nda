@@ -457,6 +457,7 @@ public class MainApp extends Application {
 
                 if (cliente.getPuntosFidelidad() >= 100)
                 {
+                    showDiscountPopup(cliente, logArea);
                     gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456", 0.2);
                 }
                 else
@@ -522,7 +523,7 @@ public class MainApp extends Application {
             try {
                 Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
                 controlAcceso.registrarSalida(cliente); // USO: Registro de Salida
-                lblResultado.setText("✅ Salida registrada para: " + cliente.getNombreCompleto());
+                lblResultado.setText("Salida registrada para: " + cliente.getNombreCompleto());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: blue; -fx-font-size: 16px;");
             } catch (GymException ex) {
                 mostrarAlerta(Alert.AlertType.ERROR, "Error", ex.getMessage());
@@ -873,6 +874,32 @@ public class MainApp extends Application {
         alert.setContentText(content);
         if (stylesheet != null) alert.getDialogPane().getStylesheets().add(stylesheet);
         alert.showAndWait();
+    }
+
+    private static void showDiscountPopup(Cliente cliente, TextArea logArea) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar descuento");
+        alert.setHeaderText("Aplicar descuento con puntos");
+        alert.setContentText(String.format("Cliente: %s\nPuntos disponibles: %d\n\n¿Usar 100 puntos para obtener 30%% de descuento\n en la próxima compra/renovación?",
+                cliente.getNombreCompleto(), cliente.getPuntosFidelidad()));
+
+        ButtonType btnSi = new ButtonType("Sí", ButtonBar.ButtonData.YES);
+        ButtonType btnNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+        alert.getButtonTypes().setAll(btnSi, btnNo);
+
+        alert.showAndWait().ifPresent(respuesta -> {
+            if (respuesta == btnSi) {
+                try {
+                    cliente.setPuntosFidelidad(cliente.getPuntosFidelidad() - 100);
+                    actualizarVistaClientes(tableView);
+                    gestorClientes.actualizar(cliente);
+                    logArea.appendText("Descuento del 30% activado para " + cliente.getNombreCompleto() + "\n");
+                } catch (Exception ex) {
+                    logArea.appendText("ERROR al aplicar descuento: " + ex.getMessage() + "\n");
+                }
+            }
+        });
+
     }
 
     public static void actualizarVistaClientes(TableView<Cliente> tableView) {
