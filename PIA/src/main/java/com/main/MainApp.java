@@ -197,7 +197,10 @@ public class MainApp extends Application {
             return new javafx.beans.property.SimpleStringProperty(mem != null && mem.esValida() ? mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")" : "INACTIVA");
         });
 
-        tableView.getColumns().addAll(idCol, nombreCol, emailCol,  fechaRegistroCol, membresiaCol);
+        TableColumn<Cliente, String> puntosCol = new TableColumn<>("Puntos de fidelidad");
+        puntosCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getPuntosFidelidad().toString()));
+
+        tableView.getColumns().addAll(idCol, nombreCol, emailCol,  fechaRegistroCol, membresiaCol, puntosCol);
 
         Button btnAgregar = new Button("Registrar Cliente");
         btnAgregar.setOnAction(e -> {
@@ -504,7 +507,7 @@ public class MainApp extends Application {
                 Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
 
                 if (controlAcceso.validarEntrada(cliente)) {
-                    lblResultado.setText("✅ ACCESO PERMITIDO: Bienvenido(a) " + cliente.getNombreCompleto());
+                    lblResultado.setText("ACCESO PERMITIDO: Bienvenido(a) " + cliente.getNombreCompleto());
                     lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: green; -fx-font-size: 16px;");
                 }
             } catch (GymException ex) {
