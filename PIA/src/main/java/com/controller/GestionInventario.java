@@ -4,6 +4,7 @@ import com.model.Inventario;
 import com.util.Gestionador;
 import com.util.GymException;
 import com.util.Serializador;
+import com.util.Validador;
 import javafx.collections.ObservableList;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class GestionInventario implements Gestionador<Inventario> {
-    private ObservableList<Inventario> listaInventarios;
+    private ObservableList<Inventario> listaInventarios; //quitar
     private List<Inventario> inventario;    
     private Serializador<Inventario> serializadorInventario;
 
@@ -25,6 +26,10 @@ public class GestionInventario implements Gestionador<Inventario> {
     }
 
     public void registrar(Inventario inv) throws GymException {
+        if (!Validador.validarEntrada(inv.getNombre())) {
+            throw new GymException("El nombre de la clase debe contener solo letras y espacios.");
+        }
+
         if (buscar(inv.getId()).isPresent()) {
             throw new GymException("El cliente con ID " + inv.getId() + " ya existe.");
         }
@@ -41,6 +46,10 @@ public class GestionInventario implements Gestionador<Inventario> {
     }
 
     public void actualizar(Inventario objModificado) throws GymException {
+        if (!Validador.validarEntrada(objModificado.getNombre())) {
+            throw new GymException("El nombre de la clase debe contener solo letras y espacios.");
+        }
+
         boolean encontrado = false;
         for (int i = 0; i < inventario.size(); i++) {
             if (inventario.get(i).getId().equals(objModificado.getId())) {
@@ -56,6 +65,7 @@ public class GestionInventario implements Gestionador<Inventario> {
     }
 
     public Optional<Inventario> buscar(String id) throws GymException {
+
         return inventario.stream().filter(inv -> inv.getId().equals(id)).findFirst();
     }
 

@@ -41,7 +41,6 @@ public class Membresia implements Serializable {
         return ChronoUnit.DAYS.between(LocalDate.now(), fechaFin);
     }
 
-    // Getters
     public TipoMembresia getTipo() { return tipo; }
     public double getCosto() { return costo; }
     public LocalDate getFechaInicio() { return fechaInicio; }

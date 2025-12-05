@@ -5,6 +5,7 @@ import com.model.UsuarioEmpleado;
 import com.util.Gestionador;
 import com.util.Serializador;
 import com.util.GymException;
+import com.util.Validador;
 import javafx.collections.ObservableList;
 
 import java.io.File;
@@ -12,13 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class GestionClientesIbarra implements Gestionador<Cliente>{
-    private ObservableList<Cliente> listaClientes;
     private List<Cliente> clientes;
     private List<UsuarioEmpleado> empleados;
     private Serializador<Cliente> dbCliente;
     private Serializador<UsuarioEmpleado> dbEmpleado;
 
-    String proyectoDir = System.getProperty("user.dir");
+    String proyectoDir = System.getProperty("user.dir"); //private final String DB_FILE_CLIENTES =
+    //proyectoDir + File.separator + "data" + File.separator + "clientes.ser";
     private final String DB_FILE_CLIENTES = proyectoDir + File.separator + "data" + File.separator + "clientes.ser";
     private final String DB_FILE_EMPLEADOS = proyectoDir + File.separator + "data" + File.separator + "empleados.ser";
 
@@ -35,46 +36,16 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
         }
     }
 
-    public static boolean validarNombre(String nombre) {
-        if (nombre == null || nombre.isEmpty()) {
-            return false;
-        }
-
-        for (int i = 0; i < nombre.length(); i++) {
-            char c = nombre.charAt(i);
-            if (!Character.isLetter(c) && c != ' ') {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean validarCorreo(String correo) {
-        if (correo == null || correo.isEmpty()) {
-            return false;
-        }
-        int arroba = correo.indexOf('@');
-        if (arroba <= 0 || arroba >= correo.length() - 1) {
-            return false;
-        }
-
-        int punto = correo.indexOf('.', arroba);
-        if (punto <= arroba + 1 || punto >= correo.length() - 1) {
-            return false;
-        }
-        return true;
-    }
-
     public void registrar(Cliente c) throws GymException {
-        if (!validarNombre(c.getNombre())) {
+        if (!Validador.validarEntrada(c.getNombre())) {
             throw new GymException("El nombre ingresado es invalido");
         }
 
-        if (!validarNombre(c.getApellido())) {
+        if (!Validador.validarEntrada(c.getApellido())) {
             throw new GymException("El apellido ingresado es invalido");
         }
 
-        if (!validarCorreo(c.getEmail())) {
+        if (!Validador.validarCorreo(c.getEmail())) {
             throw new GymException("El correo ingresado es invalido");
         }
 
@@ -87,6 +58,18 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
     }
 
     public void actualizar(Cliente clienteModificado) throws GymException {
+        if (!Validador.validarEntrada(clienteModificado.getNombre())) {
+            throw new GymException("El nombre ingresado es invalido");
+        }
+
+        if (!Validador.validarEntrada(clienteModificado.getApellido())) {
+            throw new GymException("El apellido ingresado es invalido");
+        }
+
+        if (!Validador.validarCorreo(clienteModificado.getEmail())) {
+            throw new GymException("El correo ingresado es invalido");
+        }
+
         boolean encontrado = false;
 
         for (int i = 0; i < clientes.size(); i++) {
@@ -95,18 +78,6 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
                 encontrado = true;
                 break;
             }
-        }
-
-        if (!validarNombre(clienteModificado.getNombre())) {
-            throw new GymException("El nombre ingresado es invalido");
-        }
-
-        if (!validarNombre(clienteModificado.getApellido())) {
-            throw new GymException("El apellido ingresado es invalido");
-        }
-
-        if (!validarCorreo(clienteModificado.getEmail())) {
-            throw new GymException("El correo ingresado es invalido");
         }
 
         if (encontrado) {
@@ -128,7 +99,7 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
         }
     }
 
-    private void guardarClientes() throws GymException {
+    private synchronized void guardarClientes() throws GymException { //la hice synchronized
         dbCliente.guardar(DB_FILE_CLIENTES, clientes);
     }
 

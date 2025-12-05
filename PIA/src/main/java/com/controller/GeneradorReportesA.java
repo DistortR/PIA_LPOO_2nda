@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class GeneradorReportesA extends Task<Boolean> {
+public class GeneradorReportesA extends Task<Boolean> { //hay q hacer que genere pdfs tmb
 
     private List<Cliente> listaClientes;
     private List<Inventario> listaInventario;
@@ -101,6 +101,6 @@ public class GeneradorReportesA extends Task<Boolean> {
             return false;
         }
 
-        return null;
+        return null; //debe retornar true segun
     }
 }

@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="GymPOSAI4647:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="Merge remote-tracking branch 'origin/main' into ALEXIS&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;PIA/src/main/resources/Estilos.css&#10;#&#9;PIA/target/classes/Estilos.css">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" afterDir="false" />
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="HABEMUS PIA">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/GymPOSAI4647_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PIA/src/main/java/com/util/Validador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/CalendarioDeClase.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/CalendarioDeClase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/ControlAccesoIbarra.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/ControlAccesoIbarra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GeneradorReportesA.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GeneradorReportesA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/VistaInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/VistaInventario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionInventario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/model/Membresia.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/model/Membresia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/model/UsuarioEmpleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/model/UsuarioEmpleado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/view/VistaInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/view/VistaInventario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/gym.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/warning.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/CalendarioDeClase.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/CalendarioDeClase.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionInventario.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionInventario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/empleados.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/empleados.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/Membresia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/gym.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/warning.png" beforeDir="false" />
     </list>
     <list id="60180efd-9712-4b41-91cc-0788cd821e30" name="Changes by USER" comment="En teoria ya quedo el programa" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +53,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="ALEXIS" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,14 +80,19 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Launcher.executor": "Run",
     "Application.MainApp.executor": "Run",
     "Application.main.executor": "Run",
+    "Maven.gympos [clean].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "ALEXIS",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.570115",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -164,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764909498353</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="HABEMUS PIA">
+      <option name="closed" value="true" />
+      <created>1764912771024</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1764912771024</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,7 +217,8 @@
     <MESSAGE value="ahora si ya quedo" />
     <MESSAGE value="agregue iconos pero no pude agregar los del error y alerta" />
     <MESSAGE value="En teoria ya quedo el programa" />
-    <option name="LAST_COMMIT_MESSAGE" value="En teoria ya quedo el programa" />
+    <MESSAGE value="HABEMUS PIA" />
+    <option name="LAST_COMMIT_MESSAGE" value="HABEMUS PIA" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

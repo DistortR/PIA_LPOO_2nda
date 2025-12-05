@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControlAccesoIbarra {
+public class ControlAccesoIbarra {//HAY Q MEJORAR AQUI
     private List<String> registroAccesos;
 
     public ControlAccesoIbarra() {

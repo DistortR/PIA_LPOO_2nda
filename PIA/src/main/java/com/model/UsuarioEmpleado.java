@@ -6,9 +6,9 @@ public class UsuarioEmpleado implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String username;
-    private String password; // En un caso real, esto debería estar hasheado
+    private String password;
     private String nombreCompleto;
-    private String rol; // "ADMIN", "RECEPCION"
+    private String rol;
 
     public UsuarioEmpleado(String username, String password, String nombre, String rol) {
         this.username = username;

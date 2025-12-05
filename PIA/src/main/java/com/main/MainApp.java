@@ -1,16 +1,12 @@
 package com.main;
 
 import com.controller.*;
-import com.model.ClaseGrupal;
 import com.model.Cliente;
 import com.model.UsuarioEmpleado;
-import com.util.GymException;
 import com.view.*;
 import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,16 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.HBox;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.YearMonth;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import static com.view.VistaReportes.crearVistaReportes;
 
 public class MainApp extends Application {
@@ -141,8 +127,6 @@ public class MainApp extends Application {
         return scene;
     }
 
-
-
     public static void mostrarAlerta(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -195,4 +179,3 @@ public class MainApp extends Application {
         launch(args);
     }
 }
-

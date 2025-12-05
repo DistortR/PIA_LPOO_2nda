@@ -4,8 +4,8 @@ import com.model.ClaseGrupal;
 import com.util.Gestionador;
 import com.util.GymException;
 import com.util.Serializador;
+import com.util.Validador;
 
-import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ public class CalendarioDeClase implements Gestionador<ClaseGrupal> {
     private Serializador<ClaseGrupal> dbClase;
 
     String proyectoDir = System.getProperty("user.dir");
-    private final String DB_FILE_CLASES = proyectoDir + File.separator + "data" + File.separator + "clases.ser";
+    private final String DB_FILE_CLASES = proyectoDir + "\\data\\clases.ser";
 
     public CalendarioDeClase() {
         this.dbClase = new Serializador<>();
@@ -22,7 +22,7 @@ public class CalendarioDeClase implements Gestionador<ClaseGrupal> {
     }
 
     public void registrar(ClaseGrupal clase) throws GymException {
-        if (!GestionClientesIbarra.validarNombre(clase.getDescription())) {
+        if (!Validador.validarEntrada(clase.getDescription())) {
             throw new GymException("El nombre de la clase debe contener solo letras y espacios.");
         }
         if (buscar(clase.getId()).isPresent()) {
@@ -41,6 +41,10 @@ public class CalendarioDeClase implements Gestionador<ClaseGrupal> {
     }
 
     public void actualizar(ClaseGrupal claseModificada) throws GymException {
+        if (!Validador.validarEntrada(claseModificada.getDescription())) {
+            throw new GymException("El nombre de la clase debe contener solo letras y espacios.");
+        }
+
         boolean encontrado = false;
 
         for (int i = 0; i < clases.size(); i++) {
@@ -49,10 +53,6 @@ public class CalendarioDeClase implements Gestionador<ClaseGrupal> {
                 encontrado = true;
                 break;
             }
-        }
-
-        if (!GestionClientesIbarra.validarNombre(claseModificada.getDescription())) {
-            throw new GymException("El nombre de la clase debe contener solo letras y espacios.");
         }
 
         if (encontrado) {

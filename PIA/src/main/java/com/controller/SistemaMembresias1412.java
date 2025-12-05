@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 public class SistemaMembresias1412 {
 
-    private static final double PRECIO_BASICO = 500.0;
-    private static final double PRECIO_PREMIUM = 900.0;
+    private static final double PRECIO_BASICO = 500.4647;
+    private static final double PRECIO_PREMIUM = 900.4647;
 
     private ProcesadorPagos4647 procesadorPagos = new ProcesadorPagos4647();
 
