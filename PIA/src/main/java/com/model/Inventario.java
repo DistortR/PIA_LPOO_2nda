@@ -38,14 +38,4 @@ public class Inventario implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public void addCantidad(long cantidad) {
-        if (cantidad > 0)
-            this.cantidad += cantidad;
-    }
-
-    public void removeCantidad(long cantidad) {
-        if (cantidad > 0)
-            this.cantidad -= cantidad;
-    }
-
 }

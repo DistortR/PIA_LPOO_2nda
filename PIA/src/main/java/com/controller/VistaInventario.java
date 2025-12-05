@@ -40,7 +40,7 @@ public class VistaInventario {
 
         tablaInventario.getColumns().addAll(idObjCol, nombreObjCol, cantidadCol);
 
-        Button btnAgregar = new Button("Registrar Cliente");
+        Button btnAgregar = new Button("Registrar Inventario");
         btnAgregar.setOnAction(e -> {
             crearInventario(tablaInventario);
         });

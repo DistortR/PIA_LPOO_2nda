@@ -36,14 +36,6 @@ public class Cliente implements Serializable {
         }
     }
 
-    public boolean canjearPuntos(int costo) {
-        if (this.puntosFidelidad >= costo) {
-            this.puntosFidelidad -= costo;
-            return true;
-        }
-        return false;
-    }
-
     public String getId() {
         return id;
     }

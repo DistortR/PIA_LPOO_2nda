@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ClaseGrupal implements Serializable {
+public class    ClaseGrupal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;

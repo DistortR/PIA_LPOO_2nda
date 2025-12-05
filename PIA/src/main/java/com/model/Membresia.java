@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 public class Membresia implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public enum TipoMembresia {
+    public enum  TipoMembresia {
         BASICA, PREMIUM, ESTUDIANTE, ANUAL
     }
 
