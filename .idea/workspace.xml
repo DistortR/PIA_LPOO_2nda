@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d4a19c5-67a9-4bd9-ae2c-7e9350102372" name="Changes" comment="añadiendo retoques">
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="Merge remote-tracking branch 'origin/main' into ALEXIS&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;PIA/src/main/resources/Estilos.css&#10;#&#9;PIA/target/classes/Estilos.css">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/MainView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/CalendarioDeClase.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/CalendarioDeClase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/VistaInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/VistaInventario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/model/ClaseGrupal.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/model/ClaseGrupal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/model/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/model/Inventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/model/Inventario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/model/Membresia.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/model/Membresia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/resources/Estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/CalendarioDeClase.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/CalendarioDeClase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/empleados.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/empleados.ser" afterDir="false" />
     </list>
+    <list id="60180efd-9712-4b41-91cc-0788cd821e30" name="Changes by USER" comment="En teoria ya quedo el programa" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -29,139 +35,165 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ramaManuel" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Airos1214&quot;
+  }
 }</component>
-  <component name="ProjectId" id="36DD4lVmfyrZIGabXsGyWTGbOFN" />
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/DistortR/PIA_LPOO_2nda.git&quot;,
+    &quot;accountId&quot;: &quot;7fc64427-9438-42fb-a4a2-b6793e4d3841&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="365DuOJHvhPNLZeQMEjOYqf9JSL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
-    &quot;Application.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.570115&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;swagger&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainApp.executor": "Run",
+    "Application.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "ALEXIS",
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
-  <component name="RunManager" selected="Application.Launcher">
-    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.main.Launcher" />
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\java\com\controller" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\resources" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main\java\com" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\main" />
+      <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.main.MainApp" />
       <module name="gympos" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\aibar\Desktop\PIA\javafx-sdk-25.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics --enable-native-access=javafx.graphics" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="PIA_LPOO_2nda" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="PIA_LPOO_2nda" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Launcher" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
-      </set>
-    </attachedChunks>
-  </component>
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\USER\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6d4a19c5-67a9-4bd9-ae2c-7e9350102372" name="Changes" comment="" />
-      <created>1764532060402</created>
+      <changelist id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="" />
+      <created>1764287766155</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1764532060402</updated>
-      <workItem from="1764532061910" duration="2879000" />
-      <workItem from="1764534959269" duration="354000" />
-      <workItem from="1764535321523" duration="60000" />
-      <workItem from="1764535438305" duration="351000" />
-      <workItem from="1764535797610" duration="156000" />
-      <workItem from="1764542283049" duration="916000" />
-      <workItem from="1764813864431" duration="1724000" />
-      <workItem from="1764876096776" duration="10179000" />
-      <workItem from="1764891735114" duration="8003000" />
+      <updated>1764287766155</updated>
     </task>
-    <task id="LOCAL-00001" summary="merge del main con rama manuel">
+    <task id="LOCAL-00001" summary="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
       <option name="closed" value="true" />
-      <created>1764533647726</created>
+      <created>1764290390035</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1764533647726</updated>
+      <updated>1764290390035</updated>
     </task>
-    <task id="LOCAL-00002" summary="solucionando vistas de puntos de fidelidad">
+    <task id="LOCAL-00002" summary="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen">
       <option name="closed" value="true" />
-      <created>1764814853153</created>
+      <created>1764445766469</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1764814853153</updated>
+      <updated>1764445766469</updated>
     </task>
-    <task id="LOCAL-00003" summary="añadiendo retoques">
+    <task id="LOCAL-00003" summary="workspace">
       <option name="closed" value="true" />
-      <created>1764815562173</created>
+      <created>1764445790834</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1764815562173</updated>
+      <updated>1764445790834</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora.">
+      <option name="closed" value="true" />
+      <created>1764538059238</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1764538059238</updated>
+    </task>
+    <task id="LOCAL-00005" summary="hasta donde yo tengo, ya esta finalizado el diseño">
+      <option name="closed" value="true" />
+      <created>1764637573309</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1764637573309</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ahora si ya quedo">
+      <option name="closed" value="true" />
+      <created>1764637889086</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764637889086</updated>
+    </task>
+    <task id="LOCAL-00007" summary="agregue iconos pero no pude agregar los del error y alerta">
+      <option name="closed" value="true" />
+      <created>1764642095249</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1764642095249</updated>
+    </task>
+    <task id="LOCAL-00008" summary="En teoria ya quedo el programa">
+      <option name="closed" value="true" />
+      <created>1764909498353</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1764909498353</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="merge del main con rama manuel" />
-    <MESSAGE value="solucionando vistas de puntos de fidelidad" />
-    <MESSAGE value="añadiendo retoques" />
-    <option name="LAST_COMMIT_MESSAGE" value="añadiendo retoques" />
+    <MESSAGE value="se cambiaron cosas del css, para la pantalla del login, se agrego la imagen" />
+    <MESSAGE value="workspace" />
+    <MESSAGE value="Se mejoro el diseño del login y el diseño de la interfaz principal, todavia no me termina de convencer el diseño principal pero ya es una mejora." />
+    <MESSAGE value="hasta donde yo tengo, ya esta finalizado el diseño" />
+    <MESSAGE value="ahora si ya quedo" />
+    <MESSAGE value="agregue iconos pero no pude agregar los del error y alerta" />
+    <MESSAGE value="En teoria ya quedo el programa" />
+    <option name="LAST_COMMIT_MESSAGE" value="En teoria ya quedo el programa" />
   </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>

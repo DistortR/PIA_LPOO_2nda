@@ -13,9 +13,9 @@ import java.util.Optional;
 public class GestionClientesIbarra implements Gestionador<Cliente>{
     private ObservableList<Cliente> listaClientes;
     private List<Cliente> clientes;
-    private List<UsuarioEmpleado> empleados; // Lista de empleados
+    private List<UsuarioEmpleado> empleados;
     private Serializador<Cliente> dbCliente;
-    private Serializador<UsuarioEmpleado> dbEmpleado; // Serializador para empleados
+    private Serializador<UsuarioEmpleado> dbEmpleado;
 
     String proyectoDir = System.getProperty("user.dir");
     private final String DB_FILE_CLIENTES = proyectoDir + "\\data\\clientes.ser";
@@ -29,15 +29,58 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
         this.empleados = dbEmpleado.cargar(DB_FILE_EMPLEADOS);
 
         if (this.empleados.isEmpty()) {
-            this.empleados.add(new UsuarioEmpleado("jibarra", "admin123", "Juan Ibarra (ADMIN)", "ADMIN"));
-            try { guardarEmpleados(); } catch (GymException e) { /* Ignorar en inicialización */ }
+            this.empleados.add(new UsuarioEmpleado("Aibarra", "admin123", "Alexis Ibarra (ADMIN)", "ADMIN"));
+            try { guardarEmpleados(); } catch (GymException e) {}
         }
     }
 
+    public static boolean validarNombre(String nombre) {
+        if (nombre == null || nombre.isEmpty()) {
+            return false;
+        }
+
+        for (int i = 0; i < nombre.length(); i++) {
+            char c = nombre.charAt(i);
+            if (!Character.isLetter(c) && c != ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean validarCorreo(String correo) {
+        if (correo == null || correo.isEmpty()) {
+            return false;
+        }
+        int arroba = correo.indexOf('@');
+        if (arroba <= 0 || arroba >= correo.length() - 1) {
+            return false;
+        }
+
+        int punto = correo.indexOf('.', arroba);
+        if (punto <= arroba + 1 || punto >= correo.length() - 1) {
+            return false;
+        }
+        return true;
+    }
+
     public void registrar(Cliente c) throws GymException {
+        if (!validarNombre(c.getNombre())) {
+            throw new GymException("El nombre ingresado es invalido");
+        }
+
+        if (!validarNombre(c.getApellido())) {
+            throw new GymException("El apellido ingresado es invalido");
+        }
+
+        if (!validarCorreo(c.getEmail())) {
+            throw new GymException("El correo ingresado es invalido");
+        }
+
         if (buscar(c.getId()).isPresent()) {
             throw new GymException("El cliente con ID " + c.getId() + " ya existe.");
         }
+
         clientes.add(c);
         guardarClientes();
     }
@@ -51,6 +94,18 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
                 encontrado = true;
                 break;
             }
+        }
+
+        if (!validarNombre(clienteModificado.getNombre())) {
+            throw new GymException("El nombre ingresado es invalido");
+        }
+
+        if (!validarNombre(clienteModificado.getApellido())) {
+            throw new GymException("El apellido ingresado es invalido");
+        }
+
+        if (!validarCorreo(clienteModificado.getEmail())) {
+            throw new GymException("El correo ingresado es invalido");
         }
 
         if (encontrado) {

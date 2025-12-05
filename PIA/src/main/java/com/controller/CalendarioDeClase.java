@@ -20,6 +20,9 @@ public class CalendarioDeClase implements Gestionador<ClaseGrupal> {
     }
 
     public void registrar(ClaseGrupal clase) throws GymException {
+        if (!GestionClientesIbarra.validarNombre(clase.getDescription())) {
+            throw new GymException("El nombre de la clase debe contener solo letras y espacios.");
+        }
         if (buscar(clase.getId()).isPresent()) {
             throw new GymException("La clase con ID " + clase.getId() + " ya existe.");
         }
@@ -44,6 +47,10 @@ public class CalendarioDeClase implements Gestionador<ClaseGrupal> {
                 encontrado = true;
                 break;
             }
+        }
+
+        if (!GestionClientesIbarra.validarNombre(claseModificada.getDescription())) {
+            throw new GymException("El nombre de la clase debe contener solo letras y espacios.");
         }
 
         if (encontrado) {

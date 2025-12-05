@@ -107,37 +107,6 @@ public class MainApp extends Application {
         }
     }
 
-    /*private Scene crearVistaLogin(Stage primaryStage) {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25));
-        grid.getStyleClass().add("login-pane");
-
-        TextField userField = new TextField("jibarra");
-        PasswordField passField = new PasswordField();
-        passField.setText("admin123");
-        Button btnLogin = new Button("Iniciar Sesión");
-
-        grid.addRow(1, new Label("Usuario:"), userField);
-        grid.addRow(2, new Label("Contraseña:"), passField);
-        grid.add(btnLogin, 1, 4);
-
-        btnLogin.setOnAction(e -> {
-            try {
-
-                usuarioLogeado = gestorClientes.autenticar(userField.getText(), passField.getText());
-                primaryStage.setScene(crearVistaPrincipal(primaryStage));
-                primaryStage.centerOnScreen();
-            } catch (GymException ex) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Fallo en Login", ex.getMessage());
-            }
-        });
-        Scene scene = new Scene(grid, 400, 300);
-        if (stylesheet != null) scene.getStylesheets().add(stylesheet);
-        return scene;
-    } */
-
     private Scene crearVistaPrincipal(Stage primaryStage) {
         BorderPane root = new BorderPane();
         root.getStyleClass().add("main-root");
@@ -458,7 +427,7 @@ public class MainApp extends Application {
                 if (cliente.getPuntosFidelidad() >= 100)
                 {
                     showDiscountPopup(cliente, logArea);
-                    gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456", 0.2);
+                    gestorMembresias.renovarMembresia(cliente, meses, "1234567890123456", 0.3);
                 }
                 else
                 {
@@ -522,7 +491,7 @@ public class MainApp extends Application {
         btnSalida.setOnAction(e -> {
             try {
                 Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
-                controlAcceso.registrarSalida(cliente); // USO: Registro de Salida
+                controlAcceso.registrarSalida(cliente);
                 lblResultado.setText("Salida registrada para: " + cliente.getNombreCompleto());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: blue; -fx-font-size: 16px;");
             } catch (GymException ex) {
@@ -649,10 +618,24 @@ public class MainApp extends Application {
         dialog.setTitle("Crear Clase");
         dialog.setHeaderText("Ingrese los datos de la clase grupal");
 
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png")));
+
         if (stylesheet != null) {
             dialog.getDialogPane().getStylesheets().add(stylesheet);
             dialog.getDialogPane().getStyleClass().add("dialog-pane");
         }
+
+        try {
+            if (getClass().getResourceAsStream("/create.png") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                dialog.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
 
         ButtonType btnGuardarType = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
@@ -710,10 +693,24 @@ public class MainApp extends Application {
         dialog.setTitle("Editar Clase");
         dialog.setHeaderText("Ingrese los datos para editar la clase grupal");
 
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/edit.jpg")));
+
         if (stylesheet != null) {
             dialog.getDialogPane().getStylesheets().add(stylesheet);
             dialog.getDialogPane().getStyleClass().add("dialog-pane");
         }
+
+        try {
+            if (getClass().getResourceAsStream("/edit.jpg") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/edit.jpg"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                dialog.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
 
         ButtonType btnGuardarType = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
@@ -769,6 +766,21 @@ public class MainApp extends Application {
         alertConfirm.setTitle("Confirmar Eliminación");
         alertConfirm.setHeaderText("¿Está seguro de eliminar la clase?");
         alertConfirm.setContentText("Clase: " + selectedClaseGrupal.getDescription());
+
+        Stage stage = (Stage) alertConfirm.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/delete.png")));
+
+        try {
+            if (getClass().getResourceAsStream("/delete.png") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/delete.png"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                alertConfirm.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
+
         if (stylesheet != null) {
             alertConfirm.getDialogPane().getStylesheets().add(stylesheet);
             alertConfirm.getDialogPane().getStyleClass().add("dialog-pane");
@@ -873,6 +885,11 @@ public class MainApp extends Application {
         alert.setHeaderText(null);
         alert.setContentText(content);
         if (stylesheet != null) alert.getDialogPane().getStylesheets().add(stylesheet);
+        try {
+            Image img = new Image(MainApp.class.getResourceAsStream("/error.png"));
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(img);
+        } catch (Exception e) {}
         alert.showAndWait();
     }
 

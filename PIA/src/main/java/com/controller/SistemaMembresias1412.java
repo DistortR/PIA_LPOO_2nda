@@ -1,26 +1,16 @@
 package com.controller;
 
-import com.main.MainApp;
 import com.model.Cliente;
 import com.model.Membresia;
 import com.model.Membresia.TipoMembresia;
 import com.util.GymException;
 import java.time.LocalDate;
 
-// IMPORTA TU CLASE REAL DE PROCESADOR DE PAGOS
-// Asumiendo que usaste los dígitos 123
-import com.controller.ProcesadorPagos4647;
-import javafx.scene.control.TableView;
-
-import static com.main.MainApp.gestorClientes;
-
 public class SistemaMembresias1412 {
 
-    // Precios base
     private static final double PRECIO_BASICO = 500.0;
     private static final double PRECIO_PREMIUM = 900.0;
 
-    // Dependencia: Instancia del procesador de pagos (AJUSTA EL NOMBRE SI ES NECESARIO)
     private ProcesadorPagos4647 procesadorPagos = new ProcesadorPagos4647();
 
     private Membresia calcularCostoMembresia(TipoMembresia tipo, int meses) throws GymException {
@@ -34,19 +24,20 @@ public class SistemaMembresias1412 {
                 break;
             case PREMIUM:
                 costoBase = PRECIO_PREMIUM * meses;
-                if (meses >= 12) costoBase *= 0.90; // 10% descuento por volumen
+                if (meses >= 12) costoBase *= 0.90;
                 break;
             case ESTUDIANTE:
-                costoBase = (PRECIO_BASICO * 0.70) * meses; // 30% descuento fijo
+                costoBase = (PRECIO_BASICO * 0.70) * meses;
                 break;
             case ANUAL:
-                costoBase = (PRECIO_PREMIUM * 12) * 0.85; // 15% descuento anual
-                meses = 12; // Asegurar la duración
+                costoBase = (PRECIO_PREMIUM * 12) * 0.85;
+                meses = 12;
                 break;
         }
 
-        // Crea el objeto Membresia con el costo final
-        return new Membresia(tipo, meses, costoBase);
+        double costoFinalConCentavos = procesadorPagos.calcularTotalConCentavos(costoBase, 0.0);
+
+        return new Membresia(tipo, meses, costoFinalConCentavos);
     }
 
     public void inscribirCliente(Cliente cliente, TipoMembresia tipo, int meses, String tarjetaSimulada) throws GymException {
@@ -71,6 +62,7 @@ public class SistemaMembresias1412 {
     }
 
     public void renovarMembresia(Cliente cliente, int mesesExtras, String tarjetaSimulada, double descuento) throws GymException {
+        double costoFinalRenovacion;
         if (mesesExtras <= 0) {
             throw new GymException("La renovación debe ser por al menos un mes.");
         }
@@ -85,22 +77,23 @@ public class SistemaMembresias1412 {
                 ? PRECIO_BASICO : PRECIO_PREMIUM;
 
         double costoBaseRenovacion = precioBasePorMes * mesesExtras;
-        double costoFinalRenovacion = 0.0;
 
-        if (descuento > 0.0) {
+        if (cliente.getPuntosFidelidad() >= 100)
+        {
             costoFinalRenovacion = procesadorPagos.calcularTotalConCentavos(costoBaseRenovacion, descuento);
         }
-        else {
+        else
             costoFinalRenovacion = costoBaseRenovacion;
-        }
+
 
         if (!procesadorPagos.procesarPagoTarjeta(tarjetaSimulada, costoFinalRenovacion)) {
             throw new GymException("Pago rechazado. No se pudo completar la renovación.");
         }
 
+
         LocalDate fechaInicioRenovacion = membresiaActual.esValida()
-                ? membresiaActual.getFechaFin().plusDays(1) // Si es válida, empieza el día después de vencer
-                : LocalDate.now(); // Si está vencida, empieza hoy
+                ? membresiaActual.getFechaFin().plusDays(1)
+                : LocalDate.now();
 
 
         LocalDate nuevaFechaFin = fechaInicioRenovacion.plusMonths(mesesExtras);
@@ -109,10 +102,9 @@ public class SistemaMembresias1412 {
 
         cliente.agregarPuntos(mesesExtras * 10);
         String recibo = procesadorPagos.generarRecibo(cliente.getNombreCompleto(), membresiaActual, costoFinalRenovacion);
-        gestorClientes.actualizar(cliente);
-        MainApp.actualizarVistaClientes(MainApp.tableView);
         System.out.println(recibo);
-        System.out.println("Membresía renovada para " + cliente.getNombreCompleto() + " hasta el " + nuevaFechaFin + ". " + mesesExtras*10 +" Puntos añadidos.");
+
+        System.out.println("Membresía renovada para " + cliente.getNombreCompleto() + " hasta el " + nuevaFechaFin + ". Puntos añadidos.");
     }
 
 }
