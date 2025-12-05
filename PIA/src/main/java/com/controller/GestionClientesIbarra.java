@@ -34,7 +34,7 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
         }
     }
 
-    private boolean validarNombre(String nombre) {
+    public static boolean validarNombre(String nombre) {
         if (nombre == null || nombre.isEmpty()) {
             return false;
         }

@@ -5,22 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="Merge remote-tracking branch 'origin/main' into ALEXIS&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;PIA/src/main/resources/Estilos.css&#10;#&#9;PIA/target/classes/Estilos.css">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/CalendarioDeClase.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/CalendarioDeClase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/VistaInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/VistaInventario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/CalendarioDeClase.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/CalendarioDeClase.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionInventario.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionInventario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/Launcher.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/model/Inventario.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/model/Inventario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/empleados.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/empleados.ser" afterDir="false" />
     </list>
-    <list id="60180efd-9712-4b41-91cc-0788cd821e30" name="Changes by USER" comment="">
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
-    </list>
+    <list id="60180efd-9712-4b41-91cc-0788cd821e30" name="Changes by USER" comment="En teoria ya quedo el programa" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,24 +52,6 @@
     &quot;accountId&quot;: &quot;7fc64427-9438-42fb-a4a2-b6793e4d3841&quot;
   }
 }</component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java">
-      <ranges>
-        <range start1="7" end1="11" start2="7" end2="7" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="14" end1="15" start2="10" end2="10" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="18" end1="19" start2="13" end2="13" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="32" end1="33" start2="26" end2="27" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="35" end1="36" start2="29" end2="30" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="38" end1="40" start2="32" end2="34" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="43" end1="45" start2="37" end2="38" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="46" end1="47" start2="39" end2="39" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="62" end1="63" start2="54" end2="54" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-        <range start1="72" end1="73" start2="63" end2="65" changelist="60180efd-9712-4b41-91cc-0788cd821e30" />
-        <range start1="88" end1="90" start2="80" end2="86" changelist="60180efd-9712-4b41-91cc-0788cd821e30" />
-        <range start1="98" end1="100" start2="94" end2="96" changelist="8a06fb06-fc78-4101-8f3a-709981a80433" />
-      </ranges>
-    </file>
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -176,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764642095249</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="En teoria ya quedo el programa">
+      <option name="closed" value="true" />
+      <created>1764909498353</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1764909498353</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -197,7 +185,8 @@
     <MESSAGE value="hasta donde yo tengo, ya esta finalizado el diseño" />
     <MESSAGE value="ahora si ya quedo" />
     <MESSAGE value="agregue iconos pero no pude agregar los del error y alerta" />
-    <option name="LAST_COMMIT_MESSAGE" value="agregue iconos pero no pude agregar los del error y alerta" />
+    <MESSAGE value="En teoria ya quedo el programa" />
+    <option name="LAST_COMMIT_MESSAGE" value="En teoria ya quedo el programa" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

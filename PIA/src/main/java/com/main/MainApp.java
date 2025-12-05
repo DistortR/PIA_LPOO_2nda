@@ -618,10 +618,24 @@ public class MainApp extends Application {
         dialog.setTitle("Crear Clase");
         dialog.setHeaderText("Ingrese los datos de la clase grupal");
 
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png")));
+
         if (stylesheet != null) {
             dialog.getDialogPane().getStylesheets().add(stylesheet);
             dialog.getDialogPane().getStyleClass().add("dialog-pane");
         }
+
+        try {
+            if (getClass().getResourceAsStream("/create.png") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                dialog.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
 
         ButtonType btnGuardarType = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
@@ -679,10 +693,24 @@ public class MainApp extends Application {
         dialog.setTitle("Editar Clase");
         dialog.setHeaderText("Ingrese los datos para editar la clase grupal");
 
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/edit.jpg")));
+
         if (stylesheet != null) {
             dialog.getDialogPane().getStylesheets().add(stylesheet);
             dialog.getDialogPane().getStyleClass().add("dialog-pane");
         }
+
+        try {
+            if (getClass().getResourceAsStream("/edit.jpg") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/edit.jpg"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                dialog.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
 
         ButtonType btnGuardarType = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
@@ -738,6 +766,21 @@ public class MainApp extends Application {
         alertConfirm.setTitle("Confirmar Eliminación");
         alertConfirm.setHeaderText("¿Está seguro de eliminar la clase?");
         alertConfirm.setContentText("Clase: " + selectedClaseGrupal.getDescription());
+
+        Stage stage = (Stage) alertConfirm.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/delete.png")));
+
+        try {
+            if (getClass().getResourceAsStream("/delete.png") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/delete.png"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                alertConfirm.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
+
         if (stylesheet != null) {
             alertConfirm.getDialogPane().getStylesheets().add(stylesheet);
             alertConfirm.getDialogPane().getStyleClass().add("dialog-pane");
@@ -842,6 +885,11 @@ public class MainApp extends Application {
         alert.setHeaderText(null);
         alert.setContentText(content);
         if (stylesheet != null) alert.getDialogPane().getStylesheets().add(stylesheet);
+        try {
+            Image img = new Image(MainApp.class.getResourceAsStream("/error.png"));
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(img);
+        } catch (Exception e) {}
         alert.showAndWait();
     }
 

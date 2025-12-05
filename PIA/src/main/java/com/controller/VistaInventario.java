@@ -5,9 +5,11 @@ import com.util.GymException;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.converter.LongStringConverter;
 
 import java.util.Optional;
@@ -68,6 +70,20 @@ public class VistaInventario {
         dialog.setTitle("Agregar Inventario");
         dialog.setHeaderText("Ingrese los datos del inventario");
 
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new javafx.scene.image.Image(VistaInventario.class.getResourceAsStream("/create.png")));
+
+        try {
+            if (VistaInventario.class.getResourceAsStream("/create.png") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(VistaInventario.class.getResourceAsStream("/create.png"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                dialog.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
+
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
@@ -79,7 +95,6 @@ public class VistaInventario {
         TextField amountField = new TextField();
         nameField.setPromptText("Ej. Arturo");
         amountField.setPromptText("(sólo caracteres numéricos)");
-        // validacion para caracteres numericos
         amountField.setTextFormatter(new TextFormatter<>(new LongStringConverter(), 0L, integerFilter));
 
         grid.add(new Label("Nombre:"), 0, 0);
@@ -118,6 +133,20 @@ public class VistaInventario {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Actualizar Inventario");
         dialog.setHeaderText("Modifique los datos del objeto");
+
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new javafx.scene.image.Image(VistaInventario.class.getResourceAsStream("/edit.jpg")));
+
+        try {
+            if (VistaInventario.class.getResourceAsStream("/edit.jpg") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(VistaInventario.class.getResourceAsStream("/edit.jpg"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                dialog.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
 
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
@@ -173,6 +202,20 @@ public class VistaInventario {
         alertConfirm.setTitle("Confirmar Eliminación");
         alertConfirm.setHeaderText("¿Está seguro de eliminar el objeto?");
         alertConfirm.setContentText("Objeto: " + selectedInv.getNombre());
+
+        Stage stage = (Stage) alertConfirm.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(VistaInventario.class.getResourceAsStream("/delete.png")));
+
+        try {
+            if (VistaInventario.class.getResourceAsStream("/delete.png") != null) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(VistaInventario.class.getResourceAsStream("/delete.png"));
+                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
+                iv.setFitWidth(48);
+                iv.setFitHeight(48);
+                iv.setPreserveRatio(true);
+                alertConfirm.getDialogPane().setGraphic(iv);
+            }
+        } catch (Exception ex) {}
 
         Optional<ButtonType> result = alertConfirm.showAndWait();
 
