@@ -30,7 +30,7 @@ public class Inventario implements Serializable {
         this.nombre = nombre;
     }
 
-    public long getCantidad() {
+    public Long getCantidad() {
         return cantidad;
     }
 

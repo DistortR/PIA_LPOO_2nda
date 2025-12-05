@@ -1,8 +1,12 @@
 package com.main;
 
-import com.controller.*;
-import com.model.ClaseGrupal;
+import com.controller.ControlAccesoIbarra;
+import com.controller.GeneradorReportesA;
+import com.controller.GestionClientesIbarra;
+import com.controller.SistemaMembresias1412;
+import com.controller.ProcesadorPagos4647;
 import com.model.Cliente;
+import com.model.Inventario;
 import com.model.Membresia;
 import com.model.Membresia.TipoMembresia;
 import com.model.UsuarioEmpleado;
@@ -19,31 +23,18 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
-
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.YearMonth;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.Objects;
 import java.util.Optional;
 
 public class MainApp extends Application {
 
-    private TableView<ClaseGrupal> claseGrupalTableView = new TableView<>();
     private TableView<Cliente> tableView = new TableView<>();
     private GestionClientesIbarra gestorClientes;
     private ControlAccesoIbarra controlAcceso;
     private SistemaMembresias1412 gestorMembresias;
     private ProcesadorPagos4647 procesadorPagos;
-    private CalendarioDeClase controlCalendario = new CalendarioDeClase();
 
-    private LocalDate selectedDate = LocalDate.now();
-    private YearMonth mesActualCalendario = YearMonth.now();
-    private GridPane gridVisualCalendario;
-    private Label lblTituloMes;
     private UsuarioEmpleado usuarioLogeado = null;
     private String stylesheet;
     private Stage primaryStage;
@@ -92,6 +83,7 @@ public class MainApp extends Application {
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error al cargar Login", e.getMessage());
             e.printStackTrace();
+
         }
     }
 
@@ -106,6 +98,37 @@ public class MainApp extends Application {
         }
     }
 
+    private Scene crearVistaLogin(Stage primaryStage) { //weon esto no se usa
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25));
+        grid.getStyleClass().add("login-pane");
+
+        TextField userField = new TextField("jibarra");
+        PasswordField passField = new PasswordField();
+        passField.setText("admin123");
+        Button btnLogin = new Button("Iniciar Sesión");
+
+        grid.addRow(1, new Label("Usuario:"), userField);
+        grid.addRow(2, new Label("Contraseña:"), passField);
+        grid.add(btnLogin, 1, 4);
+
+        btnLogin.setOnAction(e -> {
+            try {
+
+                usuarioLogeado = gestorClientes.autenticar(userField.getText(), passField.getText());
+                primaryStage.setScene(crearVistaPrincipal(primaryStage));
+                primaryStage.centerOnScreen();
+            } catch (GymException ex) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Fallo en Login", ex.getMessage());
+            }
+        });
+        Scene scene = new Scene(grid, 400, 300);
+        if (stylesheet != null) scene.getStylesheets().add(stylesheet);
+        return scene;
+    }
+
     private Scene crearVistaPrincipal(Stage primaryStage) {
         BorderPane root = new BorderPane();
         root.getStyleClass().add("main-root");
@@ -116,9 +139,8 @@ public class MainApp extends Application {
         Tab tabMembresias = new Tab("Membresías & Pagos", crearVistaMembresias());
         Tab tabAcceso = new Tab("Control de Acceso", crearVistaControlAcceso());
         Tab tabReportes = new Tab("Reportes", crearVistaReportes());
-        Tab tabCalendario = new Tab("Calendario de Clases", crearVistaCalendarioDeClases());
 
-        tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes, tabCalendario);
+        tabPane.getTabs().addAll(tabClientes, tabMembresias, tabAcceso, tabReportes);
         tabPane.getTabs().forEach(t -> t.setClosable(false));
 
         Label lblUser = new Label("SESIÓN: " + usuarioLogeado.getNombreCompleto() + " | ROL: " + usuarioLogeado.getRol());
@@ -162,7 +184,7 @@ public class MainApp extends Application {
             Membresia mem = cellData.getValue().getMembresiaActual();
             if (mem != null && (mem.esValida() || Objects.requireNonNull(mem).esActualizable()))
             {
-                if (Objects.requireNonNull(mem).esActualizable() && mem.diasRestantes() == 0)
+                if (Objects.requireNonNull(mem).esActualizable() && mem.diasRestantes() == 0) // actualizar membresia automaticamente
                 {
                     try {
                         gestorMembresias.inscribirCliente(cellData.getValue(),
@@ -200,7 +222,7 @@ public class MainApp extends Application {
 
         BorderPane panel = new BorderPane();
         panel.getStyleClass().add("content-pane");
-        tableView.getStyleClass().add("table-view");
+        tableView.getStyleClass().add("custom-table");
         panel.setCenter(tableView);
 
         HBox botones = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
@@ -275,7 +297,7 @@ public class MainApp extends Application {
             }
         }
     }
-    
+
     private void UpdateClient(TableView<Cliente> tableView) {
         Cliente selectedClient = tableView.getSelectionModel().getSelectedItem();
 
@@ -314,9 +336,9 @@ public class MainApp extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
 
-        TextField nameField = new TextField();
-        TextField lastNameField = new TextField();
-        TextField emailField = new TextField();
+        TextField nameField = new TextField(selectedClient.getNombre());
+        TextField lastNameField = new TextField(selectedClient.getApellido());
+        TextField emailField = new TextField(selectedClient.getEmail());
 
         nameField.setPromptText("Nombre");
         lastNameField.setPromptText("Apellido");
@@ -496,7 +518,7 @@ public class MainApp extends Application {
         btnSalida.setOnAction(e -> {
             try {
                 Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
-                controlAcceso.registrarSalida(cliente);
+                controlAcceso.registrarSalida(cliente); // USO: Registro de Salida
                 lblResultado.setText("✅ Salida registrada para: " + cliente.getNombreCompleto());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: blue; -fx-font-size: 16px;");
             } catch (GymException ex) {
@@ -541,360 +563,12 @@ public class MainApp extends Application {
         return panel;
     }
 
-    public BorderPane crearVistaCalendarioDeClases() {
-        BorderPane panel = new BorderPane();
-        panel.setPadding(new Insets(10));
-
-        VBox contenedorCalendario = new VBox(10);
-        contenedorCalendario.setAlignment(Pos.TOP_CENTER);
-
-        HBox navegacion = new HBox(15);
-        navegacion.setAlignment(Pos.CENTER);
-        navegacion.setPadding(new Insets(10));
-
-        Button btnAnterior = new Button("<");
-        Button btnSiguiente = new Button(">");
-        lblTituloMes = new Label();
-        lblTituloMes.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-
-        btnAnterior.setOnAction(e -> {
-            mesActualCalendario = mesActualCalendario.minusMonths(1);
-            showCalendario();
-        });
-
-        btnSiguiente.setOnAction(e -> {
-            mesActualCalendario = mesActualCalendario.plusMonths(1);
-            showCalendario();
-        });
-
-        navegacion.getChildren().addAll(btnAnterior, lblTituloMes, btnSiguiente);
-
-        gridVisualCalendario = new GridPane();
-        gridVisualCalendario.setHgap(10);
-        gridVisualCalendario.setVgap(10);
-        gridVisualCalendario.setAlignment(Pos.CENTER);
-
-        contenedorCalendario.getChildren().addAll(navegacion, gridVisualCalendario);
-
-        TableColumn<ClaseGrupal, String> colFecha = new TableColumn<>("Fecha");
-        colFecha.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDate().toString()));
-
-        TableColumn<ClaseGrupal, String> colHora = new TableColumn<>("Hora");
-        colHora.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getHour().toString()));
-
-        TableColumn<ClaseGrupal, String> colDesc = new TableColumn<>("Actividad");
-        colDesc.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDescription()));
-
-        claseGrupalTableView.getColumns().addAll(colFecha, colHora, colDesc);
-        claseGrupalTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        Button btnAgregar = new Button("Agregar Clase");
-        btnAgregar.setOnAction(e -> {
-            createClaseGrupal(claseGrupalTableView);
-        });
-
-        Button btnActualizar = new Button("Actualizar Clase");
-        btnActualizar.setOnAction(e -> {
-            updateClase(claseGrupalTableView);
-        });
-
-        Button btnEliminar = new Button("Eliminar Clase");
-        btnEliminar.setOnAction(e -> {
-            deleteClase(claseGrupalTableView);
-        });
-
-        HBox barraHerramientas = new HBox(10, btnAgregar, btnActualizar, btnEliminar);
-        barraHerramientas.setAlignment(Pos.CENTER_RIGHT);
-        barraHerramientas.setPadding(new Insets(10, 0, 0, 0));
-
-        VBox contenedorDerecho = new VBox(10, new Label("Detalle de Clases"), claseGrupalTableView, barraHerramientas);
-        VBox.setVgrow(claseGrupalTableView, Priority.ALWAYS);
-
-        SplitPane divisor = new SplitPane(contenedorCalendario, contenedorDerecho);
-        divisor.setDividerPositions(0.65);
-        panel.setCenter(divisor);
-        
-        showCalendario();
-        return panel;
-    }
-
-    private void createClaseGrupal(TableView<ClaseGrupal> claseGrupalTableView) {
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Crear Clase");
-        dialog.setHeaderText("Ingrese los datos de la clase grupal");
-
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png")));
-
-        if (stylesheet != null) {
-            dialog.getDialogPane().getStylesheets().add(stylesheet);
-            dialog.getDialogPane().getStyleClass().add("dialog-pane");
-        }
-
-        try {
-            if (getClass().getResourceAsStream("/create.png") != null) {
-                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/create.png"));
-                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
-                iv.setFitWidth(48);
-                iv.setFitHeight(48);
-                iv.setPreserveRatio(true);
-                dialog.getDialogPane().setGraphic(iv);
-            }
-        } catch (Exception ex) {}
-
-        ButtonType btnGuardarType = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField txtDesc = new TextField();
-        txtDesc.setPromptText("Ej. Yoga, CrossFit");
-        DatePicker datePicker = new DatePicker(selectedDate);
-        TextField txtHora = new TextField();
-        txtHora.setPromptText("HH:mm (Ej. 17:30)");
-
-        grid.add(new Label("Actividad:"), 0, 0);
-        grid.add(txtDesc, 1, 0);
-        grid.add(new Label("Fecha:"), 0, 1);
-        grid.add(datePicker, 1, 1);
-        grid.add(new Label("Hora (24h):"), 0, 2);
-        grid.add(txtHora, 1, 2);
-
-        dialog.getDialogPane().setContent(grid);
-
-        Optional<ButtonType> result = dialog.showAndWait();
-
-        if (result.isPresent() && result.get() == btnGuardarType) {
-            if(!txtDesc.getText().isEmpty() && !txtHora.getText().isEmpty() && datePicker.getValue() != null) {
-                try {
-                    ClaseGrupal clase = new ClaseGrupal("CL" + (controlCalendario.getLista().size() + 1), txtDesc.getText(), datePicker.getValue(), LocalTime.parse(txtHora.getText()));
-                    controlCalendario.registrar(clase);
-                    showCalendario();
-                    mostrarClasesEnTabla(clase.getDate());
-                } catch (GymException ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Error", ex.getMessage());
-                } catch (DateTimeParseException ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Error de Formato", "Formato de hora inválido. Use HH:mm (Ej. 14:30).");
-                }
-            }
-            else {
-                mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
-            }
-        }
-    }
-
-    private void updateClase(TableView<ClaseGrupal> claseGrupalTableView) {
-        ClaseGrupal selectedClaseGrupal = claseGrupalTableView.getSelectionModel().getSelectedItem();
-
-        if (selectedClaseGrupal == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona una clase de la lista para editar.");
-            return;
-        }
-
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Editar Clase");
-        dialog.setHeaderText("Ingrese los datos para editar la clase grupal");
-
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/edit.jpg")));
-
-        if (stylesheet != null) {
-            dialog.getDialogPane().getStylesheets().add(stylesheet);
-            dialog.getDialogPane().getStyleClass().add("dialog-pane");
-        }
-
-        try {
-            if (getClass().getResourceAsStream("/edit.jpg") != null) {
-                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/edit.jpg"));
-                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
-                iv.setFitWidth(48);
-                iv.setFitHeight(48);
-                iv.setPreserveRatio(true);
-                dialog.getDialogPane().setGraphic(iv);
-            }
-        } catch (Exception ex) {}
-
-        ButtonType btnGuardarType = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField txtDesc = new TextField(selectedClaseGrupal.getDescription());
-        DatePicker datePicker = new DatePicker(selectedClaseGrupal.getDate());
-        TextField txtHora = new TextField(selectedClaseGrupal.getHour().toString());
-
-        grid.add(new Label("Actividad:"), 0, 0);
-        grid.add(txtDesc, 1, 0);
-        grid.add(new Label("Fecha:"), 0, 1);
-        grid.add(datePicker, 1, 1);
-        grid.add(new Label("Hora (24h):"), 0, 2);
-        grid.add(txtHora, 1, 2);
-
-        dialog.getDialogPane().setContent(grid);
-
-        Optional<ButtonType> result = dialog.showAndWait();
-
-        if(result.isPresent() && result.get() == btnGuardarType) {
-            if(!txtDesc.getText().isEmpty() && !txtHora.getText().isEmpty() && datePicker.getValue() != null) {
-                try {
-                    ClaseGrupal claseModificada = new ClaseGrupal(selectedClaseGrupal.getId(), txtDesc.getText(), datePicker.getValue(), LocalTime.parse(txtHora.getText()));
-                    controlCalendario.actualizar(claseModificada);
-                    showCalendario();
-                    mostrarClasesEnTabla(claseModificada.getDate());
-                } catch (GymException ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Error al Actualizar", ex.getMessage());
-                } catch (DateTimeParseException ex) {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Error de Formato", "Formato de hora inválido. Use HH:mm (Ej. 14:30).");
-                }
-            }
-            else {
-                mostrarAlerta(Alert.AlertType.WARNING, "Datos Incompletos", "Por favor complete todos los campos.");
-            }
-        }
-    }
-
-    private void deleteClase(TableView<ClaseGrupal> claseGrupalTableView) {
-        ClaseGrupal selectedClaseGrupal = claseGrupalTableView.getSelectionModel().getSelectedItem();
-
-        if (selectedClaseGrupal == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "ALERTA", "Por favor, selecciona una clase de la lista para eliminar.");
-            return;
-        }
-
-        Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirm.setTitle("Confirmar Eliminación");
-        alertConfirm.setHeaderText("¿Está seguro de eliminar la clase?");
-        alertConfirm.setContentText("Clase: " + selectedClaseGrupal.getDescription());
-        if (stylesheet != null) {
-            alertConfirm.getDialogPane().getStylesheets().add(stylesheet);
-            alertConfirm.getDialogPane().getStyleClass().add("dialog-pane");
-        }
-
-        Stage stage = (Stage) alertConfirm.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/delete.png")));
-
-        try {
-            if (getClass().getResourceAsStream("/delete.png") != null) {
-                javafx.scene.image.Image img = new javafx.scene.image.Image(getClass().getResourceAsStream("/delete.png"));
-                javafx.scene.image.ImageView iv = new javafx.scene.image.ImageView(img);
-                iv.setFitWidth(48);
-                iv.setFitHeight(48);
-                iv.setPreserveRatio(true);
-                alertConfirm.getDialogPane().setGraphic(iv);
-            }
-        } catch (Exception ex) {}
-
-        Optional<ButtonType> result = alertConfirm.showAndWait();
-
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                controlCalendario.eliminar(selectedClaseGrupal.getId());
-                showCalendario();
-                mostrarClasesEnTabla(selectedClaseGrupal.getDate());
-            } catch (GymException ex) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Error al Eliminar", ex.getMessage());
-            }
-        }
-    }
-
-    private void showCalendario() {
-        lblTituloMes.setText(mesActualCalendario.getMonth().name() + " " + mesActualCalendario.getYear());
-        gridVisualCalendario.getChildren().clear();
-
-        String[] diasSemana = {"Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"};
-        for (int i = 0; i < diasSemana.length; i++) {
-            Label lbl = new Label(diasSemana[i]);
-            lbl.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;");
-            lbl.setMaxWidth(Double.MAX_VALUE);
-            gridVisualCalendario.add(lbl, i, 0);
-        }
-
-        LocalDate primerDiaDelMes = mesActualCalendario.atDay(1);
-        int diaSemanaInicio = primerDiaDelMes.getDayOfWeek().getValue();
-        if (diaSemanaInicio == 7) diaSemanaInicio = 0;
-
-        int diasEnMes = mesActualCalendario.lengthOfMonth();
-
-        try {
-            List<ClaseGrupal> todasLasClases = controlCalendario.getLista();
-
-            for (int i = 1; i <= diasEnMes; i++) {
-                LocalDate fechaDia = mesActualCalendario.atDay(i);
-
-                List<ClaseGrupal> clasesDelDia = todasLasClases.stream().filter(c -> c.getDate() != null).filter(c -> c.getDate().isEqual(fechaDia)).collect(Collectors.toList());
-
-                Button btnDia = new Button();
-                btnDia.setPrefSize(200, 200);
-                btnDia.setAlignment(Pos.TOP_LEFT);
-
-                VBox contenidoCelda = new VBox(2);
-                Label lblNumero = new Label(String.valueOf(i));
-                lblNumero.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;");
-                contenidoCelda.getChildren().add(lblNumero);
-
-                for (ClaseGrupal c : clasesDelDia) {
-                    Label lblClase = new Label("• " + c.getHour() + " " + c.getDescription());
-                    lblClase.setStyle("-fx-font-size: 10px; -fx-text-fill: white;");
-                    lblClase.setMaxWidth(180);
-                    lblClase.setWrapText(false);
-                    contenidoCelda.getChildren().add(lblClase);
-                }
-
-                if (clasesDelDia.size() > 3) {
-                    Label lblExtra = new Label("... (+" + (clasesDelDia.size()-3) + ")");
-                    lblExtra.setStyle("-fx-font-size: 10px; -fx-text-fill: white;");
-                    contenidoCelda.getChildren().add(lblExtra);
-                }
-
-                btnDia.setGraphic(contenidoCelda);
-
-                if (fechaDia.equals(LocalDate.now())) {
-                    btnDia.setStyle("-fx-border-color: red; -fx-border-width: 2;");
-                }
-
-                btnDia.setOnAction(e -> mostrarClasesEnTabla(fechaDia));
-
-                int col = (diaSemanaInicio + i - 1) % 7;
-                int row = (diaSemanaInicio + i - 1) / 7 + 1;
-                gridVisualCalendario.add(btnDia, col, row);
-            }
-
-        } catch (GymException e) {
-            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No cargaron las clases.");
-        }
-    }
-
-    private void mostrarClasesEnTabla(LocalDate fecha) {
-        this.selectedDate = fecha;
-
-        try {
-            List<ClaseGrupal> todas = controlCalendario.getLista();
-            List<ClaseGrupal> delDia = todas.stream().filter(c -> c.getDate() != null).filter(c -> c.getDate().isEqual(fecha)).collect(Collectors.toList());
-
-            claseGrupalTableView.setItems(javafx.collections.FXCollections.observableList(delDia));
-        } catch (GymException e) {
-            mostrarAlerta(Alert.AlertType.ERROR, "Error de Datos", "No se pudieron cargar las clases para la fecha: " + fecha);
-        }
-    }
-
     private void mostrarAlerta(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
         if (stylesheet != null) alert.getDialogPane().getStylesheets().add(stylesheet);
-
-        try {
-            Image img = new Image(getClass().getResourceAsStream("/error.png"));
-            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-            stage.getIcons().add(img);
-        } catch (Exception e) {}
         alert.showAndWait();
     }
 

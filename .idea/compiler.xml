@@ -9,8 +9,5 @@
         <module name="gympos" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="gympos (1)" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

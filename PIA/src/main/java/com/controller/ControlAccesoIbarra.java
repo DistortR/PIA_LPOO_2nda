@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.main.MainApp;
 import com.model.Cliente;
 import com.model.Membresia;
 import com.util.GymException;
@@ -24,8 +25,10 @@ public class ControlAccesoIbarra {
             throw new GymException("Membresía vencida. Por favor renovar.");
         }
 
-        registrarEvento(cliente, "ENTRADA");
         cliente.agregarPuntos(10);
+        registrarEvento(cliente, "ENTRADA");
+        MainApp.gestorClientes.actualizar(cliente);
+        MainApp.actualizarVistaClientes(MainApp.tableView);
         return true;
     }
 

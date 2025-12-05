@@ -6,11 +6,17 @@ import com.model.Membresia.TipoMembresia;
 import com.util.GymException;
 import java.time.LocalDate;
 
+// IMPORTA TU CLASE REAL DE PROCESADOR DE PAGOS
+// Asumiendo que usaste los dígitos 123
+import com.controller.ProcesadorPagos4647;
+
 public class SistemaMembresias1412 {
 
+    // Precios base
     private static final double PRECIO_BASICO = 500.0;
     private static final double PRECIO_PREMIUM = 900.0;
 
+    // Dependencia: Instancia del procesador de pagos (AJUSTA EL NOMBRE SI ES NECESARIO)
     private ProcesadorPagos4647 procesadorPagos = new ProcesadorPagos4647();
 
     private Membresia calcularCostoMembresia(TipoMembresia tipo, int meses) throws GymException {
@@ -24,19 +30,21 @@ public class SistemaMembresias1412 {
                 break;
             case PREMIUM:
                 costoBase = PRECIO_PREMIUM * meses;
-                if (meses >= 12) costoBase *= 0.90;
+                if (meses >= 12) costoBase *= 0.90; // 10% descuento por volumen
                 break;
             case ESTUDIANTE:
-                costoBase = (PRECIO_BASICO * 0.70) * meses;
+                costoBase = (PRECIO_BASICO * 0.70) * meses; // 30% descuento fijo
                 break;
             case ANUAL:
-                costoBase = (PRECIO_PREMIUM * 12) * 0.85;
-                meses = 12;
+                costoBase = (PRECIO_PREMIUM * 12) * 0.85; // Ejemplo: 15% descuento anual
+                meses = 12; // Asegurar la duración
                 break;
         }
 
+        // Llama al procesador para aplicar el requisito de los centavos de matrícula
         double costoFinalConCentavos = procesadorPagos.calcularTotalConCentavos(costoBase);
 
+        // Crea el objeto Membresia con el costo final
         return new Membresia(tipo, meses, costoFinalConCentavos);
     }
 
@@ -52,6 +60,7 @@ public class SistemaMembresias1412 {
             cliente.setMembresiaActual(nuevaMembresia);
             cliente.agregarPuntos(50);
 
+            // Opcional: Generar recibo
             String recibo = procesadorPagos.generarRecibo(cliente.getNombreCompleto(), nuevaMembresia, costoFinal);
             System.out.println(recibo);
 
@@ -87,8 +96,8 @@ public class SistemaMembresias1412 {
 
 
         LocalDate fechaInicioRenovacion = membresiaActual.esValida()
-                ? membresiaActual.getFechaFin().plusDays(1)
-                : LocalDate.now();
+                ? membresiaActual.getFechaFin().plusDays(1) // Si es válida, empieza el día después de vencer
+                : LocalDate.now(); // Si está vencida, empieza hoy
 
 
         LocalDate nuevaFechaFin = fechaInicioRenovacion.plusMonths(mesesExtras);

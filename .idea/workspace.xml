@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="validaciones y se fueron agregados los iconos, y se corrigio el problema que habia de que no se actualizaban los datos en la ventana de update">
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="agregue iconos pero no pude agregar los del error y alerta">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionInventario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/Estilos.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/MainView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/Launcher.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,20 +57,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
     &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
     &quot;Application.main.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.gympos [clean].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;ALEXIS&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.14941406&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.570115&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
@@ -87,37 +77,15 @@
       <recent name="C:\Users\aibar\Desktop\PIA\PIA\src\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Launcher">
-    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.main.Launcher" />
-      <module name="gympos" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.main.MainApp" />
       <module name="gympos" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\Yael G\IdeaProjects\PIA_LPOO_2nda\javafx-sdk-25.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\aibar\Desktop\PIA\javafx-sdk-25.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics --enable-native-access=javafx.graphics" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.main" />
-      <item itemvalue="Application.Launcher" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Launcher" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -183,31 +151,7 @@
       <option name="project" value="LOCAL" />
       <updated>1764642095249</updated>
     </task>
-    <task id="LOCAL-00008" summary="avr voy a hacerle commit">
-      <option name="closed" value="true" />
-      <created>1764881575344</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1764881575344</updated>
-    </task>
-    <task id="LOCAL-00009" summary="avr voy a hacerle commit">
-      <option name="closed" value="true" />
-      <created>1764881591784</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1764881591784</updated>
-    </task>
-    <task id="LOCAL-00010" summary="validaciones y se fueron agregados los iconos, y se corrigio el problema que habia de que no se actualizaban los datos en la ventana de update">
-      <option name="closed" value="true" />
-      <created>1764905353439</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1764905353439</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -228,9 +172,7 @@
     <MESSAGE value="hasta donde yo tengo, ya esta finalizado el diseño" />
     <MESSAGE value="ahora si ya quedo" />
     <MESSAGE value="agregue iconos pero no pude agregar los del error y alerta" />
-    <MESSAGE value="avr voy a hacerle commit" />
-    <MESSAGE value="validaciones y se fueron agregados los iconos, y se corrigio el problema que habia de que no se actualizaban los datos en la ventana de update" />
-    <option name="LAST_COMMIT_MESSAGE" value="validaciones y se fueron agregados los iconos, y se corrigio el problema que habia de que no se actualizaban los datos en la ventana de update" />
+    <option name="LAST_COMMIT_MESSAGE" value="agregue iconos pero no pude agregar los del error y alerta" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
