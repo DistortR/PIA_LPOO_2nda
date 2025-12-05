@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="avr voy a hacerle commit">
+    <list default="true" id="8a06fb06-fc78-4101-8f3a-709981a80433" name="Changes" comment="validaciones y se fueron agregados los iconos, y se corrigio el problema que habia de que no se actualizaban los datos en la ventana de update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionClientesIbarra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/GestionInventario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/controller/SistemaMembresias1412.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/src/main/java/com/main/MainApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/GestionClientesIbarra.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/controller/SistemaMembresias1412.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/Launcher.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/PIA/target/classes/com/main/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/clientes.ser" beforeDir="false" afterPath="$PROJECT_DIR$/data/clientes.ser" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764881591784</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="validaciones y se fueron agregados los iconos, y se corrigio el problema que habia de que no se actualizaban los datos en la ventana de update">
+      <option name="closed" value="true" />
+      <created>1764905353439</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1764905353439</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -218,7 +229,8 @@
     <MESSAGE value="ahora si ya quedo" />
     <MESSAGE value="agregue iconos pero no pude agregar los del error y alerta" />
     <MESSAGE value="avr voy a hacerle commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="avr voy a hacerle commit" />
+    <MESSAGE value="validaciones y se fueron agregados los iconos, y se corrigio el problema que habia de que no se actualizaban los datos en la ventana de update" />
+    <option name="LAST_COMMIT_MESSAGE" value="validaciones y se fueron agregados los iconos, y se corrigio el problema que habia de que no se actualizaban los datos en la ventana de update" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

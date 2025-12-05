@@ -162,7 +162,7 @@ public class MainApp extends Application {
             Membresia mem = cellData.getValue().getMembresiaActual();
             if (mem != null && (mem.esValida() || Objects.requireNonNull(mem).esActualizable()))
             {
-                if (Objects.requireNonNull(mem).esActualizable() && mem.diasRestantes() == 0) // actualizar membresia automaticamente
+                if (Objects.requireNonNull(mem).esActualizable() && mem.diasRestantes() == 0)
                 {
                     try {
                         gestorMembresias.inscribirCliente(cellData.getValue(),
@@ -496,7 +496,7 @@ public class MainApp extends Application {
         btnSalida.setOnAction(e -> {
             try {
                 Cliente cliente = gestorClientes.buscar(txtIdCliente.getText()).orElseThrow(() -> new GymException("Cliente con ID no encontrado."));
-                controlAcceso.registrarSalida(cliente); // USO: Registro de Salida
+                controlAcceso.registrarSalida(cliente);
                 lblResultado.setText("✅ Salida registrada para: " + cliente.getNombreCompleto());
                 lblResultado.setStyle("-fx-font-weight: bold; -fx-text-fill: blue; -fx-font-size: 16px;");
             } catch (GymException ex) {

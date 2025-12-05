@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class GestionInventario implements Gestionador<Inventario> {
     private ObservableList<Inventario> listaInventarios;
-    private List<Inventario> inventario;
+    private List<Inventario> inventario;    
     private Serializador<Inventario> serializadorInventario;
 
     private final String proyectoDir = System.getProperty("user.dir");

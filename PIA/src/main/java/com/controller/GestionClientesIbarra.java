@@ -13,9 +13,9 @@ import java.util.Optional;
 public class GestionClientesIbarra implements Gestionador<Cliente>{
     private ObservableList<Cliente> listaClientes;
     private List<Cliente> clientes;
-    private List<UsuarioEmpleado> empleados; // Lista de empleados
+    private List<UsuarioEmpleado> empleados;
     private Serializador<Cliente> dbCliente;
-    private Serializador<UsuarioEmpleado> dbEmpleado; // Serializador para empleados
+    private Serializador<UsuarioEmpleado> dbEmpleado;
 
     String proyectoDir = System.getProperty("user.dir");
     private final String DB_FILE_CLIENTES = proyectoDir + "\\data\\clientes.ser";
@@ -29,7 +29,7 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
         this.empleados = dbEmpleado.cargar(DB_FILE_EMPLEADOS);
 
         if (this.empleados.isEmpty()) {
-            this.empleados.add(new UsuarioEmpleado("jibarra", "admin123", "Juan Ibarra (ADMIN)", "ADMIN"));
+            this.empleados.add(new UsuarioEmpleado("Aibarra", "admin123", "Alexis Ibarra (ADMIN)", "ADMIN"));
             try { guardarEmpleados(); } catch (GymException e) {}
         }
     }

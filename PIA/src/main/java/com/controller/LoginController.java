@@ -3,11 +3,8 @@ package com.controller;
 import com.main.MainApp;
 import com.model.UsuarioEmpleado;
 import com.util.GymException;
-import com.controller.GestionClientesIbarra;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 public class LoginController {
 
