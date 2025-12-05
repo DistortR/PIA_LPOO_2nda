@@ -4,6 +4,8 @@ import com.model.ClaseGrupal;
 import com.util.Gestionador;
 import com.util.GymException;
 import com.util.Serializador;
+
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +14,7 @@ public class CalendarioDeClase implements Gestionador<ClaseGrupal> {
     private Serializador<ClaseGrupal> dbClase;
 
     String proyectoDir = System.getProperty("user.dir");
-    private final String DB_FILE_CLASES = proyectoDir + "\\data\\clases.ser";
+    private final String DB_FILE_CLASES = proyectoDir + File.separator + "data" + File.separator + "clases.ser";
 
     public CalendarioDeClase() {
         this.dbClase = new Serializador<>();

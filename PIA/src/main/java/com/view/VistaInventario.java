@@ -1,4 +1,4 @@
-package com.controller;
+package com.view;
 
 import com.model.Inventario;
 import com.util.GymException;

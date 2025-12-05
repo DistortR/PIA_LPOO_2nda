@@ -7,6 +7,7 @@ import com.util.Serializador;
 import com.util.GymException;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +19,8 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
     private Serializador<UsuarioEmpleado> dbEmpleado;
 
     String proyectoDir = System.getProperty("user.dir");
-    private final String DB_FILE_CLIENTES = proyectoDir + "\\data\\clientes.ser";
-    private final String DB_FILE_EMPLEADOS = proyectoDir + "\\data\\empleados.ser";
+    private final String DB_FILE_CLIENTES = proyectoDir + File.separator + "data" + File.separator + "clientes.ser";
+    private final String DB_FILE_EMPLEADOS = proyectoDir + File.separator + "data" + File.separator + "empleados.ser";
 
     public GestionClientesIbarra() {
         this.dbCliente = new Serializador<>();

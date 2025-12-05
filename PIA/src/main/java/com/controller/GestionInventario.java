@@ -6,6 +6,7 @@ import com.util.GymException;
 import com.util.Serializador;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ public class GestionInventario implements Gestionador<Inventario> {
     private Serializador<Inventario> serializadorInventario;
 
     private final String proyectoDir = System.getProperty("user.dir");
-    private final String DB_FILE_INVENTARIO = proyectoDir + "\\data\\inventarios.ser";
+    private final String DB_FILE_INVENTARIO = proyectoDir + File.separator +"data" + File.separator + "inventarios.ser";
 
     public GestionInventario() {
         this.serializadorInventario = new Serializador<>();
