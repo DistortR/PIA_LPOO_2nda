@@ -17,7 +17,6 @@ import static com.main.MainApp.gestorInventario;
 import static com.main.MainApp.mostrarAlerta;
 
 public class VistaInventario {
-    //filtro para obtener numeros de una cadena
     private static final UnaryOperator<TextFormatter.Change> integerFilter = change -> {
         String text = change.getControlNewText();
         if (text.matches("-?([1-9][0-9]*)?")) {return change;}
@@ -40,7 +39,7 @@ public class VistaInventario {
 
         tablaInventario.getColumns().addAll(idObjCol, nombreObjCol, cantidadCol);
 
-        Button btnAgregar = new Button("Registrar Cliente");
+        Button btnAgregar = new Button("Registrar Inventario");
         btnAgregar.setOnAction(e -> {
             crearInventario(tablaInventario);
         });
