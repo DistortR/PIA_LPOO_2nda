@@ -13,6 +13,7 @@ public class Cliente implements Serializable {
     private String email;
     private LocalDate fechaRegistro;
     private Integer puntosFidelidad;
+    private boolean membresiaRenovable;
 
     private Membresia membresiaActual;
 
@@ -90,6 +91,14 @@ public class Cliente implements Serializable {
 
     public void setMembresiaActual(Membresia membresiaActual) {
         this.membresiaActual = membresiaActual;
+    }
+
+    public boolean isMembresiaRenovable() {
+        return membresiaRenovable;
+    }
+
+    public void setMembresiaRenovable(boolean membresiaRenovable) {
+        this.membresiaRenovable = membresiaRenovable;
     }
 
     @Override

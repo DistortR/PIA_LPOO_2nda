@@ -163,6 +163,12 @@ public class MainApp extends Application {
         TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
         membresiaCol.setCellValueFactory(cellData -> {
             Membresia mem = cellData.getValue().getMembresiaActual();
+            // renovacion automatica
+            if (cellData.getValue().isMembresiaRenovable() && !mem.esValida())
+            {
+                System.out.println("Membresia del usuario "+ cellData.getValue().getNombreCompleto() +" renovada");
+                return new javafx.beans.property.SimpleStringProperty(mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")");
+            }
             return new javafx.beans.property.SimpleStringProperty(mem != null && mem.esValida() ? mem.getTipo().name() + " (Vence: " + mem.getFechaFin() + ")" : "INACTIVA");
         });
 
