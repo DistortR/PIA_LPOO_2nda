@@ -4,14 +4,15 @@
   <groupId>com.gympos</groupId>
   <artifactId>gympos</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <url>https://maven.apache.org</url>
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
-          <source>17</source>
-          <target>17</target>
+          <source>25</source>
+          <target>25</target>
         </configuration>
       </plugin>
       <plugin>
@@ -19,7 +20,13 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-          <mainClass>com.gympos.app.MainApp</mainClass>
+          <mainClass>com.main.MainApp</mainClass>
+          <options>
+            <option>--add-opens=javafx.graphics/com.sun.glass.utils=ALL-UNNAMED</option>
+            <option>--add-opens=javafx.graphics/com.sun.marlin=ALL-UNNAMED</option>
+            <option>--add-exports=javafx.graphics/com.sun.marlin=ALL-UNNAMED</option>
+            <option>--enable-native-access=ALL-UNNAMED</option>
+          </options>
         </configuration>
       </plugin>
       <plugin>
@@ -34,19 +41,23 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.gympos.app.MainApp</mainClass>
+                  <mainClass>com.main.Launcher</mainClass>
                 </transformer>
               </transformers>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javafx.version>20.0.2</javafx.version>
-    <maven.compiler.target>17</maven.compiler.target>
-    <maven.compiler.source>17</maven.compiler.source>
-  </properties>
 </project>
