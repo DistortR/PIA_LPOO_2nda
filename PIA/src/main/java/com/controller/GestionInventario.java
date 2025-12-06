@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class GestionInventario implements Gestionador<Inventario> {
-    private ObservableList<Inventario> listaInventarios; //quitar
+    private ObservableList<Inventario> listaInventarios;
     private List<Inventario> inventario;    
     private Serializador<Inventario> serializadorInventario;
 

@@ -40,7 +40,6 @@ public class ClienteView {
         TableColumn<Cliente, String> membresiaCol = new TableColumn<>("Estado Membresía");
         membresiaCol.setCellValueFactory(cellData -> {
             Membresia mem = cellData.getValue().getMembresiaActual();
-            // renovacion automatica
             if (cellData.getValue().isMembresiaRenovable() && !mem.esValida())
             {
                 System.out.println("Membresia del usuario "+ cellData.getValue().getNombreCompleto() +" renovada");

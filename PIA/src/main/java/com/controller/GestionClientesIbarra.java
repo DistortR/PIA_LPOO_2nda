@@ -18,8 +18,7 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
     private Serializador<Cliente> dbCliente;
     private Serializador<UsuarioEmpleado> dbEmpleado;
 
-    String proyectoDir = System.getProperty("user.dir"); //private final String DB_FILE_CLIENTES =
-    //proyectoDir + File.separator + "data" + File.separator + "clientes.ser";
+    String proyectoDir = System.getProperty("user.dir");
     private final String DB_FILE_CLIENTES = proyectoDir + File.separator + "data" + File.separator + "clientes.ser";
     private final String DB_FILE_EMPLEADOS = proyectoDir + File.separator + "data" + File.separator + "empleados.ser";
 
@@ -99,7 +98,7 @@ public class GestionClientesIbarra implements Gestionador<Cliente>{
         }
     }
 
-    private synchronized void guardarClientes() throws GymException { //la hice synchronized
+    private synchronized void guardarClientes() throws GymException {
         dbCliente.guardar(DB_FILE_CLIENTES, clientes);
     }
 
