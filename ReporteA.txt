@@ -1,16 +1,68 @@
 =================================================================================
                              REPORTE MENSUAL GIMNASIO                            
 =================================================================================
-Fecha de generación: 05/12/2025 01:53:09
+Fecha de generación: 06/12/2025 15:23:05
 ---------------------------------------------------------------------------------
 
 ~~~ CLIENTES Y ESTADO DE MEMBRESÍAS ~~~
 ID         | Nombre                         | Membresía       | Vencimiento     | Estado    
 ---------------------------------------------------------------------------------
-C1         | Manuel Garcia                  | BASICA          | 2026-08-10      | Activo    
+C1         | Alexis Ibarra                  | BASICA          | 2026-02-06      | Activo    
+C2         | Yael Garcia                    | ESTUDIANTE      | 2026-06-06      | Activo    
+C3         | Manuel Garcia                  | BASICA          | 2026-04-06      | Activo    
+C4         | Angel Carmona                  | PREMIUM         | 2026-01-06      | Activo    
+C5         | Laura Jimenez                  | ANUAL           | 2026-12-06      | Activo    
+C6         | Pedro Castillo                 | BASICA          | 2026-04-06      | Activo    
+C7         | Mariana Vega                   | Sin membresía   | N/A             | Inactivo  
+C8         | Roberto Ovalle                 | Sin membresía   | N/A             | Inactivo  
+C9         | Eliana Torres                  | BASICA          | 2026-02-06      | Activo    
+C10        | Lucas Ortega                   | ESTUDIANTE      | 2026-04-06      | Activo    
+C11        | Carmen Ruiz                    | Sin membresía   | N/A             | Inactivo  
+C12        | Miguel Castro                  | PREMIUM         | 2026-11-06      | Activo    
+C13        | Isabela Morales                | Sin membresía   | N/A             | Inactivo  
+C14        | Francisco Navarro              | Sin membresía   | N/A             | Inactivo  
+C15        | Daniela Romero                 | ANUAL           | 2026-12-06      | Activo    
+C16        | Alejandro Gil                  | Sin membresía   | N/A             | Inactivo  
+C17        | Paula Herrera                  | PREMIUM         | 2026-03-06      | Activo    
+C18        | Sergio Delgado                 | ANUAL           | 2026-12-06      | Activo    
+C19        | Natalia Medina                 | Sin membresía   | N/A             | Inactivo  
+C20        | Jorge Serrano                  | BASICA          | 2026-02-06      | Activo    
+C21        | Clara Rojas                    | BASICA          | 2026-06-06      | Activo    
+C22        | Rafael Garza                   | Sin membresía   | N/A             | Inactivo  
+C23        | Adriana Guerra                 | BASICA          | 2026-05-06      | Activo    
+C24        | Patricio Blanco                | Sin membresía   | N/A             | Inactivo  
+C25        | Julia Montes                   | ANUAL           | 2026-12-06      | Activo    
+C26        | Aziel Campos                   | PREMIUM         | 2026-08-06      | Activo    
+C27        | Columba Pimienta               | Sin membresía   | N/A             | Inactivo  
+C28        | Fernando Reyes                 | ESTUDIANTE      | 2026-02-06      | Activo    
+C29        | Fernanda Contreras             | ANUAL           | 2026-12-06      | Activo    
+C30        | Alberto Santiago               | ESTUDIANTE      | 2026-07-06      | Activo    
 
 ~~~ SECCIÓN: INVENTARIO Y EQUIPO ~~~
 ID         | Producto / Equipo              | Cantidad  
 ---------------------------------------------------------------------------------
-C1         | 44                             | 0         
-C2         | 44                             | 0         
+A1         | Mancuerna Par                  | 40        
+A2         | Barra Olimpica                 | 15        
+A3         | Barra Z                        | 22        
+A4         | Disco Olimpico                 | 90        
+A5         | Pesa Rusa                      | 12        
+A6         | Caminadora Electrica           | 25        
+A7         | Eliptica Magnetica             | 10        
+A8         | Prensa de Pierna               | 3         
+A9         | Bicicleta                      | 8         
+A10        | Maquina de Poleas              | 5         
+A11        | Banco Plano                    | 10        
+A12        | Banco Inclinable               | 8         
+A13        | Maquina de Extension de Cuadriceps | 4         
+A14        | Remo Hidraulico                | 3         
+A15        | Agua Epura                     | 15        
+A16        | Proteina Whey Vainilla         | 4         
+A17        | Proteina Whey Chocolate        | 5         
+A18        | Bebida Isotonica               | 8         
+A19        | Electrolit Mora Azul           | 8         
+A20        | Electrolit Coco                | 17        
+A21        | Vendas                         | 10        
+A22        | Proteina BIRDMAN               | 9         
+A23        | Barras de Alta Proteina WILD PROTEIN | 35        
+A24        | Barritas Proteicas KIRKLAND    | 25        
+A25        | Proteina Chocobanana MASSIV    | 7         
