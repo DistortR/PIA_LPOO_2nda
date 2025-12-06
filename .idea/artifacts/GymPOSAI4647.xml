@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="GymPOSAI4647">
+    <output-path>$PROJECT_DIR$/out/artifacts/GymPOSAI4647</output-path>
+    <root id="archive" name="GymPOSAI4647.jar" />
+  </artifact>
+</component>
