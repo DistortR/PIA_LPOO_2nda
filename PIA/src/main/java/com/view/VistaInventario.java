@@ -110,7 +110,7 @@ public class VistaInventario {
         if(result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 if(!nameField.getText().isEmpty() && !amountField.getText().isEmpty()) {
-                    Inventario inv = new Inventario("C" + (gestorInventario.getLista().size() + 1), nameField.getText(), Long.parseLong(amountField.getText()));
+                    Inventario inv = new Inventario("A" + (gestorInventario.getLista().size() + 1), nameField.getText(), Long.parseLong(amountField.getText()));
                     gestorInventario.registrar(inv);
                     tablaInventario.setItems(javafx.collections.FXCollections.observableList(gestorInventario.getLista()));
                 }
